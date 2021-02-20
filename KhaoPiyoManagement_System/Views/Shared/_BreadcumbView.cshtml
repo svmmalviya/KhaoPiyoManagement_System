@@ -1,0 +1,13 @@
+﻿
+<div class="row">
+    <div class="col-md-12 ">
+        <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb breadcrumb-gray breadcrumb-transparent">
+                @foreach (var item in ViewBag.breacumb)
+                {
+                  <li class="breadcrumb-item"><a href="@item.routevalue" > @item.routename </a></li>
+                }
+            </ol>
+        </nav>
+    </div>
+</div> 

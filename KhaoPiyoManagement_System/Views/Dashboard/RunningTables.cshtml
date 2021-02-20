@@ -1,0 +1,99 @@
+﻿@model  KhaoPiyoManagement_System.Models.RunningTables
+
+@{
+    ViewBag.Title = "Running Tables";
+}
+
+
+<div class="row">
+    <div class="col-12 col-md-12">
+
+        @foreach (var x in Model.tablecatname)
+        {
+            <div class="card-body shadow-soft rounded border border-light m-2 ">
+                <div class="h5 card-title my-4 text-left ">
+                    @x.ToString()
+                </div>
+                <div class="row mt-2">
+                    @foreach (var item in Model.tableDetails)
+                    {
+                        if (item.stab_Cat_Nm == x)
+                        {
+                            <div class="col-md-1"></div>
+                            <div class="col-md-11 text-left">
+                                @using (Ajax.BeginForm("GetRunningTableDetail", "Dashboard", new AjaxOptions { HttpMethod = "POST", OnSuccess = "dataReceived", OnFailure = "onFailure" }))
+                                {
+                                    <button type="submit" class="border-0" data-placement="top" title="" data-original-title="Running Table">
+                                        <div class="card bg-primary shadow-inset border-light text-center bg-orange h-100 w-100">
+                                            <div class="card-body">
+                                                <div class=" font-medium text-white font-weight-bolder"></div>
+                                                <div class=" font-medium text-white">
+                                                    <label>@item.stab_Nm</label>
+                                                    <input type="hidden" id="tableno" name="tableno" value=" @item.itab_cd" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </button>
+
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>  <!--column close-->
+
+
+    <script>
+
+
+        function dataReceived(data) {  //rendering running table detail from ajax call
+
+            $(document).find(".tabno").text("Table No.-" + data[0].tabno);
+            $(document).find(".billno").text(" "+data[0].billno);
+            $(document).find(".billdate").text(" " +data[0].billdate);
+            $(document).find(".guestname").text(" " +data[0].guestname);
+            $(document).find(".pax").text(" " +data[0].pax);
+            $(document).find(".Attendedby").text(" " +data[0].waiter);
+            $(document).find(".mobile").text(" " +data[0].mobileno);
+            $("._itemsTable").find("tr:gt(0)").remove();  //remove all rows before updating
+            $(".modalCardBody").find(".totalsDiv").remove();   //Remove added card before adding new 
+            var addingRowStr = "";
+
+
+            $.each(data, function (key, val) {
+                addingRowStr += "<tr> <td >" + val.itemname + "</td>";
+                addingRowStr += "<td align='right' > " + val.rate + "</td>";
+                addingRowStr += "<td align='right' >" + val.qty + "</td>";
+                addingRowStr += "<td align='right' > " + val.amount + "</td></tr>";
+            });
+
+
+            var newrow = " <div class='card m-2 totalsDiv  '><div class='bg-primary text-right h-100 w-100'>" +
+                "<div class='row'><div class='col-md-12'><table class='' style='width:100%'><tr><td colspan=2 align='right' class='font-weight-bold' >Total :</td><td align='right' style='width:80px;padding:0 10px 0 0' class='font-weight-bold'>" + data[0].totqty + "</td><td class='font-weight-bold' style='width:80px' align='right'>" + data[0].total + " </td></tr>"+
+                "<tr><td colspan=2 align='right' class='font-weight-bold' >Discount : </td><td class='font-weight-bold' align='right' ></td><td align='right' class='font-weight-bold'>" + data[0].discount + " </td></tr>" +
+                "<tr><td colspan=2 align='right'class='font-weight-bold' >Tax : </td><td  ></td><td align='right' class='font-weight-bold' >" + data[0].tax + " </td></tr>" +
+                "<tr><td colspan=2 align='right'class='font-weight-bold' >Round Off : </td><td class='font-weight-bold' ></td><td align='right' class='font-weight-bold'>" + data[0].roundoff + " </td></tr>" +
+                "<tr><td colspan=2 align='right'class='font-weight-bold' >Grand Total : </td><td  class='font-weight-bold' ></td><td align='right' class='font-weight-bold'>" + data[0].grandtotal + " </td></tr>" +
+                "</table ></div > </div ></div > ";
+
+
+          //  addingRowStr += "<tr><td colspan=2 align='right' class='font-weight-bold' >Total :</td><td align='right' class='font-weight-bold'>" + data[0].totqty +"</td><td class='font-weight-bold' align='right'>" + data[0].total + " </td></tr>";
+          //  addingRowStr += "<tr><td colspan=2 align='right' class='font-weight-bold' >Discount : </td><td class='font-weight-bold' align='right' ></td><td align='right' class='font-weight-bold'>" + data[0].discount + " </td></tr>";
+          //  addingRowStr += "<tr><td colspan=2 align='right'class='font-weight-bold' >Tax : </td><td  ></td><td align='right' class='font-weight-bold' >" + data[0].tax + " </td></tr>";
+          //  addingRowStr += "<tr><td colspan=2 align='right'class='font-weight-bold' >Round Off : </td><td class='font-weight-bold' ></td><td align='right' class='font-weight-bold'>" + data[0].roundoff + " </td></tr>";
+          //  addingRowStr += "<tr><td colspan=2 align='right'class='font-weight-bold' >Grand Total : </td><td  class='font-weight-bold' ></td><td align='right' class='font-weight-bold'>" + data[0].grandtotal + " </td></tr>";
+
+            $("._itemsTable").append(addingRowStr);
+            $(newrow).insertAfter("._itemsTable");
+
+            $("#tabDetailsModal").modal("show");
+        }
+        function onFailure(data) {
+            alert(data);
+        }
+
+    </script>
+</div>
+

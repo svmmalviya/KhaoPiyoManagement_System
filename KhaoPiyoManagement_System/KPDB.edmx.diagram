@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4427036d719e42658d416550478dd426" Name="Diagram1">
+        <EntityTypeShape EntityType="KhaoPiyoModel.Acc_Group_Master" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Account_Master" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Advance_Tran" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.App_BillMaster" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Attendent_Master" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Bank_Master" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Billing_Detail" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Billing_Detail_Vend" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Billing_Master" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Billing_Master_Vend" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Billing_Online" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Billing_Payment" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Billing_Tax" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Billing_Tax_Vend" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.BillPrint_Record" Width="1.5" PointX="4.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Category_Master" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Company_Master" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Configration_Master" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Consume_Tran" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.CustBillItem" Width="1.5" PointX="14.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.CustBillMaster" Width="1.5" PointX="14.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Daily_Cash" Width="1.5" PointX="0.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Daily_Mail" Width="1.5" PointX="2.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.DataCopy" Width="1.5" PointX="4.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Discount_Master" Width="1.5" PointX="14.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Est_Billing" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Expenses_Master" Width="1.5" PointX="16.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Expenses_Tran" Width="1.5" PointX="16.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Feedback_Master" Width="1.5" PointX="16.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Feedback_Tran" Width="1.5" PointX="6.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Fin_Yr_Master" Width="1.5" PointX="8.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.FoodOrder_Customer_Master" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.FoodOrder_Item_Master" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.FoodOrder_Order_Master" Width="1.5" PointX="2.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.FoodOrder_Order_Status" Width="1.5" PointX="18.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.FoodOrder_Reference_Master" Width="1.5" PointX="18.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.FoodOrder_Rider_Status" Width="1.5" PointX="18.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Form_Master" Width="1.5" PointX="18.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Gravy_Master" Width="1.5" PointX="14.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Guest_Master" Width="1.5" PointX="16.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Income_Master" Width="1.5" PointX="18.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Income_Tran" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Inv_Category_Master" Width="1.5" PointX="20.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Inv_Consume_Master" Width="1.5" PointX="20.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Inv_Item_Master" Width="1.5" PointX="8.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Inv_Unit_Master" Width="1.5" PointX="20.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Item_Description_Master" Width="1.5" PointX="20.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Item_Group_Master" Width="1.5" PointX="20.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Item_Master" Width="1.5" PointX="20.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Item_Master_Time" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.KOT_Delete" Width="1.5" PointX="22.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.KOT_Master" Width="1.5" PointX="4.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Location_Master" Width="1.5" PointX="22.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Loyalty_Master" Width="1.5" PointX="22.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Loyalty_Program_Master" Width="1.5" PointX="10.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Loyalty_Tran" Width="1.5" PointX="22.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.MainForm_Master" Width="1.5" PointX="22.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Map_Sale_Tax" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Meal_Master" Width="1.5" PointX="0.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Month_Master" Width="1.5" PointX="24.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Online_Item_Master" Width="1.5" PointX="24.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Online_Master" Width="1.5" PointX="24.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Online_Meal_Master" Width="1.5" PointX="12.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Online_Tag_Master" Width="1.5" PointX="14.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Opening_Balance" Width="1.5" PointX="24.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Opening_Balance_Inv_Item" Width="1.5" PointX="16.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Opening_Balance_Vend" Width="1.5" PointX="24.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Outlet_Master" Width="1.5" PointX="24.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Payment_Master" Width="1.5" PointX="6.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Payment_Master_Vend" Width="1.5" PointX="8.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.PayMode_Master" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Recipe_Master" Width="1.5" PointX="26.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Reference_Master" Width="1.5" PointX="26.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Sale_Master" Width="1.5" PointX="26.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.SMS_Recharge" Width="1.5" PointX="26.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.State_Master" Width="1.5" PointX="26.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Tab_Process" Width="1.5" PointX="26.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Table_Category_Master" Width="1.5" PointX="22.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Table_Master" Width="1.5" PointX="26.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Table_Shift" Width="1.5" PointX="2.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Tax_Master" Width="1.5" PointX="10.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.User_Address" Width="1.5" PointX="12.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.User_Master" Width="1.5" PointX="14.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.User_Rights" Width="1.5" PointX="16.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.User_Rights_Main" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Vendor_Master" Width="1.5" PointX="28.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.Void_Bill" Width="1.5" PointX="28.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_BillPrint" Width="1.5" PointX="28.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Hour" Width="1.5" PointX="28.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Inv_Item_Master" Width="1.5" PointX="24.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Inv_TaxDetail" Width="1.5" PointX="28.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Item_Master" Width="1.5" PointX="18.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Pay" Width="1.5" PointX="20.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Pay_Vend" Width="1.5" PointX="26.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_RunningTable" Width="1.5" PointX="28.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_TaxDetail" Width="1.5" PointX="30.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Top10" Width="1.5" PointX="30.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Top15" Width="1.5" PointX="4.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Top3" Width="1.5" PointX="6.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Tran" Width="1.5" PointX="30.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KhaoPiyoModel.View_Tran_Vend" Width="1.5" PointX="30.75" PointY="25.75" IsExpanded="true" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
