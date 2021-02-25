@@ -3,15 +3,16 @@
     ViewBag.Title = "Index";
 }
 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
 <div class="welcome">
     <div class="container-fluid">
         <div class="row mt-3">
             <div class="col-md-12">
-                <div class="card bg-primary shadow-soft shadow-sm p-2">
-                    <h4>Welcome : @Session["username"].ToString() </h4>
-                    <p>We code for you.</p>
+                <div class="card  shadow-inset shadow-sm p-2">
+                <div class="card-body shadow-soft ">
+                    <h4>Welcome :  @ViewBag.companyname  </h4>
+                    <p></p>
+                </div>
                 </div>
             </div>
         </div>
@@ -32,7 +33,7 @@
                         <div class="col-6 col-md-3 ">
                             <div class="card bg-primary shadow-soft border-light text-center bg-red">
                                 <div class="card-body">
-                                    <div class=" font-medium text-white font-weight-bolder">@ViewBag.totalsls</div>
+                                    <div class=" font-medium text-white font-weight-bolder"><i class="fas fa-rupee-sign pr-1"></i>@ViewBag.totalsls</div>
                                     <div class=" font-medium text-white">
                                         Total Sale
                                     </div>
@@ -73,53 +74,52 @@
                         </div>
 
                         @*<div class="col-md-6">
-                            <canvas id="transChart" style=" "> </canvas>
-                        </div>*@
+                                <canvas id="transChart" style=" "> </canvas>
+                            </div>*@
                     </div>
                 </div>
-                </div>
             </div>
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <script type="text/javascript">
-                $.ajax({
-                    type: "POST",
-                    url: "/Dashboard/GetChart",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (chData) {
-                        var aData = chData;
-                        var aLabels = aData[1];
-                        var aDatasets1 = aData[0];
-                        var dataT = {
-                            labels: aLabels,
-                            datasets: [{
-                                label: "Payment Data",
-                                data: aDatasets1,
-                                fill: false,
-                                backgroundColor: ["#ffff", "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
-                                borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
-                                borderWidth: 1
-                            }]
-                        };
-                        var ctx = $("#paymentChart").get(0).getContext("2d");
-                        var myNewChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: dataT,
-                            options: {
-                                responsive: true,
-                                title: { display: true, text: 'Daily Sale' },
-                                legend: { position: 'bottom' },
-                                scales: {
-                                    xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' } }],
-                                    yAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' }, ticks: { stepSize: 50, beginAtZero: false } }]
-                                },
-                            }
-                        });
-                    }
-                });
-               
-            </script>
         </div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            $.ajax({
+                type: "POST",
+                url: "/Dashboard/GetChart",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (chData) {
+                    var aData = chData;
+                    var aLabels = aData[1];
+                    var aDatasets1 = aData[0];
+                    var dataT = {
+                        labels: aLabels,
+                        datasets: [{
+                            label: "Payment Info",
+                            data: aDatasets1,
+                            fill: false,
+                            backgroundColor: ["#ffff", "rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
+                            borderColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
+                            borderWidth: 1
+                        }]
+                    };
+                    var ctx = $("#paymentChart").get(0).getContext("2d");
+                    var myNewChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: dataT,
+                        options: {
+                            responsive: true,
+                            title: { display: true, text: 'Today Sale' },
+                            legend: { position: 'bottom' },
+                            scales: {
+                                xAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' } }],
+                                yAxes: [{ gridLines: { display: false }, display: true, scaleLabel: { display: false, labelString: '' }, ticks: { stepSize: 1000, beginAtZero: false } }]
+                            },
+                        }
+                    });
+                }
+            });
+        </script>
+    </div>
 </div>
 <style>
 </style>

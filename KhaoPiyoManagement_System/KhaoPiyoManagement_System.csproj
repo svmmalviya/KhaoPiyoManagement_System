@@ -141,6 +141,8 @@
     <Compile Include="App_BillMaster.cs">
       <DependentUpon>KPDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Log.cs" />
+    <Compile Include="App_Data\Globals.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Data\DBConnect.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -198,7 +200,9 @@
       <DependentUpon>KPDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ReportSummaryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RunningTablesController.cs" />
     <Compile Include="CustBillItem.cs">
       <DependentUpon>KPDB.tt</DependentUpon>
     </Compile>
@@ -274,7 +278,13 @@
     <Compile Include="Guest_Master.cs">
       <DependentUpon>KPDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ILibrary\ItemSummaryImp.cs" />
+    <Compile Include="ILibrary\IItemSummary.cs" />
+    <Compile Include="ILibrary\ISalesRegister.cs" />
+    <Compile Include="ILibrary\SalesRegisterImp.cs" />
+    <Compile Include="ILibrary\RunningTables.cs" />
     <Compile Include="ILibrary\Dashboard.cs" />
+    <Compile Include="ILibrary\IRunningTable.cs" />
     <Compile Include="ILibrary\IDashboard.cs" />
     <Compile Include="Income_Master.cs">
       <DependentUpon>KPDB.tt</DependentUpon>
@@ -355,6 +365,8 @@
       <DependentUpon>KPDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\breadcumb.cs" />
+    <Compile Include="Models\CustTrans_View.cs" />
+    <Compile Include="Models\ItemSummary.cs" />
     <Compile Include="Models\RunningTables.cs" />
     <Compile Include="Month_Master.cs">
       <DependentUpon>KPDB.tt</DependentUpon>
@@ -559,7 +571,7 @@
     <Content Include="Content\c3.css" />
     <Content Include="Content\c3.min.css" />
     <Content Include="css\customStyle.css" />
-    <Content Include="css\neumorphism.css" />
+    <Content Include="css\khaopiyo.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -567,6 +579,7 @@
     <Content Include="images\bg_1.jpg" />
     <Content Include="images\khaopiyo_logo.png" />
     <Content Include="images\logo.png" />
+    <Content Include="images\NETCODERS.png" />
     <Content Include="images\smalllogo.png" />
     <Content Include="images\undraw_file_sync_ot38.svg" />
     <Content Include="KPDB.Context.tt">
@@ -593,6 +606,7 @@
     <Content Include="assets\img\favicon\manifest.json" />
     <Content Include="assets\img\favicon\site.webmanifest" />
     <Content Include="css\neumorphism.css.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\c3.js" />
     <Content Include="Scripts\c3.min.js" />
@@ -2751,9 +2765,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="src\.DS_Store" />
     <Content Include="src\assets\.DS_Store" />
@@ -2948,9 +2959,14 @@
     <Content Include="vendor\prismjs\components.json" />
     <Content Include="vendor\waypoints\testem.json" />
     <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\Dashboard\RunningTables.cshtml" />
+    <Content Include="Views\RunningTables\Index.cshtml" />
     <Content Include="Views\Dashboard\_TableDetail.cshtml" />
     <Content Include="Views\Shared\_BreadcumbView.cshtml" />
+    <Content Include="Views\ReportSummary\SaleRegister.cshtml" />
+    <Content Include="Views\ReportSummary\ItemSummary.cshtml" />
+    <Content Include="Views\ReportSummary\MealSummary.cshtml" />
+    <Content Include="Views\ReportSummary\CatSummary.cshtml" />
+    <Content Include="Views\ReportSummary\AuditReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="vendor\jquery.counterup\demo\" />

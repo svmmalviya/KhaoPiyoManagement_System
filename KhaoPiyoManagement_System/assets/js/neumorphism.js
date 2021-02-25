@@ -1,19 +1,4 @@
-/*
 
-=========================================================
-* Neumorphism UI - v1.0.0
-=========================================================
-
-* Product Page: https://themesberg.com/product/ui-kits/neumorphism-ui
-* Copyright 2020 Themesberg MIT LICENSE (https://www.themesberg.com/licensing#mit)
-
-* Coded by https://themesberg.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 
 "use strict";
 $(document).ready(function () {
@@ -98,7 +83,8 @@ $(document).ready(function () {
     $('.datepicker')[0] && $('.datepicker').each(function () {
         $('.datepicker').datepicker({
             disableTouchKeyboard: true,
-            autoclose: false
+            autoclose: false,
+            dateFormat: 'dd//mm/yy'
         });
     });
 
@@ -191,23 +177,23 @@ $(document).ready(function () {
     }
 
     if ($("#input-slider-vertical-2")[0]) {
-    var c = document.getElementById("input-slider-vertical-2"),
-        d = document.getElementById("input-slider-range-value-low"),
-        e = document.getElementById("input-slider-range-value-high"),
-        f = [d, e];
+        var c = document.getElementById("input-slider-vertical-2"),
+            d = document.getElementById("input-slider-range-value-low"),
+            e = document.getElementById("input-slider-range-value-high"),
+            f = [d, e];
 
-    noUiSlider.create(c, {
-        start: [parseInt(d.getAttribute('data-range-value-low')), parseInt(e.getAttribute('data-range-value-high'))],
-        connect: !0,
-        tooltips: true,
-        orientation: 'vertical',
-        range: {
-            min: parseInt(c.getAttribute('data-range-value-min')),
-            max: parseInt(c.getAttribute('data-range-value-max'))
-        }
-    }), c.noUiSlider.on("update", function (a, b) {
-        f[b].textContent = a[b]
-    })
+        noUiSlider.create(c, {
+            start: [parseInt(d.getAttribute('data-range-value-low')), parseInt(e.getAttribute('data-range-value-high'))],
+            connect: !0,
+            tooltips: true,
+            orientation: 'vertical',
+            range: {
+                min: parseInt(c.getAttribute('data-range-value-min')),
+                max: parseInt(c.getAttribute('data-range-value-max'))
+            }
+        }), c.noUiSlider.on("update", function (a, b) {
+            f[b].textContent = a[b]
+        })
     }
 
     //Progress bars

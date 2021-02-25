@@ -12,7 +12,7 @@ namespace KhaoPiyoManagement_System.Controllers
         // GET: Login
         public ActionResult Index()
         {
-
+           
             return View();
         }
         [HttpPost]
@@ -23,10 +23,9 @@ namespace KhaoPiyoManagement_System.Controllers
                 User_Master user = KhaoPiyoEntities.User_Master.Where(x => x.sUser_Nm == txtuserid&&x.sPassword==txtuserpass).FirstOrDefault();
                 if (user != null)
                 {
-                    Session["username"] = user.sFull_nm.ToString();
-                    Session["compcd"] = 1;
-                    Session["buscd"] = 1;
-
+                    Session["username"] = user.sFull_nm.ToString();                  
+                    Session["iuser_cd"] = user.iUser_Cd;
+                    //GlobalProperties.Instance.dateformate = "MM/dd/yyyy";
                     return RedirectToAction("Index","Dashboard");
                 }
                 else {

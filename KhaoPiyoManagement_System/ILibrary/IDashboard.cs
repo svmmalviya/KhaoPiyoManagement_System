@@ -11,39 +11,39 @@ namespace KhaoPiyoManagement_System.ILibrary
     {
 
         /// <summary>
-        /// it fetches running tables accordingly given parameters
-        /// </summary>
-        /// <param name="iBusiness_Cd">Business code</param>
-        /// <param name="iCompany_Cd">Company code</param>
-        /// <returns>RunningTables</returns>
-        RunningTables GetRunningTables(int iCompany_Cd, int iBusiness_Cd);
-        /// <summary>
-        /// it return the running table accordingly given table code
-        /// </summary>
-        /// <param name="tablecd">Table code</param>
-        /// <returns></returns>
-        List<TableDetails> GetRunningTableDetail(int tablecd);
-
-        /// <summary>
         /// it fetched today's todal bill count
         /// </summary>
         /// <returns>count as string</returns>
-        string GetTodaysTotalBill();
+        string GetTodaysTotalBill(int ibus_cd, int icomp_cd);
+
+
+        /// <summary>
+        /// it returns company's details
+        /// </summary>
+        /// <returns>details as company_master</returns>
+        MyResponse GetCompanyDetails(int? iuser_cd);
+
 
         /// <summary>
         /// it fetched today's todal guests count
         /// </summary>
         /// <returns>count as string</returns>
-        string GetTodaysTotalGuest();
+        string GetTodaysTotalGuest(int ibus_cd, int icomp_cd);
         /// <summary>
         /// it fetched today's todal sales count
         /// </summary>
         /// <returns>count as string</returns>
-        string GetTodaysTotalSales();
+        string GetTodaysTotalSales(int ibus_cd, int icomp_cd);
         /// <summary>
         /// it fetched today's todal expenses count
         /// </summary>
         /// <returns>count as string</returns>
-        string GetTodaysTotalExpenses();
+        string GetTodaysTotalExpenses(int ibus_cd, int icomp_cd);
+
+        /// <summary>
+        /// it fetched daily money collection 
+        /// </summary>
+        /// <returns>list of payment info</returns>
+        List<object> GetDailyMoneyCollection(int ibus_cd, int icomp_cd);
     }
 }

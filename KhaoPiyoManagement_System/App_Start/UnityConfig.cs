@@ -16,6 +16,9 @@ namespace KhaoPiyoManagement_System
 
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IDashboard, Dashboard>();
+            container.RegisterType<IRunningTables, RunningTables>();
+            container.RegisterType<ISalesRegister, SalesRegisterImp>();
+            container.RegisterType<IItemSummary, ItemSummaryImp>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

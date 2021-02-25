@@ -1,0 +1,291 @@
+﻿@{
+
+}
+
+
+@using (Ajax.BeginForm("CatSummary", "ReportSummary", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnUpdate" }))
+{
+    @*<div id="loadderDiv">
+            <div class="spinner-border text-success " role="status" >
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>*@
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="input-daterange datepicker row align-items-center">
+                <div class="col">
+                    <label class="h6" for="exampleInputDate2">From</label>
+                    <div class="form-group">
+                        <div class="input-group input-group-border">
+                            <div class="input-group-prepend"><span class="input-group-text"><span class="far fa-calendar-alt"></span></span></div>
+                            <input class="form-control datepicker" readonly id="dtfrom" name="dtfrom" placeholder="Start date" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="h6" for="exampleInputDate3">To</label>
+                        <div class="input-group input-group-border">
+                            <div class="input-group-prepend"><span class="input-group-text"><span class="far fa-calendar-alt"></span></span></div>
+                            <input class="form-control datepicker" readonly id="dtto" name="dtto" placeholder="End date" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group" style="padding-top:29px">
+                        <button class="btn btn-primary" type="submit">
+                            Search
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 pl-6">
+            <div class="form-check">
+                <input class="form-check-input r1" group="r1" type="radio" name="r1" id="r1" value="Qty" checked>
+                <label class="form-check-label" for="r1">
+                    Qty
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input r2" group="r1" type="radio" name="r1" id="r2" value="Name">
+                <label class="form-check-label" for="r2">
+                    Name
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input r3" group="r1" type="radio" name="r1" id="r3" value="Sale">
+                <label class="form-check-label" for="r3">
+                    Sale
+                </label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info font-weight-bold text-center " role="alert">
+                @ViewBag.selectedRecordDescription
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <table class="table  khaopiyo-summary-table table-striped ">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-left" scope="col">Meal Name</th>
+                        <th class="" scope="col">Quantity</th>
+                        <th class="" scope="col">Total Amount</th>
+                        <th class="" scope="col">Total Discount</th>
+                        <th class="" scope="col">Total Tax</th>
+                    </tr>
+                </thead>
+                <tfoot class="tfoot-dark">
+                    <tr class="">
+                        <td class="text-white">Total</td>
+                        <td id="totalqty" class="text-white"></td>
+                        <td id="totalamt" class="text-white"></td>
+                        <td id="totaldisc" class="text-white"></td>
+                        <td id="totaltax" class="text-white"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+}
+
+
+<script type="text/javascript">
+
+    var i = 0;
+
+    if (i == 0) {
+        var d = new Date();
+        var currMonth = d.getMonth();
+        var currYear = d.getFullYear();
+
+        var startDate = new Date(currYear, currMonth, d.getDate());
+
+
+        $("#dtfrom").datepicker("setDate", startDate);
+        $("#dtto").datepicker("setDate", startDate);
+        i++;
+    }
+
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: "/ReportSummary/GetCatRecords",
+            data: '{}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccess,
+            failure: function (response) {
+                //  alert(response.d);
+            },
+            error: function (response) {
+                alert(response.d);
+            }
+        });
+    });
+
+    function OnUpdate(response) {  //to call  while fetching data on submit button
+        var datatable = $(".khaopiyo-summary-table").DataTable();
+        datatable.clear();
+        datatable.rows.add(response);
+        datatable.draw();
+    }
+
+    $(".r2").click(function () {
+        $(".khaopiyo-summary-table").DataTable().order([0, 'asc']).draw();
+    });
+
+    $(".r3").click(function () {
+        $(".khaopiyo-summary-table").DataTable().order([2, 'desc']).draw();
+    });
+    $(".r1").click(function () {
+        $(".khaopiyo-summary-table").DataTable().order([1, 'desc']).draw();
+    });
+
+
+
+    function OnSuccess(response) {
+        var d = $(".khaopiyo-summary-table").DataTable(
+            {
+                //oLanguage: {
+                //    sProcessing: "<div class='spinner-border text-success ' role='status'  ><span class= 'sr-only' > Loading...</span></div >",
+                //},
+                //processing: true,
+                language: {
+                    searchPlaceholder: "Search text"
+                },
+                bLengthChange: false,
+                lengthMenu: [[5, 10, -1], [5, 10, 50, 100, "All"]],
+                bFilter: true,
+                bSort: true,
+                bPaginate: true,
+                paging: false,
+                aaSorting: [[1, 'asc']],
+                data: response,
+                columns: [{ 'data': 'item','class': 'text-left' },
+                {
+                    'data': 'TQty', 'mRender': function (data, type, full) {
+                        return data.toString().match(/\d+(\.\d{1,2})?/g)[0];
+                    }
+                },
+                {
+                    'data': 'TTax', 'mRender': function (data, type, full) {
+                        return data.toString().match(/\d+(\.\d{1,2})?/g)[0];
+                    }
+                },
+                {
+                    'data': 'TDisAmt', 'mRender': function (data, type, full) {
+                        return data.toString().match(/\d+(\.\d{1,2})?/g)[0];
+                    }
+                },
+                {
+                    'data': 'TAmt', 'mRender': function (data, type, full) {
+                        return data.toString().match(/\d+(\.\d{1,2})?/g)[0];
+                    }
+                },
+                ],
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+
+                    // Total over all pages
+                    totalqty = api
+                        .column(1)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    totalamt = justTwoDecimalValue(api
+                        .column(2)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0));
+
+                    totaldisc = justTwoDecimalValue(api
+                        .column(3)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0));
+
+                    totaltax = justTwoDecimalValue(api
+                        .column(4)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0));
+
+                    // Update footer
+                    $(api.column(1).footer()).html(
+                        totalqty
+                    );
+                    $(api.column(2).footer()).html(
+                        totalamt
+                    );
+
+                    $(api.column(3).footer()).html(
+                        totaldisc
+                    );
+                    $(api.column(4).footer()).html(
+                        totaltax
+                    );
+                }
+            });
+    };
+
+    function justTwoDecimalValue(data) {
+        return data.toString().match(/\d+(\.\d{1,2})?/g)[0];
+    }
+</script>
+<script>
+
+
+
+
+                                                            //$(document).ready(function () {
+
+                                                            //    $('.khaopiyo-tran-table').DataTable({
+                                                            //        "ajax": "SalesRegister/GetRecords",
+                                                            //        "columns": [
+                                                            //            { "data": "Bill No" },
+                                                            //            { "data": "Bill Date" },
+                                                            //            { "data": "Table No" },
+                                                            //            { "data": "Qty" },
+                                                            //            { "data": "Amount" },
+                                                            //            { "data": "Discount" },
+                                                            //            { "data": "RoundOff" },
+                                                            //            { "data": "Grand Total" },
+                                                            //            { "data": "Guest Name" },
+                                                            //            { "data": "Mobile" }    ,
+                                                            //            { "data": "Pax" }       ,
+                                                            //            { "data": "GSTIN" }     ,
+                                                            //            { "data": "Attend By" } ,
+                                                            //            { "data": "NC Reason" } ,
+                                                            //            { "data": "NC Amount" } ,
+                                                            //            { "data": "Discount Value" },
+                                                            //            { "data": "Discount Type" } ,
+                                                            //            { "data": "Void Reason" }   ,
+                                                            //            { "data": "Pay Type" }      ,
+                                                            //            { "data": "Way Off" }       ,
+                                                            //            { "data": "Way Off Remark" },
+                                                            //            { "data": "Tip Amount" }    ,
+                                                            //            { "data": "Donation" }      ,
+                                                            //            { "data": "Donation Remark" },
+                                                            //        ]
+                                                            //    });
+                                                            //});
+
+</script>

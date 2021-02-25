@@ -1,3 +1,177 @@
 ﻿body {
-    font-size:14px;
+    font-family: 'Poppins' !important;
 }
+
+.list-group > .list-group-item {
+    border: none;
+}
+
+img.loginpage-logo {
+    width: auto;
+    height: 80px;
+}
+
+
+.navbar-brand img {
+    width: 50px;
+    height: 50px;
+}
+
+div.dataTables_wrapper div.dataTables_paginate {
+    float: right;
+}
+
+.table {
+    color: #44476A;
+    white-space: normal;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 50%) !important;
+    background-color: #ffffff !important;
+    margin: 0px;
+}
+
+
+.sorting, .sorting_asc, .sorting_desc {
+    background: none;
+}
+
+.table thead tr th {
+    padding: 10px;
+}
+
+.modal.row.col-md-12 + .table {
+    background: white;
+}
+
+.col-xl-6 .card.bg-primary.shadow-soft.border-light {
+    box-shadow: 0 4px 10px rgb(0 0 0 / 50%) !important;
+    background-color: #ffffff !important;
+}
+
+.modal-body > .card {
+    background-color: #ffffff !important;
+}
+
+.login-form.input-group > .input-group-text {
+    background-color: #ffffff !important;
+}
+
+.login-form > .input-group input[type='text'] {
+    background: white;
+}
+
+button.btn-primary.btn {
+    background: #fe5012;
+    color: #fff;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 50%);
+    border-color: #fe5012;
+    transition: all 0.3s ease-in-out;
+}
+/*.navbar-brand .shadow-soft .py-2 .px-3 .rounded border .border-light .mr-lg-4 >img {
+
+}*/
+.table .tfoot-dark td {
+    color: #e6e7ee;
+    background-color: #44476A;
+    border-color: #535781;
+}
+
+#loadderDiv {
+    display: none;
+    background-color: white;
+    width: 50%;
+    height: 100%;
+    z-index: 9999;
+    margin: auto;
+    text-align: center
+}
+
+.khaopiyo-tran-table {
+    overflow: scroll !important;
+    display: -webkit-inline-box !important;
+}
+
+
+button.btn.btn-primary.btn-block:hover {
+    background: #fff;
+    color: #fe5012;
+}
+
+
+nav-item dropdown > .nav-link {
+    font-size: 16px;
+}
+
+.breadcrumb-item, .breadcrumb-item a {
+    font-size: 14px;
+}
+
+h3, .h3 {
+    font-size: 24px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Poppins'
+}
+
+.navbar .navbar-nav .nav-link {
+    font-size: 16px;
+}
+
+.khaopiyo-button-r-table {
+    width: 80px;
+    height: 80px;
+    background: #fe5012;
+    color: #fff;
+    font-family: 'Poppins , sans-serif';
+    font-size: 24px;
+    border: 1px solid #fe5012 !important;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .khaopiyo-button-r-table:hover {
+        background: #fff;
+        color: #fe5012;
+    }
+
+.table th, .table td {
+    padding: 5px 15px 5px 15px;
+}
+
+.list-group-item {
+    padding: 10px;
+}
+
+.input-group > .input-group-prepend > .btn, .input-group > .input-group-prepend > .input-group-text, .input-group > .input-group-append:not(:last-child) > .btn, .input-group > .input-group-append:not(:last-child) > .input-group-text, .input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle), .input-group > .input-group-append:last-child > .input-group-text:not(:last-child) {
+    background: white;
+}
+
+.input-group > .form-control:not(:first-child), .input-group > .custom-select:not(:first-child) {
+    background: white;
+}
+
+.modal {
+    min-width: 300px;
+}
+
+.table {
+    color: #44476A;
+    white-space: none;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 50%) !important;
+    background-color: #ffffff !important;
+    margin: 0px;
+    display: contents;
+}
+
+    .table td {
+        padding: 5px 15px 5px 15px;
+        word-break: keep-all;
+        white-space: pre-wrap;
+        width: 20%;
+    }
+
+        .table td:first-child {
+            width: 40%;
+        }
