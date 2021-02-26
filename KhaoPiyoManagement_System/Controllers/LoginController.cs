@@ -12,7 +12,6 @@ namespace KhaoPiyoManagement_System.Controllers
         // GET: Login
         public ActionResult Index()
         {
-           
             return View();
         }
         [HttpPost]

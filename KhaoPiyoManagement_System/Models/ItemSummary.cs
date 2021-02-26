@@ -13,6 +13,16 @@ namespace KhaoPiyoManagement_System.Models
         public double TDisAmt { get; set; }
         public string item { get; set; }
     }
+
+    public class DashboardSummary
+    {
+        public string billcount { get; set; }
+        public string expences { get; set; }
+        public string sale { get; set; }
+        public string guest { get; set; }
+        public List<string> chartLabels { get; set; }
+        public List<string> chartData { get; set; }
+    }
     public class AuditReport
     {
         public string sItem_Nm { get; set; }

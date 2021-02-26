@@ -16,6 +16,12 @@ namespace KhaoPiyoManagement_System.ILibrary
         /// <returns>count as string</returns>
         string GetTodaysTotalBill(int ibus_cd, int icomp_cd);
 
+        /// <summary>
+        /// it fetched dashboard summary accordingly date
+        /// </summary>
+        /// <returns>count as string</returns>
+        MyResponse GetDashboardSummary(string from, string to, int icomp_cd, int ibus_cd);
+
 
         /// <summary>
         /// it returns company's details

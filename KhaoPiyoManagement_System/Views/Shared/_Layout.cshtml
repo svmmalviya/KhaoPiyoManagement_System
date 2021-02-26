@@ -1,8 +1,5 @@
 ﻿@{
     ViewBag.title = "KhaoPiyo-Soft";
-    if (Session["companylogo"] == null) {
-        Response.Redirect("~/Login/Index");
-    }
 }
 
 <!DOCTYPE html>
@@ -12,12 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.title</title>
     <meta name="referrer" content="strict-origin" />
+
     <link href="~/vendor/_fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
     <link rel="icon" href="~/images/khaopiyo_logo.png" type="image/icon type">
     <!-- Pixel CSS -->
     <link type="text/css" href="~/css/khaopiyo.css" rel="stylesheet">
-
-    @*<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+   
 
 </head>
 <body>
@@ -26,8 +23,8 @@
             <div class="container position-relative">
                 <a class="navbar-brand shadow-soft py-2 px-3 rounded border border-light " href='@Url.Action("Index","Dashboard")'>
                     @*<img class="navbar-brand-dark" height="50" width="50" src="./assets/img/brand/dark.svg" alt="Logo light">*@
-                    <img class="navbar-brand-dark navbar-logo" src="~/images/@Session["companylogo"]" alt="Logo light">
-                    <img class="navbar-brand-light navbar-logo" src="~/images/@Session["companylogo"]" alt="Logo dark">
+                    <img class="navbar-brand-dark navbar-logo" src="~/images/khaopiyo_logo.png" alt="Logo light">
+                    <img class="navbar-brand-light navbar-logo" src="~/images/khaopiyo_logo.png" alt="Logo dark">
                 </a>
                 <div class="navbar-collapse collapse" id="navbar_global">
                     <div class="navbar-collapse-header">
@@ -43,6 +40,12 @@
                         </div>
                     </div>
                     <ul class="navbar-nav navbar-nav-hover align-items-lg-center ">
+                        <li class="nav-item " style="float:right">
+                            <a href="@Url.Action("MyDashboard","Dashboard")" class="nav-link">
+                                <span class="nav-link-inner-text">My-Dashboard</span>
+                                @*  <span class="fas fa-angle-down nav-link-arrow ml-2"></span>*@
+                            </a>
+                        </li>
                         <li class="nav-item " style="float:right">
                             <a href="@Url.Action("Index","RunningTables")" class="nav-link">
                                 <span class="nav-link-inner-text">Running-Tables</span>
@@ -162,8 +165,10 @@
 
     </header>
     <main>
+        <link href="~/css/customStyle.css" rel="stylesheet" />
         @Scripts.Render("~/bundles/jquery")
-        <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+        @Scripts.Render("~/bundles/jqueryval")
+        @*<script src=""></script>*@
         <!-- Hero -->
         <section class="section section bg-soft pb-5 overflow-hidden z-2">
             <div class="container z-2 pt-5">
@@ -172,8 +177,17 @@
             </div>
         </section>
     </main>
+    <footer>
+        <link href="~/css/customStyle.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
 
+        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+
+    </footer>
     <!--TableDetail Modal  -->
+
     <div class="modal  fade overflow-auto bg-primary" id="tabDetailsModal" tabindex="-1" role="dialog" aria-labelledby="modal-form-signup" aria-hidden="true">
         <div class="modal-dialog " role="document" style="">
             <div class="modal-content">
@@ -196,7 +210,7 @@
                                 <div class="font-weight-bold rounded-bottom  modaltext text-left"> <span>Attended By : &nbsp;</span> <span class="Attendedby"></span></div>
                                 <div class="font-weight-bold rounded-bottom  modaltext text-left"> <span>Pax : &nbsp;</span> <span class=" pax"></span></div>
                             </div>
-                            <div class="col-md-12 col-xs-12 col-sm-12 p-0" id="tableitems">
+                            <div class="col-md-12 col-xs-12 col-sm-12 pt-3 " id="tableitems">
                                 <table class="table  _itemsTable " id="_itemsTable">
                                     <thead class="thead-dark">
                                         <tr>
@@ -210,7 +224,9 @@
                             </div>
                             <div class='col-md-12 col -xs-12 col-sm-12 p-0 pr-1' id="totalTab"></div>
                             <div class="col-md-12 col-xs-12 col-sm-12 text-right">
-                                <button type="button" class="btn btn-outline-danger float-lg-right ml-auto" data-dismiss="modal" aria-label="Close">Close</button>
+                                <button type="button" class="btn  btn-khaopiyo  float-lg-right ml-auto" data-dismiss="modal" aria-label="Close">
+                                    Close
+                                </button>
                             </div>
 
                         </div>
@@ -220,14 +236,7 @@
         </div>
     </div>
 
-    <footer>
-        <link href="~/css/customStyle.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
 
-        <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
-    </footer>
 
 </body>
 

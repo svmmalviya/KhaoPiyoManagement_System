@@ -68,6 +68,51 @@ namespace KhaoPiyoManagement_System.ILibrary
             return tableDetails;
         }
 
+        public List<TableDetails> GetBill(int tablecd)
+        {
+            List<TableDetails> tableDetails = new List<TableDetails>();
+            try
+            {
+                var trans = entities.View_Tran.ToList();
+
+                foreach (var item in trans)
+                {
+                    if (item.iBill_No == tablecd )
+                    {
+                        tableDetails.Add(new TableDetails
+                        {
+                            cat = item.sTab_Cat_Nm,
+                            tabno = item.sTab_Nm,
+                            tabno_cd = item.iTab_Cd.ToString(),
+                            billno = item.iBill_No.ToString(),
+                            billdate = item.dBill_Dt.Value.ToString("dd-MM-yyyy"),
+                            guestname = item.sGuest_Nm,
+                            mobileno = item.sMobile,
+                            pax = item.iPax.ToString(),
+                            waiter = item.sAttd_Nm,
+                            itemname = item.sItem_Nm,
+                            qty = item.Qty.ToString(),
+                            rate = item.Rate.ToString(),
+                            amount = item.Amount.ToString(),
+                            total = item.TAmt.ToString(),
+                            discount = item.TDiscount.ToString(),
+                            tax = item.TGST.ToString(),
+                            roundoff = item.TRoundOff.ToString(),
+                            grandtotal = item.iGrand_Amt.ToString(),
+                            totqty = item.TQty.ToString()
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return tableDetails;
+        }
+
         public Models.RunningTables GetRunningTables(int iCompany_Cd,int iBusiness_Cd)
         {
            Models.RunningTables rtabs = new Models.RunningTables();

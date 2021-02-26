@@ -35,8 +35,8 @@ namespace KhaoPiyoManagement_System.ILibrary
                     List<AuditReport> auditReports = new List<AuditReport>();
                     
 
-                    dtFrom = DateTime.ParseExact(from, GlobalProperties.Instance.AuditReportdateformate, System.Globalization.CultureInfo.InvariantCulture);
-                    dtTo = DateTime.ParseExact(to, GlobalProperties.Instance.AuditReportdateformate, System.Globalization.CultureInfo.InvariantCulture);
+                    dtFrom = DateTime.ParseExact(from, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
+                    dtTo = DateTime.ParseExact(to, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
                     //cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bOpen == 0 && x.bVoid == 0).ToList();
 
                     var r = from t1 in entities.KOT_Delete
@@ -45,7 +45,7 @@ namespace KhaoPiyoManagement_System.ILibrary
 
                     foreach (var item in r)
                     {
-                        if (item.UpdateDate >= dtFrom && item.UpdateDate <= dtTo) {
+                        if (Convert.ToDateTime(item.UpdateDate) > dtFrom.AddDays(-1) && Convert.ToDateTime( item.UpdateDate)<=dtTo) {
                             auditReports.Add(new AuditReport {
                                 sItem_Nm=item.sItem_Nm,
                                 date=item.UpdateDate.Value.ToString().Split(' ')[0].ToString(),
@@ -74,7 +74,7 @@ namespace KhaoPiyoManagement_System.ILibrary
             }
             catch (Exception EX)
             {
-                Log.Write(EX.Message, "");
+                  Log.Write(EX.Message, "");
                 myResponse.Error = EX.Message;
                 myResponse.isValid = false;
                 myResponse.JsonStr = null;
@@ -154,6 +154,7 @@ namespace KhaoPiyoManagement_System.ILibrary
                     dtFrom = DateTime.ParseExact(from, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
                     dtTo = DateTime.ParseExact(to, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
 
+
                     cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo &&x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bOpen == 0 && x.bVoid == 0).ToList();
 
 
@@ -207,6 +208,10 @@ namespace KhaoPiyoManagement_System.ILibrary
                     List<View_Tran> cust_Views = new List<View_Tran>();
                     dtFrom = DateTime.ParseExact(from, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
                     dtTo = DateTime.ParseExact(to, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
+                    Log.Write(from,"");
+                    Log.Write(to,"");
+                    //dtFrom = DateTime.Parse(from);
+                    //dtTo = DateTime.Parse(to);
 
                     cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bOpen == 0 && x.bVoid == 0).ToList();
 

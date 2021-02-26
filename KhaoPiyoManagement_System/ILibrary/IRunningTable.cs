@@ -23,6 +23,8 @@ namespace KhaoPiyoManagement_System.ILibrary
         /// <param name="tablecd">Table code</param>
         /// <returns></returns>
         List<TableDetails> GetRunningTableDetail(int tablecd);
-       
+
+        List<TableDetails> GetBill(int tablecd);
+
     }
 }

@@ -4,13 +4,9 @@
 
 @using (Ajax.BeginForm("SaleRegister", "ReportSummary", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnUpdate" }))
 {
-    @*<div id="loadderDiv">
-            <div class="spinner-border text-success " role="status" >
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>*@
+
     <div class="row mt-3">
-        <div class="col-md-12">
+        <div class="col-md-4 col-sm-4">
             <div class="input-daterange datepicker row align-items-center">
                 <div class="col">
                     <label class="h6" for="exampleInputDate2">From</label>
@@ -21,6 +17,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="input-daterange datepicker row align-items-center">
                 <div class="col">
                     <div class="form-group">
                         <label class="h6" for="exampleInputDate3">To</label>
@@ -30,6 +30,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="input-daterange datepicker row align-items-center">
                 <div class="col">
                     <div class="form-group" style="padding-top:29px">
                         <button class="btn btn-primary btnSubmit" type="submit">
@@ -94,7 +98,7 @@
                         <th class="" scope="col">Donation</th>
                     </tr>
                 </thead>
-                <tfoot class="thead-dark">
+                <tfoot class="tfoot-dark">
                     <tr>
                         <td class="" scope="col"></td>
                         <td class="" scope="col"></td>
@@ -128,6 +132,63 @@
 
 <script type="text/javascript">
 
+    $(document).on("click", ".billno", function () {
+        var id=$(this).text();
+         $.ajax({
+             url: "@Url.Action("GetRunningTable", "ReportSummary")",
+             data: { "tid":  id },
+            contentType: "application/json; charset=utf-8",
+             dataType: "json",
+             success: dataReceived,
+            failure: function (response) {
+                //  alert(response.d);
+            },
+            error: function (response) {
+                alert(response.d);
+            }
+        });
+    });
+
+
+
+    function dataReceived(data) {  //rendering running table detail from ajax call
+        $(document).find(".modal.tabno").text("Table No.-" + data[0].tabno);
+        $(document).find(".modal .billno").text(" " + data[0].billno);
+        $(document).find(".billdate").text(" " + data[0].billdate);
+        $(document).find(".guestname").text(" " + data[0].guestname);
+        $(document).find(".pax").text(" " + data[0].pax);
+        $(document).find(".Attendedby").text(" " + data[0].waiter);
+        $(document).find(".mobile").text(" " + data[0].mobileno);
+        $("._itemsTable").find("tr:gt(0)").remove();  //remove all rows before updating
+        $("#totalTab").after().find(".totalTable").remove();   //Remove added card before adding new
+        var addingRowStr = "";
+
+
+        $.each(data, function (key, val) {
+            addingRowStr += "<tr > <td  >" + val.itemname + "</td>";
+            addingRowStr += "<td align='right' > " + val.rate + "</td>";
+            addingRowStr += "<td align='right' >" + val.qty + "</td>";
+            addingRowStr += "<td align='right' > " + val.amount + "</td></tr>";
+        });
+
+
+        addingRowStr += "<tr><td  colspan=2 align='right' class='font-weight-bold border-0' >Total :</td><td align='right'  class='font-weight-bold border-0'>" + data[0].totqty + "</td><td class='font-weight-bold border-0' align='right'>" + data[0].total + " </td></tr>" +
+            "<tr><td colspan=2 align='right' class='font-weight-bold border-0' >Discount : </td><td class='border-0' align='right' ></td><td align='right' class='font-weight-bold border-0'>" + data[0].discount + " </td></tr>" +
+            "<tr><td colspan=2 align='right'class='font-weight-bold border-0' >Tax : </td><td  ></td><td align='right' class='font-weight-bold border-0' >" + data[0].tax + " </td></tr>" +
+            "<tr><td colspan=2 align='right'class='font-weight-bold border-0' >Round Off : </td><td class='font-weight-bold border-0' ></td><td align='right' class='font-weight-bold border-0'>" + data[0].roundoff + " </td></tr>" +
+            "<tr><td colspan=2 align='right'class='font-weight-bold border-0' >Grand Total : </td><td  class='font-weight-bold border-0' ></td><td align='right' class='font-weight-bold border-0'>" + data[0].grandtotal + " </td></tr>";
+
+
+
+        $("._itemsTable").append(addingRowStr);
+        $(".modal").css("paddin-right", "0px");
+        $("#tabDetailsModal").modal("show");
+    }
+
+    function onFailure(data) {
+        alert(data);
+    }
+
     var i = 0;
 
     if (i == 0) {
@@ -149,7 +210,7 @@
     $(function () {
         $.ajax({
             type: "POST",
-            url: "/ReportSummary/GetSaleRecords",
+            url: "@Url.Action("GetSaleRecords", "ReportSummary")",
             data: '{}',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -174,6 +235,7 @@
 
 
     function OnSuccess(response) {
+
         var d = $(".khaopiyo-tran-table").DataTable(
             {
                 language: {
@@ -184,7 +246,7 @@
                 lengthMenu: [[5, 10, -1], [5, 10, 50, 100, "All"]],
                 bFilter: false,
                 bSort: false,
-                bPaginate: true,
+                bPaginate: false,
                 paging: false,
                 data: response,
                 columns: [{ 'data': 'iBill_No', 'class': 'billno' },
@@ -283,7 +345,7 @@
                             return intVal(a) + intVal(b);
                         }, 0);
 
-                   
+
                     totaltax = api
                         .column(6)
                         .data()
@@ -330,7 +392,7 @@
                     $(api.column(4).footer()).html(
                         totalamt
                     );
-                   
+
 
                     $(api.column(6).footer()).html(
                         totaltax
@@ -338,8 +400,8 @@
                     $(api.column(9).footer()).html(
                         totalipax
                     );
-                   
-                   
+
+
                     $(api.column(10).footer()).html(
                         totalgstin
                     );
@@ -362,7 +424,7 @@
                     $(api.column(21).footer()).html(
                         totalDonationAmt
                     );
-                }
+                },
             });
     };
 </script>

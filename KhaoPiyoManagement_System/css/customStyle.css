@@ -87,9 +87,14 @@ button.btn-primary.btn {
 }
 
 .khaopiyo-tran-table {
-    overflow: scroll !important;
+    overflow-x: scroll !important;
     display: -webkit-inline-box !important;
 }
+
+.DataTables_Table_0_wrapper {
+overflow-x:auto;
+}
+
 
 
 button.btn.btn-primary.btn-block:hover {
@@ -175,3 +180,4 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         .table td:first-child {
             width: 40%;
         }
+

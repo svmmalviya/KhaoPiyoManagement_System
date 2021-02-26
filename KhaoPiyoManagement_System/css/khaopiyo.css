@@ -664,7 +664,7 @@ pre code {
 
 @media (min-width: 1200px) {
     .container {
-        max-width: 1140px;
+        max-width: 1180px;
     }
 }
 
@@ -5021,8 +5021,18 @@ input[type="button"].btn-block {
     margin-left: 0;
 }
 
+.btn-khaopiyo {
+    background: #fff;
+    color: #fe5012;
+}
+
+    .btn-khaopiyo:hover {
+        background: #fe5012;
+        color:#fff;
+    }
+
 .dropdown-menu {
-    position: absolute;
+    position: relative;
     top: 100%;
     left: 0;
     z-index: 1000;
@@ -16987,6 +16997,7 @@ a.text-slack:hover, a.text-slack:focus {
 }
 
 .datepicker-dropdown {
+    position:absolute;
     top: 0;
     left: 0;
     padding: 20px 22px;
@@ -17214,7 +17225,9 @@ a.text-slack:hover, a.text-slack:focus {
     padding: 0 2px 0 5px;
     vertical-align: middle;
 }
-
+.login-text-pwd {
+    -webkit-text-security: disc;
+}
 .headroom {
     will-change: transform;
     background-color: inherit;

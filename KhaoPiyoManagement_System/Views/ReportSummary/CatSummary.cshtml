@@ -11,7 +11,7 @@
             </div>
         </div>*@
     <div class="row mt-3">
-        <div class="col-md-12">
+        <div class="col-md-4 col-sm-4">
             <div class="input-daterange datepicker row align-items-center">
                 <div class="col">
                     <label class="h6" for="exampleInputDate2">From</label>
@@ -22,6 +22,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="input-daterange datepicker row align-items-center">
                 <div class="col">
                     <div class="form-group">
                         <label class="h6" for="exampleInputDate3">To</label>
@@ -31,9 +35,13 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="input-daterange datepicker row align-items-center">
                 <div class="col">
                     <div class="form-group" style="padding-top:29px">
-                        <button class="btn btn-primary" type="submit">
+                        <button class="btn btn-primary btnSubmit" type="submit">
                             Search
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
@@ -41,6 +49,7 @@
                 </div>
             </div>
         </div>
+
 
         <div class="col-md-6 pl-6">
             <div class="form-check">
@@ -67,29 +76,31 @@
                 @ViewBag.selectedRecordDescription
             </div>
         </div>
-        <div class="col-md-12 text-center">
-            <table class="table  khaopiyo-summary-table table-striped ">
-                <thead class="thead-dark">
-                    <tr>
-                        <th class="text-left" scope="col">Meal Name</th>
-                        <th class="" scope="col">Quantity</th>
-                        <th class="" scope="col">Total Amount</th>
-                        <th class="" scope="col">Total Discount</th>
-                        <th class="" scope="col">Total Tax</th>
-                    </tr>
-                </thead>
-                <tfoot class="tfoot-dark">
-                    <tr class="">
-                        <td class="text-white">Total</td>
-                        <td id="totalqty" class="text-white"></td>
-                        <td id="totalamt" class="text-white"></td>
-                        <td id="totaldisc" class="text-white"></td>
-                        <td id="totaltax" class="text-white"></td>
-                    </tr>
-                </tfoot>
-            </table>
+        <div class="col-md-12 ">
+            <div class="table-responsive-lg table-responsive-md table-responsive-sm mb-10">
+                <table class="table  khaopiyo-summary-table table-striped ">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="text-left" scope="col">Meal Name</th>
+                            <th class="" scope="col">Quantity</th>
+                            <th class="" scope="col">Total Amount</th>
+                            <th class="" scope="col">Total Discount</th>
+                            <th class="" scope="col">Total Tax</th>
+                        </tr>
+                    </thead>
+                    <tfoot class="tfoot-dark">
+                        <tr class="">
+                            <td class="text-white">Total</td>
+                            <td id="totalqty" class="text-white"></td>
+                            <td id="totalamt" class="text-white"></td>
+                            <td id="totaldisc" class="text-white"></td>
+                            <td id="totaltax" class="text-white"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                </div>
+            </div>
         </div>
-    </div>
 }
 
 
@@ -159,13 +170,13 @@
                 },
                 bLengthChange: false,
                 lengthMenu: [[5, 10, -1], [5, 10, 50, 100, "All"]],
-                bFilter: true,
+                bFilter: false,
                 bSort: true,
-                bPaginate: true,
+                bPaginate: false,
                 paging: false,
                 aaSorting: [[1, 'asc']],
                 data: response,
-                columns: [{ 'data': 'item','class': 'text-left' },
+                columns: [{ 'data': 'item', 'class': 'text-left' },
                 {
                     'data': 'TQty', 'mRender': function (data, type, full) {
                         return data.toString().match(/\d+(\.\d{1,2})?/g)[0];
@@ -255,37 +266,37 @@
 
 
 
-                                                            //$(document).ready(function () {
+                                                                //$(document).ready(function () {
 
-                                                            //    $('.khaopiyo-tran-table').DataTable({
-                                                            //        "ajax": "SalesRegister/GetRecords",
-                                                            //        "columns": [
-                                                            //            { "data": "Bill No" },
-                                                            //            { "data": "Bill Date" },
-                                                            //            { "data": "Table No" },
-                                                            //            { "data": "Qty" },
-                                                            //            { "data": "Amount" },
-                                                            //            { "data": "Discount" },
-                                                            //            { "data": "RoundOff" },
-                                                            //            { "data": "Grand Total" },
-                                                            //            { "data": "Guest Name" },
-                                                            //            { "data": "Mobile" }    ,
-                                                            //            { "data": "Pax" }       ,
-                                                            //            { "data": "GSTIN" }     ,
-                                                            //            { "data": "Attend By" } ,
-                                                            //            { "data": "NC Reason" } ,
-                                                            //            { "data": "NC Amount" } ,
-                                                            //            { "data": "Discount Value" },
-                                                            //            { "data": "Discount Type" } ,
-                                                            //            { "data": "Void Reason" }   ,
-                                                            //            { "data": "Pay Type" }      ,
-                                                            //            { "data": "Way Off" }       ,
-                                                            //            { "data": "Way Off Remark" },
-                                                            //            { "data": "Tip Amount" }    ,
-                                                            //            { "data": "Donation" }      ,
-                                                            //            { "data": "Donation Remark" },
-                                                            //        ]
-                                                            //    });
-                                                            //});
+                                                                //    $('.khaopiyo-tran-table').DataTable({
+                                                                //        "ajax": "SalesRegister/GetRecords",
+                                                                //        "columns": [
+                                                                //            { "data": "Bill No" },
+                                                                //            { "data": "Bill Date" },
+                                                                //            { "data": "Table No" },
+                                                                //            { "data": "Qty" },
+                                                                //            { "data": "Amount" },
+                                                                //            { "data": "Discount" },
+                                                                //            { "data": "RoundOff" },
+                                                                //            { "data": "Grand Total" },
+                                                                //            { "data": "Guest Name" },
+                                                                //            { "data": "Mobile" }    ,
+                                                                //            { "data": "Pax" }       ,
+                                                                //            { "data": "GSTIN" }     ,
+                                                                //            { "data": "Attend By" } ,
+                                                                //            { "data": "NC Reason" } ,
+                                                                //            { "data": "NC Amount" } ,
+                                                                //            { "data": "Discount Value" },
+                                                                //            { "data": "Discount Type" } ,
+                                                                //            { "data": "Void Reason" }   ,
+                                                                //            { "data": "Pay Type" }      ,
+                                                                //            { "data": "Way Off" }       ,
+                                                                //            { "data": "Way Off Remark" },
+                                                                //            { "data": "Tip Amount" }    ,
+                                                                //            { "data": "Donation" }      ,
+                                                                //            { "data": "Donation Remark" },
+                                                                //        ]
+                                                                //    });
+                                                                //});
 
 </script>

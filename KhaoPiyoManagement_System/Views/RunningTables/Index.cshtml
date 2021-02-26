@@ -77,13 +77,13 @@
             });
 
 
-            var newrow = "" +
-                "<table class=' w-100 totalTable' ><tr><td ></td><td  align='right' class='font-weight-bold' >Total :</td><td align='right' style='width:80px;padding:0 0 0 0' class='font-weight-bold'>" + data[0].totqty + "</td><td class='font-weight-bold' style='width:80px' align='right'>" + data[0].total + " </td></tr>" +
-                "<tr><td colspan=2 align='right' class='font-weight-bold' >Discount : </td><td class='font-weight-bold' align='right' ></td><td align='right' class='font-weight-bold'>" + data[0].discount + " </td></tr>" +
-                "<tr><td colspan=2 align='right'class='font-weight-bold' >Tax : </td><td  ></td><td align='right' class='font-weight-bold' >" + data[0].tax + " </td></tr>" +
-                "<tr><td colspan=2 align='right'class='font-weight-bold' >Round Off : </td><td class='font-weight-bold' ></td><td align='right' class='font-weight-bold'>" + data[0].roundoff + " </td></tr>" +
-                "<tr><td colspan=2 align='right'class='font-weight-bold' >Grand Total : </td><td  class='font-weight-bold' ></td><td align='right' class='font-weight-bold'>" + data[0].grandtotal + " </td></tr>" +
-                "</table > ";
+            addingRowStr += "<tr><td  colspan=2 align='right' class='font-weight-bold border-0' >Total :</td><td align='right'  class='font-weight-bold border-0'>" + data[0].totqty + "</td><td class='font-weight-bold border-0' align='right'>" + data[0].total + " </td></tr>" +
+                "<tr><td colspan=2 align='right' class='font-weight-bold border-0' >Discount : </td><td class='border-0' align='right' ></td><td align='right' class='font-weight-bold border-0'>" + data[0].discount + " </td></tr>" +
+                "<tr><td colspan=2 align='right'class='font-weight-bold border-0' >Tax : </td><td  ></td><td align='right' class='font-weight-bold border-0' >" + data[0].tax + " </td></tr>" +
+                "<tr><td colspan=2 align='right'class='font-weight-bold border-0' >Round Off : </td><td class='font-weight-bold border-0' ></td><td align='right' class='font-weight-bold border-0'>" + data[0].roundoff + " </td></tr>" +
+                "<tr><td colspan=2 align='right'class='font-weight-bold border-0' >Grand Total : </td><td  class='font-weight-bold border-0' ></td><td align='right' class='font-weight-bold border-0'>" + data[0].grandtotal + " </td></tr>";
+
+
 
 
             //  addingRowStr += "<tr><td colspan=2 align='right' class='font-weight-bold' >Total :</td><td align='right' class='font-weight-bold'>" + data[0].totqty +"</td><td class='font-weight-bold' align='right'>" + data[0].total + " </td></tr>";
@@ -93,7 +93,7 @@
             //  addingRowStr += "<tr><td colspan=2 align='right'class='font-weight-bold' >Grand Total : </td><td  class='font-weight-bold' ></td><td align='right' class='font-weight-bold'>" + data[0].grandtotal + " </td></tr>";
 
             $("._itemsTable").append(addingRowStr);
-            $("#totalTab").append(newrow);
+            //$("#totalTab").append(newrow);
             //$(newrow).insertAfter("#tableitems");
             $(".modal").css("paddin-right", "0px");
             $("#tabDetailsModal").modal("show");

@@ -19,8 +19,8 @@ public sealed class  GlobalProperties {
     public string companyLogo = null;
 
     private GlobalProperties() {
-        dateformate = "MM/dd/yyyy";
-        AuditReportdateformate = "dd/MM/yyyy HH:mm:ss";
+        dateformate = "MM-dd-yyyy";
+        AuditReportdateformate = "MM-dd-yyyy HH:mm:ss";
     }
 
     public static GlobalProperties Instance
