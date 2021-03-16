@@ -28,6 +28,8 @@ namespace KhaoPiyoManagement_System.Controllers
             dashboard = _dashboard;
         }
 
+        
+
         // GET: Dashboard
         [OutputCache(Duration = 60)]
         public ActionResult Index()
@@ -139,16 +141,7 @@ namespace KhaoPiyoManagement_System.Controllers
                 breadcumbs.Add(new breadcumb { routename = "My-Dashboard", routevalue = "/Dashboard/MyDashboard" });
                 ViewBag.breacumb = breadcumbs;
                 
-                string dtfrom = DateTime.Now.ToString("MM-dd-yyyy");
-                string dtto = DateTime.Now.ToString("MM-dd-yyyy");
-
-
-                var response = dashboard.GetDashboardSummary(dtfrom, dtto, (int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
-
-                if (response.isValid)
-                {
-                    dSummary = Newtonsoft.Json.JsonConvert.DeserializeObject<DashboardSummary>(response.JsonStr);
-                }
+              
 
             }
             catch (Exception ex)
@@ -158,6 +151,30 @@ namespace KhaoPiyoManagement_System.Controllers
             }
 
             return View(dSummary);
+        }
+
+
+
+        public ActionResult GetDashboardSummary() {
+            DashboardSummary dSummary = new DashboardSummary();
+            try
+            {
+                string dtfrom = DateTime.Now.ToString("MM-dd-yyyy");
+                string dtto = DateTime.Now.ToString("MM-dd-yyyy");
+
+                var response = dashboard.GetDashboardSummary(dtfrom, dtto, (int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                
+                if (response.isValid)
+                {
+                    dSummary = Newtonsoft.Json.JsonConvert.DeserializeObject<DashboardSummary>(response.JsonStr);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            return Json(dSummary, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -191,7 +208,7 @@ namespace KhaoPiyoManagement_System.Controllers
                 }
                 else
                 {
-                    return View(dSummary);
+                    return View();
                 }
             }
             catch (Exception ex)
@@ -201,7 +218,6 @@ namespace KhaoPiyoManagement_System.Controllers
             }
 
         }
-
 
 
 

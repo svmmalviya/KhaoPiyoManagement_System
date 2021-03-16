@@ -12,6 +12,7 @@ namespace KhaoPiyoManagement_System.Models
         public double TQty { get; set; }
         public double TDisAmt { get; set; }
         public string item { get; set; }
+        public double total { get; set; }
     }
 
     public class DashboardSummary
