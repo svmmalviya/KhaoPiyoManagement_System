@@ -14,12 +14,13 @@ namespace KhaoPiyoManagement_System.ILibrary
 {
     public class RunningTables : IRunningTables
     {
-        KhaoPiyoEntities entities;
+        
+        KPEntity entities;
         DateTime dtFrom;
         DateTime dtTo;
 
         public RunningTables() {
-            entities = new KhaoPiyoEntities();
+            entities = new KPEntity();
         }
 
 

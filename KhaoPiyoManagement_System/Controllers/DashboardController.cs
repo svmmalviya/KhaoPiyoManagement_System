@@ -17,7 +17,7 @@ namespace KhaoPiyoManagement_System.Controllers
 {
     public class DashboardController : Controller
     {
-        private KhaoPiyoEntities entities = new KhaoPiyoEntities();
+        private KPEntity entities = new KPEntity();
         private List<breadcumb> breadcumbs = new List<breadcumb>();
         //DBConnect db = new DBConnect();
 
@@ -31,7 +31,6 @@ namespace KhaoPiyoManagement_System.Controllers
         
 
         // GET: Dashboard
-        [OutputCache(Duration = 60)]
         public ActionResult Index()
         {
             try
@@ -49,8 +48,6 @@ namespace KhaoPiyoManagement_System.Controllers
 
                     GlobalProperties.Instance.companyDetails = (Company_Master)Newtonsoft.Json.JsonConvert.DeserializeObject<Company_Master>(response.JsonStr);
 
-
-
                     breadcumbs.Add(new breadcumb { routename = "Home", routevalue = "/Dashboard/Index" });
                     ViewBag.breacumb = breadcumbs;
 
@@ -58,7 +55,13 @@ namespace KhaoPiyoManagement_System.Controllers
                     ViewBag.totalgst = dashboard.GetTodaysTotalGuest((int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
                     ViewBag.totalsls = dashboard.GetTodaysTotalSales((int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
                     ViewBag.totalexp = dashboard.GetTodaysTotalExpenses((int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
-                    ViewBag.companyname = GlobalProperties.Instance.companyDetails.sComp_Nm;
+
+                    
+                    //dashboardSummary.billcount = entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo &&x.bVoid==0 &&x.iComp_Cd==icomp_cd&&x.iBus_Cd==ibus_cd&&x.bNC==0).Select(x => x.iBill_No).Count().ToString() == "" ? "0" : entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo && x.bVoid == 0 && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd && x.bNC == 0).Select(x => x.iBill_No).Count().ToString();
+                    //dashboardSummary.guest =     entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo && x.bVoid == 0 && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd && x.bNC == 0).Sum(x => x.iPax).ToString()==""?"0": entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo && x.bVoid == 0 && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd && x.bNC == 0).Sum(x => x.iPax).ToString();
+                    //dashboardSummary.sale =      entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo && x.bVoid == 0 && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd && x.bNC == 0).Sum(x => x.iGrand_Amt).ToString() == "" ? "0" : entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo && x.bVoid == 0 && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd && x.bNC == 0).Sum(x => x.iGrand_Amt).ToString();
+                    //dashboardSummary.expences =  entities.Expenses_Tran.Where(x => x.dRec_Dt >= dtFrom && x.dRec_Dt <= dtTo && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd).Sum(x => x.iAmount).ToString() == "" ? "0" : entities.Expenses_Tran.Where(x => x.dRec_Dt >= dtFrom && x.dRec_Dt <= dtTo &&x.iComp_Cd==icomp_cd&&x.iBus_Cd==ibus_cd).Sum(x => x.iAmount).ToString();
+                    ViewBag.companyname = Session["compname"].ToString();
 
                     Session["compcd"] = GlobalProperties.Instance.companyDetails.iComp_Cd;
                     Session["buscd"] = GlobalProperties.Instance.companyDetails.ResturantID;
@@ -140,8 +143,6 @@ namespace KhaoPiyoManagement_System.Controllers
                 breadcumbs.Add(new breadcumb { routename = "Home", routevalue = "/Dashboard/Index" });
                 breadcumbs.Add(new breadcumb { routename = "My-Dashboard", routevalue = "/Dashboard/MyDashboard" });
                 ViewBag.breacumb = breadcumbs;
-                
-              
 
             }
             catch (Exception ex)

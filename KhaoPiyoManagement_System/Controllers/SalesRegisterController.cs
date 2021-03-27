@@ -36,7 +36,7 @@ namespace KhaoPiyoManagement_System.Controllers
             ViewBag.breacumb = breadcumbs;
 
 
-            var response = iSaleRegister.GetTransaction(DateTime.Now.ToString(GlobalProperties.Instance.dateformate), DateTime.Now.ToString(GlobalProperties.Instance.dateformate), "all");
+            var response = iSaleRegister.GetTransaction(DateTime.Now.ToString(GlobalProperties.Instance.dateformate), DateTime.Now.ToString(GlobalProperties.Instance.dateformate), "all",1,1);
 
             if (response.isValid)
             {
@@ -65,7 +65,7 @@ namespace KhaoPiyoManagement_System.Controllers
 
 
                 ViewBag.selectedRecordDescription = "Sale records from " + dtfrom + " To " + dtto;
-                var response = iSaleRegister.GetTransaction(dtfrom, dtto, filterValue);
+                var response = iSaleRegister.GetTransaction(dtfrom, dtto, filterValue,1,1);
 
                 if (response.isValid)
                 {
@@ -86,7 +86,7 @@ namespace KhaoPiyoManagement_System.Controllers
         public JsonResult GetRecords()
         {
 
-            var response = iSaleRegister.GetTransaction(DateTime.Now.ToString(GlobalProperties.Instance.dateformate), DateTime.Now.ToString(GlobalProperties.Instance.dateformate), "all");
+            var response = iSaleRegister.GetTransaction(DateTime.Now.ToString(GlobalProperties.Instance.dateformate), DateTime.Now.ToString(GlobalProperties.Instance.dateformate), "all",1,1);
             _trans = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Cust_View_Tran>>(response.JsonStr);
 
             return Json(_trans, JsonRequestBehavior.AllowGet);

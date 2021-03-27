@@ -62,11 +62,15 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }*/
 
+
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
+
+
 
 
 html {
@@ -75,6 +79,8 @@ html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(38, 40, 51, 0);
 }
+
+
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block;
@@ -90,6 +96,8 @@ body {
     text-align: left;
     background-color: #e6e7ee;
 }
+
+
 
 [tabindex="-1"]:focus {
     outline: 0 !important;

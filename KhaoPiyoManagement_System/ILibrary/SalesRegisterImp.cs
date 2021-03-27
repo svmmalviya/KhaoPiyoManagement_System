@@ -16,7 +16,7 @@ namespace KhaoPiyoManagement_System.ILibrary
 {
     public class SalesRegisterImp : ISalesRegister
     {
-        KhaoPiyoEntities entities;
+        KPEntity entities;
         DateTime dtFrom;
         DateTime dtTo;
 
@@ -24,7 +24,7 @@ namespace KhaoPiyoManagement_System.ILibrary
         public SalesRegisterImp()
         {
 
-            entities = new KhaoPiyoEntities();
+            entities = new KPEntity();
             dtFrom = new DateTime();
             dtTo = new DateTime();
         }
@@ -67,7 +67,7 @@ namespace KhaoPiyoManagement_System.ILibrary
                                 Amount = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
                                 bDiscount = (int)t1.bDiscount,
                                 bNC = (int)t1.bNC,
-                                DisAmt = (double)(t1.TDiscountValue == 0 || t1.TDiscountValue == null ? 0 : t1.TDiscountValue),
+                                DisAmt = (double) (t1.TDiscountValue == 0 || t1.TDiscountValue == null ? 0 : t1.TDiscountValue),
                                 bOpen = (int)t1.bOpen,
                                 iDonationAmt = (double)(t1.iDonationAmt == 0 || t1.iDonationAmt == null ? 0 : t1.iDonationAmt),
                                 GSTAmt = (double)(t1.TGST == 0 || t1.TGST == null ? 0 : t1.TGST),

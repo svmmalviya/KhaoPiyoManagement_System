@@ -14,14 +14,14 @@ namespace KhaoPiyoManagement_System.ILibrary
 {
     public class ItemSummaryImp : IItemSummary
     {
-        KhaoPiyoEntities entities;
+        KPEntity entities;
         DateTime dtFrom;
         DateTime dtTo;
         MyResponse myResponse;
 
         public ItemSummaryImp()
         {
-            entities = new KhaoPiyoEntities();
+            entities = new KPEntity();
         }
 
         public MyResponse GetTransactionAuditReport(string from, string to)
@@ -105,7 +105,7 @@ namespace KhaoPiyoManagement_System.ILibrary
 
                     var result = cust_Views.GroupBy(x => x.sCat_Nm).Select(x => new
                     {
-                        TAmt = (double)x.Sum(k => k.Rate),
+                        TAmt = (double)x.Sum(k => k.Amount),
                         TDisAmt = (double)x.Sum(k => k.DisAmt),
                         TQty = (int)x.Sum(k => k.Qty),
                         TTax = (double)x.Sum(k => k.TaxAmt),
@@ -169,7 +169,7 @@ namespace KhaoPiyoManagement_System.ILibrary
 
                     var result = cust_Views.GroupBy(x => x.sMeal_Nm).Select(x => new
                     {
-                        TAmt = (double)x.Sum(k => k.Rate),
+                        TAmt = (double)x.Sum(k => k.Amount),
                         TDisAmt = (double)x.Sum(k => k.DisAmt),
                         TQty = (int)x.Sum(k => k.Qty),
                         TTax = (double)x.Sum(k => k.TaxAmt),
@@ -232,17 +232,17 @@ namespace KhaoPiyoManagement_System.ILibrary
                     //dtFrom = DateTime.Parse(from);
                     //dtTo = DateTime.Parse(to);
 
-                    cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bOpen == 0 && x.bVoid == 0).ToList();
+                    cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bVoid == 0).ToList();
 
 
-                    var result = cust_Views.OrderBy(x=>x.TQty).GroupBy(x => x.sItem_Nm).Select(x => new
+                    var result = cust_Views.GroupBy(x => x.sItem_Nm).Select(x => new
                     {
-                        TAmt = (double)x.Sum(k => k.Total),
+                        TAmt = (double)x.Sum(k => k.Amount),
                         TDisAmt = (double)x.Sum(k => k.DisAmt),
                         TQty = (int)x.Sum(k => k.Qty),
                         TTax = (double)x.Sum(k => k.TaxAmt),
                         item = x.Select(k => k.sItem_Nm).First(),
-                        total = (double)x.Sum(k => k.Rate)
+                        total = (double)x.Sum(k => k.Total)
                     }).ToList();
                  
 

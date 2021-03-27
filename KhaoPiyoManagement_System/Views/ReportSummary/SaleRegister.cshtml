@@ -263,7 +263,15 @@
                     { 'data': 'sTab_Nm' },
                 { 'data': 'Qty' },
                 { 'data': 'TAmt' },
-                { 'data': 'DisAmt' },
+                    {
+                        'data': 'DisAmt'
+                        , render: function (data, type, row) {
+                            if (data > 0)
+                                return data.toFixed(2);
+                            else {
+                                return 0;
+                            }
+                        }    },
                 { 'data': 'GSTAmt' },
                 { 'data': 'TRoundOff' },
                 { 'data': 'iGrand_Amt' },
@@ -329,7 +337,7 @@
                         }, 0);
 
                     totalNCAmt = api
-                        .column(11)
+                        .column(14)
                         .data()
                         .reduce(function (a, b) {
                             return intVal(a) + intVal(b);
@@ -420,6 +428,9 @@
                     );
                     $(api.column(11).footer()).html(
                         totalipax.toFixed(2)
+                    );
+                    $(api.column(14).footer()).html(
+                        totalNCAmt.toFixed(2)
                     );
                 },
             });

@@ -158,7 +158,7 @@
             $(".khaopiyo-summary-table").DataTable().order([4, 'desc']).draw();
         });
         $(".r1").click(function () {
-            $(".khaopiyo-summary-table").DataTable().order([3, 'desc']).draw();
+            $(".khaopiyo-summary-table").DataTable().order([0, 'asc']).draw();
         });
 
 
@@ -179,7 +179,7 @@
                     bSort: true,
                     bPaginate: false,
                     paging: false,
-                    aaSorting: [[1, 'asc']],
+                    aaSorting: [[0, 'asc']],
                     data: response,
                     columns: [{ 'data': 'iBill_No', 'class': 'text-left' },
                     {

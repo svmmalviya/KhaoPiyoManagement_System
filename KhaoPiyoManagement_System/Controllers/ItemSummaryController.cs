@@ -28,7 +28,7 @@ namespace KhaoPiyoManagement_System.Controllers
             ViewBag.breacumb = breadcumbs;
 
 
-            var response = IItemSummary.GetTransaction(DateTime.Now.ToString(GlobalProperties.Instance.dateformate), DateTime.Now.ToString(GlobalProperties.Instance.dateformate));
+            var response = IItemSummary.GetTransactionItemWise(DateTime.Now.ToString(GlobalProperties.Instance.dateformate), DateTime.Now.ToString(GlobalProperties.Instance.dateformate));
 
             if (response.isValid)
             {
@@ -55,7 +55,7 @@ namespace KhaoPiyoManagement_System.Controllers
                 string dtto = form["dtto"];
 
                 ViewBag.selectedRecordDescription = "Sale record from " + dtfrom + " To " + dtto;
-                var response = IItemSummary.GetTransaction(dtfrom, dtto);
+                var response = IItemSummary.GetTransactionItemWise(dtfrom, dtto);
 
                 if (response.isValid)
                 {
@@ -74,7 +74,7 @@ namespace KhaoPiyoManagement_System.Controllers
         public JsonResult GetRecords()
         {
             List<ItemSummary> summaries = new List<ItemSummary>();
-            var response = IItemSummary.GetTransaction(DateTime.Now.ToString(GlobalProperties.Instance.dateformate), DateTime.Now.ToString(GlobalProperties.Instance.dateformate));
+            var response = IItemSummary.GetTransactionItemWise(DateTime.Now.ToString(GlobalProperties.Instance.dateformate), DateTime.Now.ToString(GlobalProperties.Instance.dateformate));
             if (response.isValid)
             {
                 summaries= Newtonsoft.Json.JsonConvert.DeserializeObject<List<ItemSummary>>(response.JsonStr);

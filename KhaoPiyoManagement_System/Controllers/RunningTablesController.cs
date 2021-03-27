@@ -10,7 +10,7 @@ namespace KhaoPiyoManagement_System.Controllers
 {
     public class RunningTablesController : Controller
     {
-        private KhaoPiyoEntities entities = new KhaoPiyoEntities();
+        private KPEntity entities = new KPEntity();
         private List<breadcumb> breadcumbs = new List<breadcumb>();
         // GET: RuinningTables
         IRunningTables runningTables;

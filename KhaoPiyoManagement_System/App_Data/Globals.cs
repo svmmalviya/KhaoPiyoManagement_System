@@ -5,11 +5,12 @@
 using KhaoPiyoManagement_System;
 using KhaoPiyoManagement_System.Models;
 using System.Collections.Generic;
+//using Company_Master = KhaoPiyoManagement_System.Models.Company_Master;
 
 public sealed class  GlobalProperties {
 
 
-    public  KhaoPiyoEntities entities { get; set; }
+   // public  KPEntity entities { get; set; }
     public List<breadcumb> breadcumbs { get; set; }
     public string dateformate { get; set ;  }
     public string AuditReportdateformate { get; set ;  }
@@ -17,6 +18,7 @@ public sealed class  GlobalProperties {
     private static GlobalProperties prGlobal = null;
     public  Company_Master companyDetails = null;
     public string companyLogo = null;
+    public  string conStringName = string.Empty;
 
     private GlobalProperties() {
         dateformate = "MM-dd-yyyy";
