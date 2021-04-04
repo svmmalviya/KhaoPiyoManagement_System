@@ -16,17 +16,25 @@ namespace KhaoPiyoManagement_System.ILibrary
 {
     public class SalesRegisterImp : ISalesRegister
     {
-        KPEntity entities;
+        Entities entities;
         DateTime dtFrom;
         DateTime dtTo;
+        DBConnect dbConnect;
+        private string query;
+        private DataSet ds;
+        private string error;
+        private List<Cust_View_Tran> trans;
 
+        private List<Billing_Master> billing_master;
+        private List<Table_Master> tab_m;
 
         public SalesRegisterImp()
         {
 
-            entities = new KPEntity();
+            entities = new Entities();
             dtFrom = new DateTime();
             dtTo = new DateTime();
+            dbConnect = new DBConnect();
         }
 
        
@@ -34,6 +42,16 @@ namespace KhaoPiyoManagement_System.ILibrary
         MyResponse ISalesRegister.GetTransaction(string from, string to, string filterValue, int ibus_cd, int icomp_cd)
         {
             MyResponse myResponse = new MyResponse();
+
+            
+
+            query = "select * from Table_Master";
+
+            if (dbConnect.Select(query, out ds, out error))
+            {
+                tab_m = CommonMethod.ConvertToList<Table_Master>(ds.Tables[0]);
+            }
+
             try
             {
 
@@ -48,86 +66,182 @@ namespace KhaoPiyoManagement_System.ILibrary
 
 
                     
-                    var tab_m = entities.Table_Master.ToList();
+                    
 
                     switch (filterValue.ToLower())
                     {
                         case "void":
+
+                            query = "select * from Billing_Master as bm inner join Table_Master as tm on bm.iTab_Cd=tm.iTab_Cd where bm.bOpen=0 and bm.bVoid=1 and bNC=0 and bm.iComp_Cd=" + icomp_cd + " and bm.iBus_Cd=" + ibus_cd + " and bm.dBill_Dt >= '" + dtFrom.ToString("yyyy-MM-dd") + "' and bm.dBill_Dt<='" + dtTo.ToString("yyyy-MM-dd") + "'";
+                            trans = new List<Cust_View_Tran>();
+
+                            if (dbConnect.Select(query, out ds, out error))
+                            {
+                                foreach (DataRow item in ds.Tables[0].Rows)
+                                {
+                                    if (item != null)
+                                    {
+                                        var t = new Cust_View_Tran
+                                        {
+                                            iBill_No = Convert.ToInt32(item["iBill_No"]),
+                                            dBill_Dt = Convert.ToString(item["dBill_Dt"]),
+                                            sTab_Nm = item["sTab_Nm"].ToString(),
+                                            sGuest_Nm = item["sGuest_Nm"].ToString() != "" ? item["sGuest_Nm"].ToString() : "",
+                                            sMobile = item["sMobile"].ToString() == "" ? "" : item["sMobile"].ToString(),
+                                            iPax = (int)(Convert.ToInt32(item["iPax"]) == 0 ? 0 : Convert.ToInt32(item["iPax"])),
+                                            Amount = Convert.ToInt32(item["TAmt"]),
+                                            GSTIN = Convert.ToString(item["GSTIN"]) == "" ? "" : Convert.ToString(item["GSTIN"]),
+                                            bDiscount = Convert.ToByte(item["bDiscount"]),
+                                            bNC = Convert.ToByte(item["bNC"]),
+                                            DisAmt = Convert.ToInt32(item["TDiscountValue"]),
+                                            bOpen = Convert.ToByte(item["bOpen"]),
+                                            iDonationAmt = Convert.ToDouble(item["bOpen"]),
+                                            GSTAmt = Convert.ToDouble(item["TGST"]),
+                                            iGrand_Amt = Convert.ToDouble(item["iGrand_Amt"]),
+                                            iDonationRemark = Convert.ToString(item["iDonationRemark"]),
+                                            iWayOffAmt = Convert.ToDouble(item["iWayOffAmt"]),
+                                            iTipAmt = Convert.ToDouble(item["iTipAmt"]),
+                                            iTipRemark = Convert.ToString(item["iTipRemark"]),
+                                            iWayOffRemark = Convert.ToString(item["iWayOffRemark"]),
+                                            NCAmt = Convert.ToDouble(item["NCAmt"]),
+                                            sBillType = Convert.ToString(item["sBillType"]),
+                                            bVoid = Convert.ToByte(item["bVoid"]),
+                                            Qty = Convert.ToInt32(item["TQty"]),
+                                            sDis_Type = Convert.ToString(item["sDis_Type"]),
+                                            sNCReason = Convert.ToString(item["sNCReason"]),
+                                            sType = Convert.ToString(item["sType"]),
+                                            TAmt = Convert.ToDouble(item["TAmt"]),
+                                            sVoidReason = Convert.ToString(item["sVoidReason"]),
+                                            TRoundOff = Convert.ToDouble(item["TRoundOff"]),
+                                        };
+
+                                        trans.Add(t);
+                                    }
+                                }
+                            }
                             //_Tran = entities.Billing_Master.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == ibus_cd && x.iComp_Cd == icomp_cd && x.bVoid == 1).Distinct().ToList();
 
-                           var  trans = entities.Billing_Master.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == ibus_cd && x.iComp_Cd == icomp_cd && x.bVoid == 1).Join(entities.Table_Master, t1 => t1.iTab_Cd, t2 => t2.iTab_Cd, (t1, t2) => new
-                            {
-                                iBill_No = t1.iBill_No,
-                               dBill_Dt = SqlFunctions.DateName("year", t1.dBill_Dt) + SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.Replicate("0", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart() + SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.Replicate("0", 2 - SqlFunctions.DateName("dd", t1.dBill_Dt).Trim().Length) + SqlFunctions.DateName("dd", t1.dBill_Dt).Trim(),
-                               sTab_Nm = t2.sTab_Nm,
-                                sGuest_Nm = t1.sGuest_Nm != "" ? t1.sGuest_Nm : "",
-                                sMobile = t1.sMobile == "" ? "" : t1.sMobile,
-                                iPax = (int)(t1.iPax == 0 || t1.iPax == null ? 0 : t1.iPax),
-                                GSTIN = t1.GSTIN == "" ? "" : t1.GSTIN,
-                                Amount = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
-                                bDiscount = (int)t1.bDiscount,
-                                bNC = (int)t1.bNC,
-                                DisAmt = (double) (t1.TDiscountValue == 0 || t1.TDiscountValue == null ? 0 : t1.TDiscountValue),
-                                bOpen = (int)t1.bOpen,
-                                iDonationAmt = (double)(t1.iDonationAmt == 0 || t1.iDonationAmt == null ? 0 : t1.iDonationAmt),
-                                GSTAmt = (double)(t1.TGST == 0 || t1.TGST == null ? 0 : t1.TGST),
-                                iGrand_Amt = (double)(t1.iGrand_Amt == 0 || t1.iGrand_Amt == null ? 0 : t1.iGrand_Amt),
-                                iDonationRemark = t1.iDonationRemark == "" || t1.iDonationRemark == null ? "" : t1.iDonationRemark,
-                                iWayOffAmt = (double)(t1.iWayOffAmt == 0 || t1.iWayOffAmt == null ? 0 : t1.iWayOffAmt),
-                                iTipAmt = (double)(t1.iTipAmt == 0 || t1.iTipAmt == null ? 0 : t1.iTipAmt),
-                                iTipRemark = t1.iTipRemark == "" || t1.iTipRemark == null ? "" : t1.iTipRemark,
-                                iWayOffRemark = t1.iWayOffRemark == "" || t1.iWayOffRemark == null ? "" : t1.iWayOffRemark,
-                                NCAmt = (double)(t1.NCAmt == 0 || t1.NCAmt == null ? 0 : t1.NCAmt),
-                                sBillType = t1.sBillType == "" || t1.sBillType == null ? "" : t1.sBillType,
-                                bVoid = (int)t1.bVoid,
-                                Qty = (double)(t1.TQty == 0 || t1.TQty == null ? 0 : t1.TQty),
-                                sDis_Type = t1.sDis_Type == "" || t1.sDis_Type == null ? "" : t1.sDis_Type,
-                                sNCReason = t1.sNCReason == "" || t1.sNCReason == null ? "" : t1.sNCReason,
-                                sType = t1.sType == "" || t1.sType == null ? "" : t1.sType,
-                                TAmt = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
-                                sVoidReason = t1.sVoidReason == "" || t1.sVoidReason == null ? "" : t1.sVoidReason,
-                                TRoundOff = (double)(t1.TRoundOff == 0 || t1.TRoundOff == null ? 0 : t1.TRoundOff),
-                            }).ToList();
+                            // trans = billing_master.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == ibus_cd && x.iComp_Cd == icomp_cd && x.bVoid == 1).Join(tab_m, t1 => t1.iTab_Cd, t2 => t2.iTab_Cd, (t1, t2) => new
+                            //{
+                            //    iBill_No = t1.iBill_No,
+                            //   dBill_Dt = SqlFunctions.DateName("year", t1.dBill_Dt) + SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.Replicate("0", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart() + SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.Replicate("0", 2 - SqlFunctions.DateName("dd", t1.dBill_Dt).Trim().Length) + SqlFunctions.DateName("dd", t1.dBill_Dt).Trim(),
+                            //   sTab_Nm = t2.sTab_Nm,
+                            //    sGuest_Nm = t1.sGuest_Nm != "" ? t1.sGuest_Nm : "",
+                            //    sMobile = t1.sMobile == "" ? "" : t1.sMobile,
+                            //    iPax = (int)(t1.iPax == 0 || t1.iPax == null ? 0 : t1.iPax),
+                            //    GSTIN = t1.GSTIN == "" ? "" : t1.GSTIN,
+                            //    Amount = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
+                            //    bDiscount = (int)t1.bDiscount,
+                            //    bNC = (int)t1.bNC,
+                            //    DisAmt = (double) (t1.TDiscountValue == 0 || t1.TDiscountValue == null ? 0 : t1.TDiscountValue),
+                            //    bOpen = (int)t1.bOpen,
+                            //    iDonationAmt = (double)(t1.iDonationAmt == 0 || t1.iDonationAmt == null ? 0 : t1.iDonationAmt),
+                            //    GSTAmt = (double)(t1.TGST == 0 || t1.TGST == null ? 0 : t1.TGST),
+                            //    iGrand_Amt = (double)(t1.iGrand_Amt == 0 || t1.iGrand_Amt == null ? 0 : t1.iGrand_Amt),
+                            //    iDonationRemark = t1.iDonationRemark == "" || t1.iDonationRemark == null ? "" : t1.iDonationRemark,
+                            //    iWayOffAmt = (double)(t1.iWayOffAmt == 0 || t1.iWayOffAmt == null ? 0 : t1.iWayOffAmt),
+                            //    iTipAmt = (double)(t1.iTipAmt == 0 || t1.iTipAmt == null ? 0 : t1.iTipAmt),
+                            //    iTipRemark = t1.iTipRemark == "" || t1.iTipRemark == null ? "" : t1.iTipRemark,
+                            //    iWayOffRemark = t1.iWayOffRemark == "" || t1.iWayOffRemark == null ? "" : t1.iWayOffRemark,
+                            //    NCAmt = (double)(t1.NCAmt == 0 || t1.NCAmt == null ? 0 : t1.NCAmt),
+                            //    sBillType = t1.sBillType == "" || t1.sBillType == null ? "" : t1.sBillType,
+                            //    bVoid = (int)t1.bVoid,
+                            //    Qty = (double)(t1.TQty == 0 || t1.TQty == null ? 0 : t1.TQty),
+                            //    sDis_Type = t1.sDis_Type == "" || t1.sDis_Type == null ? "" : t1.sDis_Type,
+                            //    sNCReason = t1.sNCReason == "" || t1.sNCReason == null ? "" : t1.sNCReason,
+                            //    sType = t1.sType == "" || t1.sType == null ? "" : t1.sType,
+                            //    TAmt = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
+                            //    sVoidReason = t1.sVoidReason == "" || t1.sVoidReason == null ? "" : t1.sVoidReason,
+                            //    TRoundOff = (double)(t1.TRoundOff == 0 || t1.TRoundOff == null ? 0 : t1.TRoundOff),
+                            //}).ToList();
 
                             myResponse.Error = "";
                             myResponse.isValid = true;
                             myResponse.JsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
                             break;
                         case "all":
-                            //_Tran = entities.Billing_Master.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == ibus_cd && x.iComp_Cd == icomp_cd && x.bVoid == 0).Distinct().ToList();
-                             trans = entities.Billing_Master.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == ibus_cd && x.iComp_Cd == icomp_cd && x.bVoid == 0).Join(entities.Table_Master, t1 => t1.iTab_Cd, t2 => t2.iTab_Cd, (t1, t2) => new
+
+                            query = "select * from Billing_Master as bm inner join Table_Master as tm on bm.iTab_Cd=tm.iTab_Cd where bm.bOpen=0 and bm.bVoid=0 and bm.iComp_Cd=" + icomp_cd + " and bm.iBus_Cd=" + ibus_cd + " and bm.dBill_Dt >= '"+dtFrom.ToString("yyyy-MM-dd")+"' and bm.dBill_Dt<='" + dtTo.ToString("yyyy-MM-dd") + "'";
+                            trans = new List<Cust_View_Tran>();
+
+                            if (dbConnect.Select(query, out ds, out error))
                             {
-                                iBill_No = t1.iBill_No,
-                                 dBill_Dt = SqlFunctions.Replicate("0", 2 - SqlFunctions.DateName("dd", t1.dBill_Dt).Trim().Length) + SqlFunctions.DateName("dd", t1.dBill_Dt).Trim() + SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.Replicate("0", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart() + SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.DateName("year", t1.dBill_Dt),
-                                 sTab_Nm = t2.sTab_Nm,
-                                sGuest_Nm = t1.sGuest_Nm != "" ? t1.sGuest_Nm : "",
-                                sMobile = t1.sMobile == "" ? "" : t1.sMobile,
-                                iPax = (int)(t1.iPax == 0 || t1.iPax == null ? 0 : t1.iPax),
-                                GSTIN = t1.GSTIN == "" ? "" : t1.GSTIN,
-                                Amount = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
-                                bDiscount = (int)t1.bDiscount,
-                                bNC = (int)t1.bNC,
-                                DisAmt = (double)(t1.TDiscount == 0 || t1.TDiscount == null ? 0 : t1.TDiscount),
-                                bOpen = (int)t1.bOpen,
-                                iDonationAmt = (double)(t1.iDonationAmt == 0 || t1.iDonationAmt == null ? 0 : t1.iDonationAmt),
-                                GSTAmt = (double)(t1.TGST == 0 || t1.TGST == null ? 0 : t1.TGST),
-                                iGrand_Amt = (double)(t1.iGrand_Amt == 0 || t1.iGrand_Amt == null ? 0 : t1.iGrand_Amt),
-                                iDonationRemark = t1.iDonationRemark == "" || t1.iDonationRemark == null ? "" : t1.iDonationRemark,
-                                iWayOffAmt = (double)(t1.iWayOffAmt == 0 || t1.iWayOffAmt == null ? 0 : t1.iWayOffAmt),
-                                iTipAmt = (double)(t1.iTipAmt == 0 || t1.iTipAmt == null ? 0 : t1.iTipAmt),
-                                iTipRemark = t1.iTipRemark == "" || t1.iTipRemark == null ? "" : t1.iTipRemark,
-                                iWayOffRemark = t1.iWayOffRemark == "" || t1.iWayOffRemark == null ? "" : t1.iWayOffRemark,
-                                NCAmt = (double)(t1.NCAmt == 0 || t1.NCAmt == null ? 0 : t1.NCAmt),
-                                sBillType = t1.sBillType == "" || t1.sBillType == null ? "" : t1.sBillType,
-                                bVoid = (int)t1.bVoid,
-                                Qty = (double)(t1.TQty == 0 || t1.TQty == null ? 0 : t1.TQty),
-                                sDis_Type = t1.sDis_Type == "" || t1.sDis_Type == null ? "" : t1.sDis_Type,
-                                sNCReason = t1.sNCReason == "" || t1.sNCReason == null ? "" : t1.sNCReason,
-                                sType = t1.sType == "" || t1.sType == null ? "" : t1.sType,
-                                TAmt = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
-                                sVoidReason = t1.sVoidReason == "" || t1.sVoidReason == null ? "" : t1.sVoidReason,
-                                TRoundOff = (double)(t1.TRoundOff == 0 || t1.TRoundOff == null ? 0 : t1.TRoundOff),
-                            }).ToList();
+                                foreach (DataRow item in ds.Tables[0].Rows)
+                                {
+                                    if (item != null)
+                                    {
+                                        var t = new Cust_View_Tran
+                                        {
+                                            iBill_No = Convert.ToInt32(item["iBill_No"]),
+                                            dBill_Dt = Convert.ToString(item["dBill_Dt"]),
+                                            sTab_Nm = item["sTab_Nm"].ToString(),
+                                            sGuest_Nm = item["sGuest_Nm"].ToString() != "" ? item["sGuest_Nm"].ToString() : "",
+                                            sMobile = item["sMobile"].ToString() == "" ? "" : item["sMobile"].ToString(),
+                                            iPax = (int)(Convert.ToInt32(item["iPax"]) == 0 ? 0 : Convert.ToInt32(item["iPax"])),
+                                            Amount = Convert.ToInt32(item["TAmt"]),
+                                            GSTIN = Convert.ToString(item["GSTIN"]) == "" ? "" : Convert.ToString(item["GSTIN"]),
+                                            bDiscount = Convert.ToByte(item["bDiscount"]),
+                                            bNC = Convert.ToByte(item["bNC"]),
+                                            DisAmt = Convert.ToInt32(item["TDiscountValue"]),
+                                            bOpen = Convert.ToByte(item["bOpen"]),
+                                            iDonationAmt = Convert.ToDouble(item["bOpen"]),
+                                            GSTAmt = Convert.ToDouble(item["TGST"]),
+                                            iGrand_Amt = Convert.ToDouble(item["iGrand_Amt"]),
+                                            iDonationRemark = Convert.ToString(item["iDonationRemark"]),
+                                            iWayOffAmt = Convert.ToDouble(item["iWayOffAmt"]),
+                                            iTipAmt = Convert.ToDouble(item["iTipAmt"]),
+                                            iTipRemark = Convert.ToString(item["iTipRemark"]),
+                                            iWayOffRemark = Convert.ToString(item["iWayOffRemark"]),
+                                            NCAmt = Convert.ToDouble(item["NCAmt"]),
+                                            sBillType = Convert.ToString(item["sBillType"]),
+                                            bVoid = Convert.ToByte(item["bVoid"]),
+                                            Qty = Convert.ToInt32(item["TQty"]),
+                                            sDis_Type = Convert.ToString(item["sDis_Type"]),
+                                            sNCReason = Convert.ToString(item["sNCReason"]),
+                                            sType = Convert.ToString(item["sType"]),
+                                            TAmt = Convert.ToDouble(item["TAmt"]),
+                                            sVoidReason = Convert.ToString(item["sVoidReason"]),
+                                            TRoundOff = Convert.ToDouble(item["TRoundOff"]),
+                                        };
+
+                                        trans.Add(t);
+                                    }
+                                }
+                            }
+                            //_Tran = entities.Billing_Master.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == ibus_cd && x.iComp_Cd == icomp_cd && x.bVoid == 0).Distinct().ToList();
+                            //trans = billing_master.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == ibus_cd && x.iComp_Cd == icomp_cd && x.bVoid == 0).Join(tab_m, t1 => t1.iTab_Cd, t2 => t2.iTab_Cd, (t1, t2) => new
+                            //{
+                            //    iBill_No = t1.iBill_No,
+                            //     dBill_Dt = SqlFunctions.Replicate("0", 2 - SqlFunctions.DateName("dd", t1.dBill_Dt).Trim().Length) + SqlFunctions.DateName("dd", t1.dBill_Dt).Trim() + SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.Replicate("0", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart() + SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.DateName("year", t1.dBill_Dt),
+                            //     sTab_Nm = t2.sTab_Nm,
+                            //    sGuest_Nm = t1.sGuest_Nm != "" ? t1.sGuest_Nm : "",
+                            //    sMobile = t1.sMobile == "" ? "" : t1.sMobile,
+                            //    iPax = (int)(t1.iPax == 0 || t1.iPax == null ? 0 : t1.iPax),
+                            //    GSTIN = t1.GSTIN == "" ? "" : t1.GSTIN,
+                            //    Amount = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
+                            //    bDiscount = (int)t1.bDiscount,
+                            //    bNC = (int)t1.bNC,
+                            //    DisAmt = (double)(t1.TDiscount == 0 || t1.TDiscount == null ? 0 : t1.TDiscount),
+                            //    bOpen = (int)t1.bOpen,
+                            //    iDonationAmt = (double)(t1.iDonationAmt == 0 || t1.iDonationAmt == null ? 0 : t1.iDonationAmt),
+                            //    GSTAmt = (double)(t1.TGST == 0 || t1.TGST == null ? 0 : t1.TGST),
+                            //    iGrand_Amt = (double)(t1.iGrand_Amt == 0 || t1.iGrand_Amt == null ? 0 : t1.iGrand_Amt),
+                            //    iDonationRemark = t1.iDonationRemark == "" || t1.iDonationRemark == null ? "" : t1.iDonationRemark,
+                            //    iWayOffAmt = (double)(t1.iWayOffAmt == 0 || t1.iWayOffAmt == null ? 0 : t1.iWayOffAmt),
+                            //    iTipAmt = (double)(t1.iTipAmt == 0 || t1.iTipAmt == null ? 0 : t1.iTipAmt),
+                            //    iTipRemark = t1.iTipRemark == "" || t1.iTipRemark == null ? "" : t1.iTipRemark,
+                            //    iWayOffRemark = t1.iWayOffRemark == "" || t1.iWayOffRemark == null ? "" : t1.iWayOffRemark,
+                            //    NCAmt = (double)(t1.NCAmt == 0 || t1.NCAmt == null ? 0 : t1.NCAmt),
+                            //    sBillType = t1.sBillType == "" || t1.sBillType == null ? "" : t1.sBillType,
+                            //    bVoid = (int)t1.bVoid,
+                            //    Qty = (double)(t1.TQty == 0 || t1.TQty == null ? 0 : t1.TQty),
+                            //    sDis_Type = t1.sDis_Type == "" || t1.sDis_Type == null ? "" : t1.sDis_Type,
+                            //    sNCReason = t1.sNCReason == "" || t1.sNCReason == null ? "" : t1.sNCReason,
+                            //    sType = t1.sType == "" || t1.sType == null ? "" : t1.sType,
+                            //    TAmt = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
+                            //    sVoidReason = t1.sVoidReason == "" || t1.sVoidReason == null ? "" : t1.sVoidReason,
+                            //    TRoundOff = (double)(t1.TRoundOff == 0 || t1.TRoundOff == null ? 0 : t1.TRoundOff),
+                            //}).ToList();
 
                             myResponse.Error = "";
                             myResponse.isValid = true;
@@ -135,41 +249,88 @@ namespace KhaoPiyoManagement_System.ILibrary
 
                             break;
                         case "nc":
-                            _Tran = entities.Billing_Master.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == ibus_cd && x.iComp_Cd == icomp_cd && x.bNC == 1 && x.bVoid == 0).Distinct().ToList();
 
-                            trans = entities.Billing_Master.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == ibus_cd && x.iComp_Cd == icomp_cd && x.bVoid == 0 &&x.bNC==1).Join(entities.Table_Master, t1 => t1.iTab_Cd, t2 => t2.iTab_Cd, (t1, t2) => new
+                            query = "select * from Billing_Master as bm inner join Table_Master as tm on bm.iTab_Cd=tm.iTab_Cd where bm.bOpen=0 and bm.bVoid=0 and bm.bNC=1 and bm.iComp_Cd=" + icomp_cd + " and bm.iBus_Cd=" + ibus_cd + " and bm.dBill_Dt >= '" + dtFrom.ToString("yyyy-MM-dd") + "' and bm.dBill_Dt<='" + dtTo.ToString("yyyy-MM-dd") + "'";
+                            trans = new List<Cust_View_Tran>();
+
+                            if (dbConnect.Select(query, out ds, out error))
                             {
-                                iBill_No = t1.iBill_No,
-                                dBill_Dt = SqlFunctions.Replicate("0", 2 - SqlFunctions.DateName("dd", t1.dBill_Dt).Trim().Length) + SqlFunctions.DateName("dd", t1.dBill_Dt).Trim()+SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.Replicate("0", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart() + SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.DateName("year", t1.dBill_Dt),
-                                sTab_Nm = t2.sTab_Nm,
-                                sGuest_Nm = t1.sGuest_Nm != "" ? t1.sGuest_Nm : "",
-                                sMobile = t1.sMobile == "" ? "" : t1.sMobile,
-                                iPax = (int)(t1.iPax == 0 || t1.iPax == null ? 0 : t1.iPax),
-                                GSTIN = t1.GSTIN == "" ? "" : t1.GSTIN,
-                                Amount = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
-                                bDiscount = (int)t1.bDiscount,
-                                bNC = (int)t1.bNC,
-                                DisAmt = (double)(t1.TDiscountValue == 0 || t1.TDiscountValue == null ? 0 : t1.TDiscountValue),
-                                bOpen = (int)t1.bOpen,
-                                iDonationAmt = (double)(t1.iDonationAmt == 0 || t1.iDonationAmt == null ? 0 : t1.iDonationAmt),
-                                GSTAmt = (double)(t1.TGST == 0 || t1.TGST == null ? 0 : t1.TGST),
-                                iGrand_Amt = (double)(t1.iGrand_Amt == 0 || t1.iGrand_Amt == null ? 0 : t1.iGrand_Amt),
-                                iDonationRemark = t1.iDonationRemark == "" || t1.iDonationRemark == null ? "" : t1.iDonationRemark,
-                                iWayOffAmt = (double)(t1.iWayOffAmt == 0 || t1.iWayOffAmt == null ? 0 : t1.iWayOffAmt),
-                                iTipAmt = (double)(t1.iTipAmt == 0 || t1.iTipAmt == null ? 0 : t1.iTipAmt),
-                                iTipRemark = t1.iTipRemark == "" || t1.iTipRemark == null ? "" : t1.iTipRemark,
-                                iWayOffRemark = t1.iWayOffRemark == "" || t1.iWayOffRemark == null ? "" : t1.iWayOffRemark,
-                                NCAmt = (double)(t1.NCAmt == 0 || t1.NCAmt == null ? 0 : t1.NCAmt),
-                                sBillType = t1.sBillType == "" || t1.sBillType == null ? "" : t1.sBillType,
-                                bVoid = (int)t1.bVoid,
-                                Qty = (double)(t1.TQty == 0 || t1.TQty == null ? 0 : t1.TQty),
-                                sDis_Type = t1.sDis_Type == "" || t1.sDis_Type == null ? "" : t1.sDis_Type,
-                                sNCReason = t1.sNCReason == "" || t1.sNCReason == null ? "" : t1.sNCReason,
-                                sType = t1.sType == "" || t1.sType == null ? "" : t1.sType,
-                                TAmt = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
-                                sVoidReason = t1.sVoidReason == "" || t1.sVoidReason == null ? "" : t1.sVoidReason,
-                                TRoundOff = (double)(t1.TRoundOff == 0 || t1.TRoundOff == null ? 0 : t1.TRoundOff),
-                            }).ToList();
+                                foreach (DataRow item in ds.Tables[0].Rows)
+                                {
+                                    if (item != null)
+                                    {
+                                        var t = new Cust_View_Tran
+                                        {
+                                            iBill_No = Convert.ToInt32(item["iBill_No"]),
+                                            dBill_Dt = Convert.ToString(item["dBill_Dt"]),
+                                            sTab_Nm = item["sTab_Nm"].ToString(),
+                                            sGuest_Nm = item["sGuest_Nm"].ToString() != "" ? item["sGuest_Nm"].ToString() : "",
+                                            sMobile = item["sMobile"].ToString() == "" ? "" : item["sMobile"].ToString(),
+                                            iPax = (int)(Convert.ToInt32(item["iPax"]) == 0 ? 0 : Convert.ToInt32(item["iPax"])),
+                                            Amount = Convert.ToInt32(item["TAmt"]),
+                                            GSTIN = Convert.ToString(item["GSTIN"]) == "" ? "" : Convert.ToString(item["GSTIN"]),
+                                            bDiscount = Convert.ToByte(item["bDiscount"]),
+                                            bNC = Convert.ToByte(item["bNC"]),
+                                            DisAmt = Convert.ToInt32(item["TDiscountValue"]),
+                                            bOpen = Convert.ToByte(item["bOpen"]),
+                                            iDonationAmt = Convert.ToDouble(item["bOpen"]),
+                                            GSTAmt = Convert.ToDouble(item["TGST"]),
+                                            iGrand_Amt = Convert.ToDouble(item["iGrand_Amt"]),
+                                            iDonationRemark = Convert.ToString(item["iDonationRemark"]),
+                                            iWayOffAmt = Convert.ToDouble(item["iWayOffAmt"]),
+                                            iTipAmt = Convert.ToDouble(item["iTipAmt"]),
+                                            iTipRemark = Convert.ToString(item["iTipRemark"]),
+                                            iWayOffRemark = Convert.ToString(item["iWayOffRemark"]),
+                                            NCAmt = Convert.ToDouble(item["NCAmt"]),
+                                            sBillType = Convert.ToString(item["sBillType"]),
+                                            bVoid = Convert.ToByte(item["bVoid"]),
+                                            Qty = Convert.ToInt32(item["TQty"]),
+                                            sDis_Type = Convert.ToString(item["sDis_Type"]),
+                                            sNCReason = Convert.ToString(item["sNCReason"]),
+                                            sType = Convert.ToString(item["sType"]),
+                                            TAmt = Convert.ToDouble(item["TAmt"]),
+                                            sVoidReason = Convert.ToString(item["sVoidReason"]),
+                                            TRoundOff = Convert.ToDouble(item["TRoundOff"]),
+                                        };
+
+                                        trans.Add(t);
+                                    }
+                                }
+                            }
+
+                            //trans = billing_master.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == ibus_cd && x.iComp_Cd == icomp_cd && x.bVoid == 0 &&x.bNC==1).Join(tab_m, t1 => t1.iTab_Cd, t2 => t2.iTab_Cd, (t1, t2) => new
+                            //{
+                            //    iBill_No = t1.iBill_No,
+                            //    dBill_Dt = SqlFunctions.Replicate("0", 2 - SqlFunctions.DateName("dd", t1.dBill_Dt).Trim().Length) + SqlFunctions.DateName("dd", t1.dBill_Dt).Trim()+SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.Replicate("0", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart() + SqlFunctions.Replicate("/", 2 - SqlFunctions.StringConvert((double)t1.dBill_Dt.Value.Month).TrimStart().Length) + SqlFunctions.DateName("year", t1.dBill_Dt),
+                            //    sTab_Nm = t2.sTab_Nm,
+                            //    sGuest_Nm = t1.sGuest_Nm != "" ? t1.sGuest_Nm : "",
+                            //    sMobile = t1.sMobile == "" ? "" : t1.sMobile,
+                            //    iPax = (int)(t1.iPax == 0 || t1.iPax == null ? 0 : t1.iPax),
+                            //    GSTIN = t1.GSTIN == "" ? "" : t1.GSTIN,
+                            //    Amount = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
+                            //    bDiscount = (int)t1.bDiscount,
+                            //    bNC = (int)t1.bNC,
+                            //    DisAmt = (double)(t1.TDiscountValue == 0 || t1.TDiscountValue == null ? 0 : t1.TDiscountValue),
+                            //    bOpen = (int)t1.bOpen,
+                            //    iDonationAmt = (double)(t1.iDonationAmt == 0 || t1.iDonationAmt == null ? 0 : t1.iDonationAmt),
+                            //    GSTAmt = (double)(t1.TGST == 0 || t1.TGST == null ? 0 : t1.TGST),
+                            //    iGrand_Amt = (double)(t1.iGrand_Amt == 0 || t1.iGrand_Amt == null ? 0 : t1.iGrand_Amt),
+                            //    iDonationRemark = t1.iDonationRemark == "" || t1.iDonationRemark == null ? "" : t1.iDonationRemark,
+                            //    iWayOffAmt = (double)(t1.iWayOffAmt == 0 || t1.iWayOffAmt == null ? 0 : t1.iWayOffAmt),
+                            //    iTipAmt = (double)(t1.iTipAmt == 0 || t1.iTipAmt == null ? 0 : t1.iTipAmt),
+                            //    iTipRemark = t1.iTipRemark == "" || t1.iTipRemark == null ? "" : t1.iTipRemark,
+                            //    iWayOffRemark = t1.iWayOffRemark == "" || t1.iWayOffRemark == null ? "" : t1.iWayOffRemark,
+                            //    NCAmt = (double)(t1.NCAmt == 0 || t1.NCAmt == null ? 0 : t1.NCAmt),
+                            //    sBillType = t1.sBillType == "" || t1.sBillType == null ? "" : t1.sBillType,
+                            //    bVoid = (int)t1.bVoid,
+                            //    Qty = (double)(t1.TQty == 0 || t1.TQty == null ? 0 : t1.TQty),
+                            //    sDis_Type = t1.sDis_Type == "" || t1.sDis_Type == null ? "" : t1.sDis_Type,
+                            //    sNCReason = t1.sNCReason == "" || t1.sNCReason == null ? "" : t1.sNCReason,
+                            //    sType = t1.sType == "" || t1.sType == null ? "" : t1.sType,
+                            //    TAmt = (double)(t1.TAmt == 0 || t1.TAmt == null ? 0 : t1.TAmt),
+                            //    sVoidReason = t1.sVoidReason == "" || t1.sVoidReason == null ? "" : t1.sVoidReason,
+                            //    TRoundOff = (double)(t1.TRoundOff == 0 || t1.TRoundOff == null ? 0 : t1.TRoundOff),
+                            //}).ToList();
 
                             myResponse.Error = "";
                             myResponse.isValid = true;

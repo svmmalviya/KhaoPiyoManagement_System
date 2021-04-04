@@ -10,23 +10,14 @@
 namespace KhaoPiyoManagement_System
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Company_Master
+    public partial class CashInHeand_Result
     {
+        public System.DateTime dDate { get; set; }
+        public Nullable<double> Amount { get; set; }
         public int iComp_Cd { get; set; }
-        public Nullable<int> ResturantID { get; set; }
-        public string sComp_Nm { get; set; }
-        public string Address { get; set; }
-        public string TagLine { get; set; }
-        public string GSTIN { get; set; }
-        public string MobileNo { get; set; }
-        public string ImgName { get; set; }
-        public string Email { get; set; }
-        public string Website { get; set; }
+        public int iBus_Cd { get; set; }
         public Nullable<int> iUser_Cd { get; set; }
         public Nullable<System.DateTime> dUpdate_Dt { get; set; }
-        public string DBaseNm { get; set; }
-        public string RefCode { get; set; }
     }
 }

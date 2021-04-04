@@ -14,14 +14,21 @@ namespace KhaoPiyoManagement_System.ILibrary
 {
     public class ItemSummaryImp : IItemSummary
     {
-        KPEntity entities;
+        Entities entities;
         DateTime dtFrom;
         DateTime dtTo;
         MyResponse myResponse;
+        private string query;
+        private List<ItemSummary> trans;
+        private DataSet ds;
+        private DBConnect dbConnect;
+        private string error;
 
         public ItemSummaryImp()
         {
-            entities = new KPEntity();
+            entities = new Entities();
+            dbConnect = new DBConnect();
+            trans = new List<ItemSummary>();
         }
 
         public MyResponse GetTransactionAuditReport(string from, string to)
@@ -41,24 +48,49 @@ namespace KhaoPiyoManagement_System.ILibrary
                     dtTo = DateTime.ParseExact(to, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
                     //cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bOpen == 0 && x.bVoid == 0).ToList();
 
-                    var r = from t1 in entities.KOT_Delete
-                            join t2 in entities.Item_Master on t1.iItem_Cd equals t2.iItem_Cd where t1.UpdateDate>=dtFrom && t1.UpdateDate<=dtTo
-                            select new { sItem_Nm = t2.sItem_Nm, UserName = t1.UserName, UpdateDate = t1.UpdateDate, Qty = t1.Qty, Rate = t1.Rate, iBill_No = t1.iBill_No, TAmt = (double)(t1.Rate * t1.Qty)};
+                    query = "select * from KOT_Delete kotd inner join Item_Master as im on kotd.iItem_Cd=im.iItem_Cd where  kotd.UpdateDate >= '"+dtFrom+"' and kotd.UpdateDate<='" + dtTo+"' ";
 
-                    foreach (var item in r)
+                    trans = new List<ItemSummary>();
+
+                    if (dbConnect.Select(query, out ds, out error))
                     {
-                            auditReports.Add(new AuditReport
+                        foreach (DataRow item in ds.Tables[0].Rows)
+                        {
+                            if (item != null)
                             {
-                                sItem_Nm = item.sItem_Nm,
-                                date = item.UpdateDate.Value.ToString().Split(' ')[0].ToString(),
-                                time = item.UpdateDate.Value.ToString().Split(' ')[1].ToString(),
-                                iBill_No = (int)item.iBill_No,
-                                UserName = item.UserName,
-                                TAmt = (double)item.TAmt,
-                                Rate = (double)item.Rate,
-                                Qty = (int)item.Qty,
-                            });
+                                auditReports.Add(new AuditReport
+                                {
+                                    sItem_Nm = item["sItem_Nm"].ToString(),
+                                    date = item["UpdateDate"].ToString().Split(' ')[0].ToString(),
+                                    time = item["UpdateDate"].ToString().Split(' ')[1].ToString(),
+                                    iBill_No = Convert.ToInt32(item["iBill_No"].ToString()),
+                                    UserName = item["UserName"].ToString(),
+                                    TAmt = (Convert.ToDouble(item["Rate"])*Convert.ToDouble(item["Qty"])),
+                                    Rate = Convert.ToDouble(item["Rate"]),
+                                    Qty = Convert.ToInt32(item["Qty"]),
+                                });
+                            }
+                        }
                     }
+
+                    //var r = from t1 in entities.KOT_Delete
+                    //        join t2 in entities.Item_Master on t1.iItem_Cd equals t2.iItem_Cd where t1.UpdateDate>=dtFrom && t1.UpdateDate<=dtTo
+                    //        select new { sItem_Nm = t2.sItem_Nm, UserName = t1.UserName, UpdateDate = t1.UpdateDate, Qty = t1.Qty, Rate = t1.Rate, iBill_No = t1.iBill_No, TAmt = (double)(t1.Rate * t1.Qty)};
+
+                    //foreach (var item in r)
+                    //{
+                    //        auditReports.Add(new AuditReport
+                    //        {
+                    //            sItem_Nm = item.sItem_Nm,
+                    //            date = item.UpdateDate.Value.ToString().Split(' ')[0].ToString(),
+                    //            time = item.UpdateDate.Value.ToString().Split(' ')[1].ToString(),
+                    //            iBill_No = (int)item.iBill_No,
+                    //            UserName = item.UserName,
+                    //            TAmt = (double)item.TAmt,
+                    //            Rate = (double)item.Rate,
+                    //            Qty = (int)item.Qty,
+                    //        });
+                    //}
                     //var result = r.Where(x => x.UpdateDate >= dtFrom&&x.UpdateDate<=dtTo).ToList();
 
                     myResponse.Error = "";
@@ -101,32 +133,47 @@ namespace KhaoPiyoManagement_System.ILibrary
                     dtFrom = DateTime.ParseExact(from, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
                     dtTo = DateTime.ParseExact(to, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
 
-                    cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bOpen == 0 && x.bVoid == 0).ToList();
+                    query = "select sum(bm.Amount) as TAmt,sum(bm.DisAmt) as TDisAmt, sum(bm.Qty) as TQty,sum(bm.TaxAmt) as TTax, bm.sCat_Nm as item,sum(bm.Total) as total  from View_tran as bm where bm.bOpen=0 and bm.bVoid=0 and bm.bNC=0 and bm.iComp_Cd=1 and bm.iBus_Cd=1 and bm.dBill_Dt >= '" + dtFrom.ToString("yyyy-MM-dd") + "' and bm.dBill_Dt<='" + dtTo.ToString("yyyy-MM-dd") + "' group by bm.sCat_Nm";
+                    trans = new List<ItemSummary>();
 
-                    var result = cust_Views.GroupBy(x => x.sCat_Nm).Select(x => new
+                    if (dbConnect.Select(query, out ds, out error))
                     {
-                        TAmt = (double)x.Sum(k => k.Amount),
-                        TDisAmt = (double)x.Sum(k => k.DisAmt),
-                        TQty = (int)x.Sum(k => k.Qty),
-                        TTax = (double)x.Sum(k => k.TaxAmt),
-                        item = x.Select(k => k.sCat_Nm).First(),
-                        total = (double)x.Sum(k => k.Total)
-                    }).ToList();
+                        foreach (DataRow item in ds.Tables[0].Rows)
+                        {
+                            if (item != null)
+                            {
+                                var t = new ItemSummary
+                                {
+                                    TAmt = Convert.ToDouble(item["TAmt"]),
+                                    TDisAmt = Convert.ToDouble(item["TDisAmt"]),
+                                    TQty = Convert.ToDouble(item["TQty"]),
+                                    TTax = Convert.ToDouble(item["TTax"]),
+                                    item = Convert.ToString(item["item"]),
+                                    total = Convert.ToDouble(item["total"])
+                                };
 
-                    //var result = from p in cust_Views
-                    //             group p by p.sCat_Nm into g
-                    //             select new
-                    //             {
-                    //                 TAmt = (double)g.Sum(x => x.TAmt),
-                    //                 TDisAmt = (double)g.Sum(x => x.DisAmt),
-                    //                 TQty = (int)g.Sum(x => x.TQty),
-                    //                 TTax = (double)g.Sum(x => x.TaxAmt),
-                    //                 item = g.Select(x => x.sCat_Nm).FirstOrDefault()
-                    //             };
+                                trans.Add(t);
+                            }
+                        }
+                    }
+
+
+                    //cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bOpen == 0 && x.bVoid == 0).ToList();
+
+                    //var result = cust_Views.GroupBy(x => x.sCat_Nm).Select(x => new
+                    //{
+                    //    TAmt = (double)x.Sum(k => k.Amount),
+                    //    TDisAmt = (double)x.Sum(k => k.DisAmt),
+                    //    TQty = (int)x.Sum(k => k.Qty),
+                    //    TTax = (double)x.Sum(k => k.TaxAmt),
+                    //    item = x.Select(k => k.sCat_Nm).First(),
+                    //    total = (double)x.Sum(k => k.Total)
+                    //}).ToList();
+
 
                     myResponse.Error = "";
                     myResponse.isValid = true;
-                    myResponse.JsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(result);
+                    myResponse.JsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
                 }
                 else
                 {
@@ -160,37 +207,50 @@ namespace KhaoPiyoManagement_System.ILibrary
                 if (dtFrom != null && dtTo != null)
                 {
                     List<ItemSummary> retrivedData = new List<ItemSummary>();
-                    List<View_Tran> cust_Views = new List<View_Tran>();
                     dtFrom = DateTime.ParseExact(from, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
                     dtTo = DateTime.ParseExact(to, GlobalProperties.Instance.dateformate, System.Globalization.CultureInfo.InvariantCulture);
 
 
-                    cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bOpen == 0 && x.bVoid == 0).ToList();
 
-                    var result = cust_Views.GroupBy(x => x.sMeal_Nm).Select(x => new
+                    query = "select sum(bm.Amount) as TAmt,sum(bm.DisAmt) as TDisAmt, sum(bm.Qty) as TQty,sum(bm.TaxAmt) as TTax, bm.sMeal_Nm as item,sum(bm.Total) as total  from View_tran as bm where bm.bOpen=0 and bm.bVoid=0 and bm.bNC=0 and bm.iComp_Cd=1 and bm.iBus_Cd=1 and bm.dBill_Dt >= '" + dtFrom.ToString("yyyy-MM-dd") + "' and bm.dBill_Dt<='" + dtTo.ToString("yyyy-MM-dd") + "' group by bm.sMeal_Nm";
+                   
+
+                    if (dbConnect.Select(query, out ds, out error))
                     {
-                        TAmt = (double)x.Sum(k => k.Amount),
-                        TDisAmt = (double)x.Sum(k => k.DisAmt),
-                        TQty = (int)x.Sum(k => k.Qty),
-                        TTax = (double)x.Sum(k => k.TaxAmt),
-                        item = x.Select(k => k.sMeal_Nm).First(),
-                        total = (double)x.Sum(k => k.Total)
-                    }).ToList();
-                    //var result = from p in cust_Views
-                    //             group p by p.sMeal_Nm into g
-                    //             select new
-                    //             {
-                    //                 TAmt = (double)g.Sum(x => x.TAmt),
-                    //                 TDisAmt = (double)g.Sum(x => x.DisAmt),
-                    //                 TQty = (int)g.Sum(x => x.TQty),
-                    //                 TTax = (double)g.Sum(x => x.TaxAmt),
-                    //                 item = g.Select(x => x.sMeal_Nm).FirstOrDefault(),
+                        foreach (DataRow item in ds.Tables[0].Rows)
+                        {
+                            if (item != null)
+                            {
+                                var t = new ItemSummary
+                                {
+                                    TAmt = Convert.ToDouble(item["TAmt"]),
+                                    TDisAmt = Convert.ToDouble(item["TDisAmt"]),
+                                    TQty = Convert.ToDouble(item["TQty"]),
+                                    TTax = Convert.ToDouble(item["TTax"]),
+                                    item = Convert.ToString(item["item"]),
+                                    total = Convert.ToDouble(item["total"])
+                                };
 
-                    //             };
+                                trans.Add(t);
+                            }
+                        }
+                    }
 
+                    //cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bOpen == 0 && x.bVoid == 0).ToList();
+
+                    //var result = cust_Views.GroupBy(x => x.sMeal_Nm).Select(x => new
+                    //{
+                    //    TAmt = (double)x.Sum(k => k.Amount),
+                    //    TDisAmt = (double)x.Sum(k => k.DisAmt),
+                    //    TQty = (int)x.Sum(k => k.Qty),
+                    //    TTax = (double)x.Sum(k => k.TaxAmt),
+                    //    item = x.Select(k => k.sMeal_Nm).First(),
+                    //    total = (double)x.Sum(k => k.Total)
+                    //}).ToList();
+                    
                     myResponse.Error = "";
                     myResponse.isValid = true;
-                    myResponse.JsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(result);
+                    myResponse.JsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
                 }
                 else
                 {
@@ -221,6 +281,8 @@ namespace KhaoPiyoManagement_System.ILibrary
             try
             {
                 Log.Write("In GetTransactionItemWise", "");
+                trans = new List<ItemSummary>();
+                
                 if (dtFrom != null && dtTo != null)
                 {
                     List<ItemSummary> retrivedData = new List<ItemSummary>();
@@ -232,23 +294,47 @@ namespace KhaoPiyoManagement_System.ILibrary
                     //dtFrom = DateTime.Parse(from);
                     //dtTo = DateTime.Parse(to);
 
-                    cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bVoid == 0).ToList();
+                    query = "select sum(bm.Amount) as TAmt,sum(bm.DisAmt) as TDisAmt, sum(bm.Qty) as TQty,sum(bm.TaxAmt) as TTax, bm.sItem_Nm as item,sum(bm.Total) as total  from View_tran as bm where bm.bOpen=0 and bm.bVoid=0 and bm.bNC=0 and bm.iComp_Cd=1 and bm.iBus_Cd=1 and bm.dBill_Dt >= '" + dtFrom.ToString("yyyy-MM-dd") + "' and bm.dBill_Dt<='" + dtTo.ToString("yyyy-MM-dd") + "' group by bm.sItem_Nm";
+                    trans = new List<ItemSummary>();
 
-
-                    var result = cust_Views.GroupBy(x => x.sItem_Nm).Select(x => new
+                    if (dbConnect.Select(query, out ds, out error))
                     {
-                        TAmt = (double)x.Sum(k => k.Amount),
-                        TDisAmt = (double)x.Sum(k => k.DisAmt),
-                        TQty = (int)x.Sum(k => k.Qty),
-                        TTax = (double)x.Sum(k => k.TaxAmt),
-                        item = x.Select(k => k.sItem_Nm).First(),
-                        total = (double)x.Sum(k => k.Total)
-                    }).ToList();
+                        foreach (DataRow item in ds.Tables[0].Rows)
+                        {
+                            if (item != null)
+                            {
+                                var t = new ItemSummary
+                                {
+                                    TAmt =  Convert.ToDouble( item["TAmt"]),
+                                    TDisAmt = Convert.ToDouble(item["TDisAmt"]),
+                                    TQty = Convert.ToDouble(item["TQty"]),
+                                    TTax = Convert.ToDouble(item["TTax"]),
+                                    item = Convert.ToString(item["item"]),
+                                    total = Convert.ToDouble(item["total"])
+                                };
+
+                                trans.Add(t);
+                            }
+                        }
+                    }
+
+                    //cust_Views = entities.View_Tran.Where(x => x.dBill_Dt >= this.dtFrom && x.dBill_Dt <= this.dtTo && x.bOpen == 0 && x.iBus_Cd == 1 && x.iComp_Cd == 1 && x.bVoid == 0).ToList();
+
+
+                    //var result = cust_Views.GroupBy(x => x.sItem_Nm).Select(x => new
+                    //{
+                    //    TAmt = (double)x.Sum(k => k.Amount),
+                    //    TDisAmt = (double)x.Sum(k => k.DisAmt),
+                    //    TQty = (int)x.Sum(k => k.Qty),
+                    //    TTax = (double)x.Sum(k => k.TaxAmt),
+                    //    item = x.Select(k => k.sItem_Nm).First(),
+                    //    total = (double)x.Sum(k => k.Total)
+                    //}).ToList();
                  
 
                     myResponse.Error = "";
                     myResponse.isValid = true;
-                    myResponse.JsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(result);
+                    myResponse.JsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(trans);
                 }
                 else
                 {

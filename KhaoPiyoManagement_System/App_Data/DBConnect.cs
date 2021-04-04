@@ -85,7 +85,7 @@ namespace Classes
             uid = ConfigurationManager.AppSettings["UserId"].ToString();
             password = ConfigurationManager.AppSettings["Password"].ToString();
 
-            database = new KPEntity().Database.Connection.Database.ToString(); //"kmsdatabase";
+            database = GlobalProperties.Instance.conStringName; //"kmsdatabase";
 
 
             //database_type = ConfigurationManager.AppSettings["DataBaseType"].ToString();

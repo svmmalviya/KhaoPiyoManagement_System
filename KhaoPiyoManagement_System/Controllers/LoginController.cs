@@ -11,12 +11,15 @@ namespace KhaoPiyoManagement_System.Controllers
     public class LoginController : Controller
     {
 
-        MasterEntities MasterEntities = new MasterEntities();
+        MasterEntities MasterEntities ;
 
 
         public LoginController()
         {
             GlobalProperties.Instance.conStringName = "khaopiyo";
+            MasterEntities = new MasterEntities();
+            MasterEntities.Database.Connection.Open();
+
         }
         // GET: Login
         public ActionResult Index()

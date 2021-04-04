@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'F:\KhaoPiyoManagement_System - Copy (2)\KhaoPiyoManagement_System\MasterModal.edmx'. 
+﻿// T4 code generation is enabled for model 'F:\KhaoPiyoManagement_System - Copy (2)\KhaoPiyoManagement_System\KPEntity.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

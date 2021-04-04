@@ -11,11 +11,9 @@ namespace KhaoPiyoManagement_System
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class CustBillItem
     {
-        [Key]
         public int CustBillItemsId { get; set; }
         public System.Guid CustBillMasterID { get; set; }
         public string ItemName { get; set; }

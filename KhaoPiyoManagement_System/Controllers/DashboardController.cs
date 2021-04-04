@@ -17,8 +17,9 @@ namespace KhaoPiyoManagement_System.Controllers
 {
     public class DashboardController : Controller
     {
-        private KPEntity entities = new KPEntity();
+        private Entities entities = new Entities();
         private List<breadcumb> breadcumbs = new List<breadcumb>();
+        DBConnect dBConnect = new DBConnect();
         //DBConnect db = new DBConnect();
 
         IDashboard dashboard = null;
@@ -26,8 +27,8 @@ namespace KhaoPiyoManagement_System.Controllers
         public DashboardController(IDashboard _dashboard)
         {
             dashboard = _dashboard;
-        }
 
+        }
         
 
         // GET: Dashboard
@@ -41,30 +42,38 @@ namespace KhaoPiyoManagement_System.Controllers
                 }
 
 
-                var response = dashboard.GetCompanyDetails(int.Parse(Session["iuser_cd"].ToString()));
+                //var response = dashboard.GetCompanyDetails(int.Parse(Session["iuser_cd"].ToString()));
 
-                if (response.isValid)
-                {
-
-                    GlobalProperties.Instance.companyDetails = (Company_Master)Newtonsoft.Json.JsonConvert.DeserializeObject<Company_Master>(response.JsonStr);
+                //if (response.isValid)
+                //{
+                   // GlobalProperties.Instance.companyDetails = (Company_Master)Newtonsoft.Json.JsonConvert.DeserializeObject<Company_Master>(response.JsonStr);
 
                     breadcumbs.Add(new breadcumb { routename = "Home", routevalue = "/Dashboard/Index" });
                     ViewBag.breacumb = breadcumbs;
 
-                    ViewBag.totalbls = dashboard.GetTodaysTotalBill((int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
-                    ViewBag.totalgst = dashboard.GetTodaysTotalGuest((int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
-                    ViewBag.totalsls = dashboard.GetTodaysTotalSales((int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
-                    ViewBag.totalexp = dashboard.GetTodaysTotalExpenses((int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                    //if (GlobalProperties.Instance.companyDetails.sComp_Nm != null)
+                    //{
+                    ViewBag.totalbls = dashboard.GetTodaysTotalBill(1,1);//dashboard.GetTodaysTotalBill((int)GlobalProperties.Instance.companyDetails.iComp_Cd, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                    ViewBag.totalgst = dashboard.GetTodaysTotalGuest(1,1);//dashboard.GetTodaysTotalGuest((int)GlobalProperties.Instance.companyDetails.iComp_Cd, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                        ViewBag.totalsls = dashboard.GetTodaysTotalSales(1, 1);//dashboard.GetTodaysTotalSales((int)GlobalProperties.Instance.companyDetails.iComp_Cd, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                    ViewBag.totalexp = dashboard.GetTodaysTotalExpenses(1,1);//dashboard.GetTodaysTotalExpenses((int)GlobalProperties.Instance.companyDetails.iComp_Cd, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                    //}
+                    //else {
+                    //    ViewBag.totalbls =0;
+                    //    ViewBag.totalgst =0;
+                    //    ViewBag.totalsls =0;
+                    //    ViewBag.totalexp =0;
+                    //}
 
-                    
                     //dashboardSummary.billcount = entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo &&x.bVoid==0 &&x.iComp_Cd==icomp_cd&&x.iBus_Cd==ibus_cd&&x.bNC==0).Select(x => x.iBill_No).Count().ToString() == "" ? "0" : entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo && x.bVoid == 0 && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd && x.bNC == 0).Select(x => x.iBill_No).Count().ToString();
                     //dashboardSummary.guest =     entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo && x.bVoid == 0 && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd && x.bNC == 0).Sum(x => x.iPax).ToString()==""?"0": entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo && x.bVoid == 0 && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd && x.bNC == 0).Sum(x => x.iPax).ToString();
                     //dashboardSummary.sale =      entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo && x.bVoid == 0 && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd && x.bNC == 0).Sum(x => x.iGrand_Amt).ToString() == "" ? "0" : entities.Billing_Master.Where(x => x.dBill_Dt >= dtFrom && x.dBill_Dt <= dtTo && x.bVoid == 0 && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd && x.bNC == 0).Sum(x => x.iGrand_Amt).ToString();
                     //dashboardSummary.expences =  entities.Expenses_Tran.Where(x => x.dRec_Dt >= dtFrom && x.dRec_Dt <= dtTo && x.iComp_Cd == icomp_cd && x.iBus_Cd == ibus_cd).Sum(x => x.iAmount).ToString() == "" ? "0" : entities.Expenses_Tran.Where(x => x.dRec_Dt >= dtFrom && x.dRec_Dt <= dtTo &&x.iComp_Cd==icomp_cd&&x.iBus_Cd==ibus_cd).Sum(x => x.iAmount).ToString();
                     ViewBag.companyname = Session["compname"].ToString();
 
-                    Session["compcd"] = GlobalProperties.Instance.companyDetails.iComp_Cd;
-                    Session["buscd"] = GlobalProperties.Instance.companyDetails.ResturantID;
+                    //Session["compcd"] = GlobalProperties.Instance.companyDetails.iComp_Cd;
+                    Session["compcd"] = 1;
+                    Session["buscd"] = 1;
 
                     //string logoImagePath = Server.MapPath("~/Images");
                     //string[] logoImageFiles = Directory.GetFiles(logoImagePath);
@@ -77,11 +86,11 @@ namespace KhaoPiyoManagement_System.Controllers
                     //        Session["companylogo"] = GlobalProperties.Instance.companyDetails.ImgName;
                     //    }
                     //}
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Login");
-                }
+                //}
+                //else
+                //{
+                //    return RedirectToAction("Index", "Login");
+                //}
 
             }
             catch (Exception ex)
@@ -97,8 +106,12 @@ namespace KhaoPiyoManagement_System.Controllers
         [HttpPost]
         public JsonResult GetChart()
         {
+            var iData=new List<object>();
 
-            var iData = dashboard.GetDailyMoneyCollection((int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
+            //if (GlobalProperties.Instance.companyDetails.iComp_Cd != 0)
+            //    iData = dashboard.GetDailyMoneyCollection(1, GlobalProperties.Instance.companyDetails.iComp_Cd);
+            //else
+                iData = dashboard.GetDailyMoneyCollection(1, 1);
             //Source data returned as JSON  
             return Json(iData, JsonRequestBehavior.AllowGet);
         }
@@ -106,8 +119,12 @@ namespace KhaoPiyoManagement_System.Controllers
         [HttpPost]
         public JsonResult GetMyChart(string dtFrom, string dtto)
         {
+            var iData = new List<object>();
+            //if (GlobalProperties.Instance.companyDetails.iComp_Cd != 0 )
+            //    iData = dashboard.GetDailyMoneyCollection(1, GlobalProperties.Instance.companyDetails.iComp_Cd);
+            //else
 
-            var iData = dashboard.GetDailyMoneyCollection((int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                iData = dashboard.GetDailyMoneyCollection(1, 1);
             //Source data returned as JSON  
             return Json(iData, JsonRequestBehavior.AllowGet);
         }
@@ -162,8 +179,15 @@ namespace KhaoPiyoManagement_System.Controllers
             {
                 string dtfrom = DateTime.Now.ToString("MM-dd-yyyy");
                 string dtto = DateTime.Now.ToString("MM-dd-yyyy");
+                var response = new MyResponse();
 
-                var response = dashboard.GetDashboardSummary(dtfrom, dtto, (int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                //if (GlobalProperties.Instance.companyDetails.iComp_Cd != 0)
+                //{
+                //     response = dashboard.GetDashboardSummary(dtfrom, dtto, 1, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                //}
+                //else {
+                    response = dashboard.GetDashboardSummary(dtfrom, dtto, 1,1);
+                //}
                 
                 if (response.isValid)
                 {
@@ -184,6 +208,7 @@ namespace KhaoPiyoManagement_System.Controllers
 
             try
             {
+                MyResponse response = new MyResponse();
 
                 breadcumbs.Add(new breadcumb { routename = "Home", routevalue = "/Dashboard/Index" });
                 breadcumbs.Add(new breadcumb { routename = "My-Dashboard", routevalue = "/Dashboard/MyDashboard" });
@@ -196,8 +221,10 @@ namespace KhaoPiyoManagement_System.Controllers
                     string dtfrom = DateTime.ParseExact(form["dtfrom"], "MM/dd/yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy");
                     string dtto = DateTime.ParseExact(form["dtto"], "MM/dd/yyyy", CultureInfo.InvariantCulture).ToString("MM-dd-yyyy");
 
-                  
-                    var response = dashboard.GetDashboardSummary(dtfrom, dtto, (int)GlobalProperties.Instance.companyDetails.ResturantID, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                    //if (GlobalProperties.Instance.companyDetails.iComp_Cd != 0 )
+                    //response = dashboard.GetDashboardSummary(dtfrom, dtto, 1, GlobalProperties.Instance.companyDetails.iComp_Cd);
+                    //else
+                    response = dashboard.GetDashboardSummary(dtfrom, dtto, 1, 1);
 
                     if (response.isValid)
                     {

@@ -30,6 +30,10 @@ img.loginpage-logo {
     width: auto;
     height: 60px;
 }
+a.navbar-brand.shadow-soft.py-2.px-3.rounded.border img {
+    width: auto;
+    height: 60px;
+}
 
 div.dataTables_wrapper div.dataTables_paginate {
     float: right;
@@ -237,6 +241,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         white-space: pre-wrap;
         width: 20%;
     }
+
 
      
 

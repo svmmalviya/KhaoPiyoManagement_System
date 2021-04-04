@@ -10,55 +10,40 @@
 namespace KhaoPiyoManagement_System
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Billing_Master
+    public partial class SaleRegister_Result
     {
         public int iBill_No { get; set; }
+        public string sTab_Nm { get; set; }
+        public Nullable<double> TaxAmt { get; set; }
         public Nullable<System.DateTime> dBill_Dt { get; set; }
-        public Nullable<int> iTab_Cd { get; set; }
-        public string sBillType { get; set; }
         public string sGuest_Nm { get; set; }
         public string sMobile { get; set; }
         public Nullable<int> iPax { get; set; }
         public string GSTIN { get; set; }
-        public Nullable<int> iAttd_Cd { get; set; }
+        public string sAttd_Nm { get; set; }
         public Nullable<double> TQty { get; set; }
-        public Nullable<byte> bNC { get; set; }
         public string sNCReason { get; set; }
-        public Nullable<double> NCAmt { get; set; }
         public Nullable<double> TAmt { get; set; }
-        public Nullable<double> TGST { get; set; }
-        public Nullable<double> TCESS { get; set; }
         public Nullable<double> TDiscount { get; set; }
-        public Nullable<double> TDiscountValue { get; set; }
-        public Nullable<double> TExtra { get; set; }
         public Nullable<double> TRoundOff { get; set; }
+        public Nullable<double> TDiscountValue { get; set; }
         public Nullable<double> iGrand_Amt { get; set; }
-        public Nullable<byte> bDiscount { get; set; }
-        public string sDis { get; set; }
-        public Nullable<int> iDis_Cd { get; set; }
-        public Nullable<byte> bPrint { get; set; }
-        public Nullable<byte> bOpen { get; set; }
-        public Nullable<byte> bLessStock { get; set; }
-        public Nullable<System.DateTime> INTime { get; set; }
-        public Nullable<byte> bVoid { get; set; }
         public string sVoidReason { get; set; }
-        public int iFin_Cd { get; set; }
-        public int iComp_Cd { get; set; }
-        public int iBus_Cd { get; set; }
-        public Nullable<int> iUser_Cd { get; set; }
-        public Nullable<System.DateTime> dUpdate_Dt { get; set; }
+        public Nullable<double> TGST { get; set; }
+        public string sAcc_Nm { get; set; }
         public string sType { get; set; }
-        public Nullable<int> iAcc_Cd { get; set; }
         public string sDis_Type { get; set; }
-        public Nullable<int> iRef_Cd { get; set; }
+        public string sDis { get; set; }
+        public string sDis_Nm { get; set; }
+        public Nullable<double> TExtra { get; set; }
+        public Nullable<double> NCAmt { get; set; }
+        public Nullable<int> iTab_Cd { get; set; }
         public Nullable<double> iWayOffAmt { get; set; }
         public string iWayOffRemark { get; set; }
         public Nullable<double> iTipAmt { get; set; }
         public string iTipRemark { get; set; }
         public Nullable<double> iDonationAmt { get; set; }
         public string iDonationRemark { get; set; }
-        public Nullable<int> iMore_Cd { get; set; }
     }
 }

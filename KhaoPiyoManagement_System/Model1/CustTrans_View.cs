@@ -71,12 +71,10 @@ namespace KhaoPiyoManagement_System.Models
         public double TExtra { get; set; }
         public double NCAmt { get; set; }
         public int? iRef_Cd { get; set; }
-        public double? iWayOffAmt { get; set; }
-        public string iWayOffRemark { get; set; }
         public double? iTipAmt { get; set; }
+        public string iWayOffRemark { get; set; }
         public double? iDonationAmt { get; set; }
         public string iTipRemark { get; set; }
-        public string iDonationRemark { get; set; }
         public string MCode { get; set; }
         public string sTab_Cat_Nm { get; set; }
         public object sVoidReason { get; set; }
@@ -89,5 +87,7 @@ namespace KhaoPiyoManagement_System.Models
         public int bDepend { get; set; }
         public object iDep_Cat_Cd { get; set; }
         public int bKDS { get; set; }
+        public string iDonationRemark { get;  set; }
+        public double iWayOffAmt { get;  set; }
     }
 }

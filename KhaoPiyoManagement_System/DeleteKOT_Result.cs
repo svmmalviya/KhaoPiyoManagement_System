@@ -10,19 +10,14 @@
 namespace KhaoPiyoManagement_System
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class KOT_Delete
+    public partial class DeleteKOT_Result
     {
-        public int iCode { get; set; }
-        public Nullable<int> iItem_Cd { get; set; }
-        public Nullable<double> Rate { get; set; }
         public Nullable<double> Qty { get; set; }
+        public Nullable<double> Rate { get; set; }
         public Nullable<int> iBill_No { get; set; }
         public string UserName { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
-        public int iFin_Cd { get; set; }
-        public int iComp_Cd { get; set; }
-        public int iBus_Cd { get; set; }
+        public string C______ { get; set; }
     }
 }

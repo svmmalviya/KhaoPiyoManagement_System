@@ -71,9 +71,8 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\KhaoPiyoManagement_System-master\KhaoPiyoManagement_System\bin\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
@@ -118,6 +117,7 @@
     </Reference>
     <Reference Include="Unity.Mvc5, Version=1.4.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Mvc5.1.4.0\lib\net45\Unity.Mvc5.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -134,10 +134,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account_Master.cs" />
-    <Compile Include="Acc_Group_Master.cs" />
-    <Compile Include="Advance_Tran.cs" />
-    <Compile Include="App_BillMaster.cs" />
+    <Compile Include="Account_Master.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Data\Log.cs" />
     <Compile Include="App_Data\Globals.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -145,23 +144,28 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="AspNet_SqlCacheTablesForChangeNotification.cs" />
-    <Compile Include="Attendent_Master.cs" />
-    <Compile Include="Bank_Master.cs" />
-    <Compile Include="Billing_Detail.cs" />
-    <Compile Include="Billing_Detail_Vend.cs" />
-    <Compile Include="Billing_Master.cs" />
-    <Compile Include="Billing_Master_Vend.cs" />
-    <Compile Include="Billing_Online.cs" />
-    <Compile Include="Billing_Payment.cs" />
-    <Compile Include="Billing_Tax.cs" />
-    <Compile Include="Billing_Tax_Vend.cs" />
-    <Compile Include="BillPrint_Record.cs" />
-    <Compile Include="Business_Master.cs" />
-    <Compile Include="Category_Master.cs" />
-    <Compile Include="Company_Master.cs" />
-    <Compile Include="Configration_Master.cs" />
-    <Compile Include="Consume_Tran.cs" />
+    <Compile Include="Attendent_Master.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Billing_Detail.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Billing_Master.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Billing_Tax.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CashInHeand_Result.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Category_Master.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common.cs" />
+    <Compile Include="Company_Master.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ItemSummaryController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -174,28 +178,15 @@
     <Compile Include="CustBillMaster.cs">
       <DependentUpon>MasterModal.tt</DependentUpon>
     </Compile>
-    <Compile Include="Daily_Cash.cs" />
-    <Compile Include="Daily_Mail.cs" />
-    <Compile Include="DataCopy.cs" />
-    <Compile Include="Discount_Master.cs" />
-    <Compile Include="Est_Billing.cs" />
-    <Compile Include="Expenses_Master.cs" />
-    <Compile Include="Expenses_Tran.cs" />
-    <Compile Include="Feedback_Master.cs" />
-    <Compile Include="Feedback_Tran.cs" />
-    <Compile Include="Fin_Yr_Master.cs" />
-    <Compile Include="FoodOrder_Customer_Master.cs" />
-    <Compile Include="FoodOrder_Item_Master.cs" />
-    <Compile Include="FoodOrder_Order_Master.cs" />
-    <Compile Include="FoodOrder_Order_Status.cs" />
-    <Compile Include="FoodOrder_Reference_Master.cs" />
-    <Compile Include="FoodOrder_Rider_Status.cs" />
-    <Compile Include="Form_Master.cs" />
+    <Compile Include="DeleteKOT_Result.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Expenses_Tran.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Gravy_Master.cs" />
-    <Compile Include="Guest_Master.cs" />
     <Compile Include="ILibrary\Dashboard.cs" />
     <Compile Include="ILibrary\IDashboard.cs" />
     <Compile Include="ILibrary\IItemSummary.cs" />
@@ -204,25 +195,30 @@
     <Compile Include="ILibrary\ItemSummaryImp.cs" />
     <Compile Include="ILibrary\RunningTables.cs" />
     <Compile Include="ILibrary\SalesRegisterImp.cs" />
-    <Compile Include="Income_Master.cs" />
-    <Compile Include="Income_Tran.cs" />
-    <Compile Include="Inv_Category_Master.cs" />
-    <Compile Include="Inv_Consume_Master.cs" />
-    <Compile Include="Inv_Item_Master.cs" />
-    <Compile Include="Inv_Unit_Master.cs" />
-    <Compile Include="Item_Description_Master.cs" />
-    <Compile Include="Item_Group_Master.cs" />
-    <Compile Include="Item_Master.cs" />
-    <Compile Include="Item_Master_Time.cs" />
-    <Compile Include="KOT_Delete.cs" />
-    <Compile Include="KOT_Master.cs" />
-    <Compile Include="KPEntity.cs" />
-    <Compile Include="Location_Master.cs" />
-    <Compile Include="Loyalty_Master.cs" />
-    <Compile Include="Loyalty_Program_Master.cs" />
-    <Compile Include="Loyalty_Tran.cs" />
-    <Compile Include="MainForm_Master.cs" />
-    <Compile Include="Map_Sale_Tax.cs" />
+    <Compile Include="Item_Master.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KOT_Delete.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KPEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KPEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KPEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KPEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KPEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Map_Sale_Tax.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="MasterModal.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -238,60 +234,44 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MasterModal.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Meal_Master.cs" />
+    <Compile Include="Meal_Master.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model1\breadcumb.cs" />
     <Compile Include="Model1\CustTrans_View.cs" />
     <Compile Include="Model1\ItemSummary.cs" />
     <Compile Include="Model1\RunningTables.cs" />
-    <Compile Include="Month_Master.cs" />
-    <Compile Include="Online_Item_Master.cs" />
-    <Compile Include="Online_Master.cs" />
-    <Compile Include="Online_Meal_Master.cs" />
-    <Compile Include="Online_Tag_Master.cs" />
-    <Compile Include="Opening_Balance.cs" />
-    <Compile Include="Opening_Balance_Inv_Item.cs" />
-    <Compile Include="Opening_Balance_Vend.cs" />
-    <Compile Include="Outlet_Master.cs" />
-    <Compile Include="Payment_Master.cs" />
-    <Compile Include="Payment_Master_Vend.cs" />
-    <Compile Include="PayMode_Master.cs" />
+    <Compile Include="PayMode_Master.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recipe_Master.cs" />
-    <Compile Include="Reference_Master.cs" />
     <Compile Include="Resturant.cs">
       <DependentUpon>MasterModal.tt</DependentUpon>
     </Compile>
-    <Compile Include="Sale_Master.cs" />
-    <Compile Include="SMS_Recharge.cs" />
-    <Compile Include="State_Master.cs" />
-    <Compile Include="Table_Category_Master.cs" />
-    <Compile Include="Table_Master.cs" />
-    <Compile Include="Table_Shift.cs" />
-    <Compile Include="Tab_Process.cs" />
-    <Compile Include="Tax_Master.cs" />
+    <Compile Include="SaleRegister_Result.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Table_Master.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>MasterModal.tt</DependentUpon>
     </Compile>
-    <Compile Include="User_Address.cs" />
-    <Compile Include="User_Master.cs" />
-    <Compile Include="User_Rights.cs" />
-    <Compile Include="User_Rights_Main.cs" />
-    <Compile Include="Vendor_Master.cs" />
-    <Compile Include="View_BillPrint.cs" />
-    <Compile Include="View_Hour.cs" />
-    <Compile Include="View_Inv_Item_Master.cs" />
-    <Compile Include="View_Inv_TaxDetail.cs" />
-    <Compile Include="View_Item_Master.cs" />
-    <Compile Include="View_Pay.cs" />
-    <Compile Include="View_Pay_Vend.cs" />
-    <Compile Include="View_RunningTable.cs" />
-    <Compile Include="View_TaxDetail.cs" />
-    <Compile Include="View_Top10.cs" />
-    <Compile Include="View_Top15.cs" />
-    <Compile Include="View_Top3.cs" />
-    <Compile Include="View_Tran.cs" />
-    <Compile Include="View_Tran_Vend.cs" />
-    <Compile Include="Void_Bill.cs" />
+    <Compile Include="User_Master.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View_RunningTable.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View_Tran.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VoidBill_Result.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Void_Bill.cs">
+      <DependentUpon>KPEntity.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\img\about-us-1.jpg" />
@@ -364,7 +344,6 @@
     <Content Include="Datatable\dataTables.bootstrap4.min.js" />
     <Content Include="Datatable\jquery.dataTables.min.js" />
     <Content Include="Datatable\responsive.bootstrap.min.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -374,6 +353,16 @@
     <Content Include="images\logo.png" />
     <Content Include="images\NETCODERS.png" />
     <Content Include="images\smalllogo.png" />
+    <Content Include="KPEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KPEntity.edmx</DependentUpon>
+      <LastGenOutput>KPEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="KPEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KPEntity.edmx</DependentUpon>
+      <LastGenOutput>KPEntity.cs</LastGenOutput>
+    </Content>
     <Content Include="LICENSE.txt" />
     <Content Include="MasterModal.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -396,6 +385,13 @@
     </EntityDeploy>
     <Content Include="MasterModal.edmx.diagram">
       <DependentUpon>MasterModal.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="KPEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>KPEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="KPEntity.edmx.diagram">
+      <DependentUpon>KPEntity.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
