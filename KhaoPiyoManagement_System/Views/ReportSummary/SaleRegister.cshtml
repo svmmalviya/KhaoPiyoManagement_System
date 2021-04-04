@@ -70,7 +70,7 @@
                 @ViewBag.selectedRecordDescription
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12 text-center">
             <table class="table  khaopiyo-tran-table table-striped table-responsive w-100">
                 <thead class="thead-dark">
                     <tr>
@@ -79,19 +79,19 @@
                         <th class="" scope="col">Table No</th>
                         <th class="" scope="col">Qty</th>
                         <th class="" scope="col">Amount</th>
+                        <th class="" scope="col">Discount</th>
+                        <th class="" scope="col">Tax</th>
                         <th class="" scope="col">RoundOff</th>
                         <th class="" scope="col">Grand Total</th>
                         <th class="" scope="col">Guest Name</th>
                         <th class="" scope="col">Mobile</th>
                         <th class="" scope="col">Pax</th>
                         <th class="" scope="col">GSTIN</th>
+                        <th class="" scope="col">Pay Type</th>
                         <th class="" scope="col">NC Amount</th>
                         <th class="" scope="col">NC Reason</th>
-                        <th class="" scope="col">Tax</th>
                         <th class="" scope="col">Discount Type</th>
-                        <th class="" scope="col">Discount Value</th>
                         <th class="" scope="col">Void Reason</th>
-                        <th class="" scope="col">Pay Type</th>
                         <th class="" scope="col">Way Off</th>
                         <th class="" scope="col">Way Off Remark</th>
                         <th class="" scope="col">Tip Amount</th>
@@ -132,7 +132,7 @@
 
 <script type="text/javascript">
 
-    $(document).on("click", ".billno", function () {
+    $(document).on("click", ".khaopiyo-tran-table tbody .billno", function () {
         var id=$(this).text();
          $.ajax({
              url: "@Url.Action("GetRunningTable", "ReportSummary")",
@@ -152,7 +152,7 @@
 
 
     function dataReceived(data) {  //rendering running table detail from ajax call
-        $(document).find(".modal.tabno").text("Table No.-" + data[0].tabno);
+        $(document).find(".modal .tabno").text("Table No.-" + data[0].tabno);
         $(document).find(".modal .billno").text(" " + data[0].billno);
         $(document).find(".billdate").text(" " + data[0].billdate);
         $(document).find(".guestname").text(" " + data[0].guestname);
@@ -175,9 +175,8 @@
         addingRowStr += "<tr><td  colspan=2 align='right' class='font-weight-bold border-0' >Total :</td><td align='right'  class='font-weight-bold border-0'>" + data[0].totqty + "</td><td class='font-weight-bold border-0' align='right'>" + data[0].total + " </td></tr>" +
             "<tr><td colspan=2 align='right' class='font-weight-bold border-0' >Discount : </td><td class='border-0' align='right' ></td><td align='right' class='font-weight-bold border-0'>" + data[0].discount + " </td></tr>" +
             "<tr><td colspan=2 align='right'class='font-weight-bold border-0' >Tax : </td><td  ></td><td align='right' class='font-weight-bold border-0' >" + data[0].tax + " </td></tr>" +
-            "<tr><td colspan=2 align='right'class='font-weight-bold border-0' >Round Off : </td><td class='font-weight-bold border-0' ></td><td align='right' class='font-weight-bold border-0'>" + data[0].roundoff + " </td></tr>" +
+            "<tr><td colspan=2 align='right'class='font-weight-bold border-0' >Round Off : </td><td class='font-weight-bold border-0' ></td><td align='right' class='font-weight-bold border-0'>" + Math.abs( data[0].roundoff) + " </td></tr>" +
             "<tr><td colspan=2 align='right'class='font-weight-bold border-0' >Grand Total : </td><td  class='font-weight-bold border-0' ></td><td align='right' class='font-weight-bold border-0'>" + data[0].grandtotal + " </td></tr>";
-
 
 
         $("._itemsTable").append(addingRowStr);
@@ -249,24 +248,42 @@
                 bPaginate: false,
                 paging: false,
                 data: response,
-                columns: [{ 'data': 'iBill_No', 'class': 'billno' },
-                { 'data': 'dBill_Dt' },
-                { 'data': 'iTab_Cd' },
-                { 'data': 'TQty' },
+                aaSourt:[[0,'asc']],
+                columns: [{
+                    'data': 'iBill_No', 'class': 'billno', 'mRender': function (data, type, full) {
+                        return '<a class="" data-toggle="tooltip" title="View Bill" >' + data +'</a>';
+                    }
+                },
+                    {
+                        'name': 'dBill_Dt', 'mData': 'dBill_Dt',
+                        "mRender": function (data, type, row) {
+                            return data;
+                        }
+                    },
+                    { 'data': 'sTab_Nm' },
+                { 'data': 'Qty' },
                 { 'data': 'TAmt' },
+                    {
+                        'data': 'DisAmt'
+                        , render: function (data, type, row) {
+                            if (data > 0)
+                                return data.toFixed(2);
+                            else {
+                                return 0;
+                            }
+                        }    },
+                { 'data': 'GSTAmt' },
                 { 'data': 'TRoundOff' },
                 { 'data': 'iGrand_Amt' },
                 { 'data': 'sGuest_Nm' },
                 { 'data': 'sMobile' },
                 { 'data': 'iPax' },
                 { 'data': 'GSTIN' },
+                { 'data': 'sType' },
                 { 'data': 'NCAmt' },
                 { 'data': 'sNCReason' },
-                { 'data': 'TaxAmt' },
                 { 'data': 'sDis_Type' },
-                { 'data': 'DisAmt' },
                 { 'data': 'sVoidReason' },
-                { 'data': 'sType' },
                 { 'data': 'iWayOffAmt' },
                 { 'data': 'iWayOffRemark' },
                 { 'data': 'iTipAmt' },
@@ -275,12 +292,6 @@
                 fnFooterCallback: function (row, data, start, end, display) {
                     var api = this.api(), data;
 
-                    //this.api().columns().every(function () {
-                    //    var column = this;
-                    //    $(footer).append('<td></td>');
-                    //});
-
-                    //   $(this).append(footer);
 
                     // Remove the formatting to get integer data for summation
                     var intVal = function (i) {
@@ -303,6 +314,7 @@
                             return intVal(a) + intVal(b);
                         }, 0);
 
+
                     totalWayOff= api
                         .column(18)
                         .data()
@@ -311,43 +323,43 @@
                         }, 0);
 
                     totalDiscAmt = api
-                        .column(15)
+                        .column(5)
                         .data()
                         .reduce(function (a, b) {
                             return intVal(a) + intVal(b);
                         }, 0);
 
                     totalTaxAmt = api
-                        .column(13)
+                        .column(6)
                         .data()
                         .reduce(function (a, b) {
                             return intVal(a) + intVal(b);
                         }, 0);
 
                     totalNCAmt = api
+                        .column(14)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    //totalgstin = api
+                    //    .column(10)
+                    //    .data()
+                    //    .reduce(function (a, b) {
+                    //        return intVal(a) + intVal(b);
+                    //    }, 0);
+
+                    totalipax= api
                         .column(11)
                         .data()
                         .reduce(function (a, b) {
                             return intVal(a) + intVal(b);
                         }, 0);
 
-                    totalgstin = api
-                        .column(10)
-                        .data()
-                        .reduce(function (a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
 
-                    totalipax= api
-                        .column(9)
-                        .data()
-                        .reduce(function (a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-
-                    totaltax = api
-                        .column(6)
+                    totalGrand = api
+                        .column(8)
                         .data()
                         .reduce(function (a, b) {
                             return intVal(a) + intVal(b);
@@ -375,6 +387,13 @@
                             return intVal(a) + intVal(b);
                         }, 0);
 
+                    totalroundoff = api
+                        .column(7)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
                     //alert(api.column(3).footer().val());
                     totalamt = api
                         .column(4)
@@ -389,40 +408,29 @@
                     $(api.column(3).footer()).html(
                         totalqty
                     );
-                    $(api.column(4).footer()).html(
-                        totalamt
+                    $(api.column(7).footer()).html(
+                        totalroundoff.toFixed(2)
                     );
-
+                    $(api.column(4).footer()).html(
+                        totalamt.toFixed(2)
+                    );
+                    $(api.column(5).footer()).html(
+                        totalDiscAmt.toFixed(2)
+                    );
 
                     $(api.column(6).footer()).html(
-                        totaltax
-                    );
-                    $(api.column(9).footer()).html(
-                        totalipax
+                        totalTaxAmt.toFixed(2)
                     );
 
 
-                    $(api.column(10).footer()).html(
-                        totalgstin
+                    $(api.column(8).footer()).html(
+                        totalGrand.toFixed(2)
                     );
                     $(api.column(11).footer()).html(
-                        totalNCAmt
+                        totalipax.toFixed(2)
                     );
-
-                    $(api.column(13).footer()).html(
-                        totalTaxAmt
-                    );
-                    $(api.column(15).footer()).html(
-                        totalDiscAmt
-                    );
-                    $(api.column(18).footer()).html(
-                        totalWayOff
-                    );
-                    $(api.column(20).footer()).html(
-                        totalTipAmt
-                    );
-                    $(api.column(21).footer()).html(
-                        totalDonationAmt
+                    $(api.column(14).footer()).html(
+                        totalNCAmt.toFixed(2)
                     );
                 },
             });

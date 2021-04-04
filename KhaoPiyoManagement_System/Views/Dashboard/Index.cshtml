@@ -9,7 +9,7 @@
         <div class="row mt-3">
             <div class="col-md-12">
                 <div class="card  shadow-inset shadow-sm p-2">
-                <div class="card-body shadow-soft ">
+                <div class="card-body shadow-soft khaopiyo-brand">
                     <h4>Welcome :  @ViewBag.companyname  </h4>
                     <p></p>
                 </div>
@@ -90,6 +90,7 @@
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (chData) {
+
             var aData = chData;
             var aLabels = aData[1];
             var aDatasets1 = aData[0];

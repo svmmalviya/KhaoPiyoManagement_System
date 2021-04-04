@@ -27,7 +27,7 @@ namespace KhaoPiyoManagement_System.ILibrary
         /// it returns company's details
         /// </summary>
         /// <returns>details as company_master</returns>
-        MyResponse GetCompanyDetails(int? iuser_cd);
+        MyResponse GetCompanyDetails(int iuser_cd);
 
 
         /// <summary>

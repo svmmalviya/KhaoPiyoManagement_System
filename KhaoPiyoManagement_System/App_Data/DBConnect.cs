@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Web.UI;
 using System.Web;
 using System.Security.Cryptography;
+using KhaoPiyoManagement_System;
 
 namespace System
 {
@@ -81,12 +82,10 @@ namespace Classes
         {
             server = ConfigurationManager.AppSettings["DBServerIP"].ToString();//   "WIN-T04S48MMAPI"; //IP where Database is present
 
-            //uid = "lipi";
             uid = ConfigurationManager.AppSettings["UserId"].ToString();
-            //password = "L!p!d@t@";
             password = ConfigurationManager.AppSettings["Password"].ToString();
 
-            database = ConfigurationManager.AppSettings["Database"].ToString(); //"kmsdatabase";
+            database = GlobalProperties.Instance.conStringName; //"kmsdatabase";
 
 
             //database_type = ConfigurationManager.AppSettings["DataBaseType"].ToString();

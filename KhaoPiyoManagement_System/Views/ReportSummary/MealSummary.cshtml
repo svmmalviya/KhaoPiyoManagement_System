@@ -82,6 +82,7 @@
                         <th class="" scope="col">Total Amount</th>
                         <th class="" scope="col">Total Discount</th>
                         <th class="" scope="col">Total Tax</th>
+                        <th class="" scope="col">Grand Total</th>
                     </tr>
                 </thead>
                 <tfoot class="tfoot-dark">
@@ -91,6 +92,7 @@
                         <td id="totalamt" class="text-white"></td>
                         <td id="totaldisc" class="text-white"></td>
                         <td id="totaltax" class="text-white"></td>
+                        <td id="grandtotal" class="text-white"></td>
                     </tr>
                 </tfoot>
             </table>
@@ -170,7 +172,7 @@
                 bSort: true,
                 bPaginate: false,
                 paging: false,
-                aaSorting: [[1, 'asc']],
+                aaSorting: [[1, 'desc']],
                 data: response,
                 columns: [{ 'data': 'item', 'class': 'text-left' },
                 {
@@ -179,7 +181,7 @@
                     }
                 },
                 {
-                    'data': 'TTax', 'mRender': function (data, type, full) {
+                    'data': 'TAmt', 'mRender': function (data, type, full) {
                         return data.toString().match(/\d+(\.\d{1,2})?/g)[0];
                     }
                 },
@@ -189,10 +191,15 @@
                     }
                 },
                 {
-                    'data': 'TAmt', 'mRender': function (data, type, full) {
+                    'data': 'TTax', 'mRender': function (data, type, full) {
                         return data.toString().match(/\d+(\.\d{1,2})?/g)[0];
                     }
                 },
+                    {
+                        'data': 'total', 'mRender': function (data, type, full) {
+                            return data.toString().match(/\d+(\.\d{1,2})?/g)[0];
+                        }
+                    }
                 ],
                 footerCallback: function (row, data, start, end, display) {
                     var api = this.api(), data;
@@ -214,40 +221,48 @@
                             return intVal(a) + intVal(b);
                         }, 0);
 
-                    totalamt = justTwoDecimalValue(api
+                    totalamt = api
                         .column(2)
                         .data()
                         .reduce(function (a, b) {
                             return intVal(a) + intVal(b);
-                        }, 0));
+                        }, 0);
 
-                    totaldisc = justTwoDecimalValue(api
+                    totaldisc = api
                         .column(3)
                         .data()
                         .reduce(function (a, b) {
                             return intVal(a) + intVal(b);
-                        }, 0));
+                        }, 0);
 
-                    totaltax = justTwoDecimalValue(api
+                    totaltax = api
                         .column(4)
                         .data()
                         .reduce(function (a, b) {
                             return intVal(a) + intVal(b);
-                        }, 0));
-
+                        }, 0);
+                    grandtotal = api
+                        .column(5)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
                     // Update footer
                     $(api.column(1).footer()).html(
-                        totalqty
+                        totalqty.toFixed(2)
                     );
                     $(api.column(2).footer()).html(
-                        totalamt
+                        totalamt.toFixed(2)
                     );
 
                     $(api.column(3).footer()).html(
-                        totaldisc
+                        totaldisc.toFixed(2)
                     );
                     $(api.column(4).footer()).html(
-                        totaltax
+                        totaltax.toFixed(2)
+                    );
+                    $(api.column(5).footer()).html(
+                        grandtotal.toFixed(2)
                     );
                 }
             });

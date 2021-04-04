@@ -1,0 +1,2035 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KhaoPiyoSoft_MatkiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account_Master">
+          <Key>
+            <PropertyRef Name="iAcc_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iGrp_Cd" Type="int" />
+          <Property Name="iAcc_Cd" Type="int" Nullable="false" />
+          <Property Name="sAcc_Nm" Type="varchar" MaxLength="250" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+          <Property Name="sMobile" Type="varchar" MaxLength="50" />
+          <Property Name="sGSTIN" Type="varchar" MaxLength="50" />
+          <Property Name="sAddress" Type="varchar" MaxLength="250" />
+          <Property Name="sEmail" Type="varchar" MaxLength="250" />
+          <Property Name="bActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Attendent_Master">
+          <Key>
+            <PropertyRef Name="iAttd_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iAttd_Cd" Type="int" Nullable="false" />
+          <Property Name="sAttd_Nm" Type="varchar" MaxLength="50" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+          <Property Name="bActive" Type="int" />
+        </EntityType>
+        <EntityType Name="Billing_Detail">
+          <Key>
+            <PropertyRef Name="AutoCode" />
+          </Key>
+          <Property Name="AutoCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iBill_No" Type="int" Nullable="false" />
+          <Property Name="iItem_Cd" Type="int" />
+          <Property Name="HSN" Type="varchar" MaxLength="50" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="DisPer" Type="float" />
+          <Property Name="DisAmt" Type="float" />
+          <Property Name="ExtraAmt" Type="float" />
+          <Property Name="GSTPer" Type="float" />
+          <Property Name="GSTAmt" Type="float" />
+          <Property Name="CessPer" Type="float" />
+          <Property Name="CessAmt" Type="float" />
+          <Property Name="Total" Type="float" />
+          <Property Name="ItemDesc" Type="varchar" MaxLength="250" />
+          <Property Name="iFin_Cd" Type="int" Nullable="false" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="bKOTPrint" Type="int" />
+          <Property Name="iSale_Cd" Type="int" />
+          <Property Name="iItemSr_No" Type="int" Nullable="false" />
+          <Property Name="iKOT_No" Type="int" />
+          <Property Name="TaxAmt" Type="float" />
+          <Property Name="dPunch_Time" Type="datetime" />
+          <Property Name="bReady" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Billing_Master">
+          <Key>
+            <PropertyRef Name="iBill_No" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iBill_No" Type="int" Nullable="false" />
+          <Property Name="dBill_Dt" Type="smalldatetime" />
+          <Property Name="iTab_Cd" Type="int" />
+          <Property Name="sBillType" Type="varchar" MaxLength="250" />
+          <Property Name="sGuest_Nm" Type="varchar" MaxLength="250" />
+          <Property Name="sMobile" Type="varchar" MaxLength="50" />
+          <Property Name="iPax" Type="int" />
+          <Property Name="GSTIN" Type="varchar" MaxLength="50" />
+          <Property Name="iAttd_Cd" Type="int" />
+          <Property Name="TQty" Type="float" />
+          <Property Name="bNC" Type="tinyint" />
+          <Property Name="sNCReason" Type="varchar" MaxLength="250" />
+          <Property Name="NCAmt" Type="float" />
+          <Property Name="TAmt" Type="float" />
+          <Property Name="TGST" Type="float" />
+          <Property Name="TCESS" Type="float" />
+          <Property Name="TDiscount" Type="float" />
+          <Property Name="TDiscountValue" Type="float" />
+          <Property Name="TExtra" Type="float" />
+          <Property Name="TRoundOff" Type="float" />
+          <Property Name="iGrand_Amt" Type="float" />
+          <Property Name="bDiscount" Type="tinyint" />
+          <Property Name="sDis" Type="varchar" MaxLength="50" />
+          <Property Name="iDis_Cd" Type="int" />
+          <Property Name="bPrint" Type="tinyint" />
+          <Property Name="bOpen" Type="tinyint" />
+          <Property Name="bLessStock" Type="tinyint" />
+          <Property Name="INTime" Type="datetime" />
+          <Property Name="bVoid" Type="tinyint" />
+          <Property Name="sVoidReason" Type="varchar" MaxLength="250" />
+          <Property Name="iFin_Cd" Type="int" Nullable="false" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+          <Property Name="sType" Type="varchar" MaxLength="50" />
+          <Property Name="iAcc_Cd" Type="int" />
+          <Property Name="sDis_Type" Type="varchar" MaxLength="50" />
+          <Property Name="iRef_Cd" Type="int" />
+          <Property Name="iWayOffAmt" Type="float" />
+          <Property Name="iWayOffRemark" Type="varchar" MaxLength="250" />
+          <Property Name="iTipAmt" Type="float" />
+          <Property Name="iTipRemark" Type="varchar" MaxLength="250" />
+          <Property Name="iDonationAmt" Type="float" />
+          <Property Name="iDonationRemark" Type="varchar" MaxLength="250" />
+          <Property Name="iMore_Cd" Type="int" />
+        </EntityType>
+        <EntityType Name="Billing_Tax">
+          <Key>
+            <PropertyRef Name="AutoCode" />
+            <PropertyRef Name="iBill_No" />
+            <PropertyRef Name="iItem_Cd" />
+            <PropertyRef Name="iSale_Cd" />
+            <PropertyRef Name="iTax_Cd" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+            <PropertyRef Name="SRNo" />
+          </Key>
+          <Property Name="AutoCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iBill_No" Type="int" Nullable="false" />
+          <Property Name="iItem_Cd" Type="int" Nullable="false" />
+          <Property Name="iSale_Cd" Type="int" Nullable="false" />
+          <Property Name="iTax_Cd" Type="int" Nullable="false" />
+          <Property Name="TAmount" Type="float" />
+          <Property Name="TTaxPer" Type="float" />
+          <Property Name="TTaxAmt" Type="float" />
+          <Property Name="iFin_Cd" Type="int" Nullable="false" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="SRNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category_Master">
+          <Key>
+            <PropertyRef Name="iCat_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iCat_Cd" Type="int" Nullable="false" />
+          <Property Name="sCat_Nm" Type="varchar" MaxLength="50" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Company_Master">
+          <Key>
+            <PropertyRef Name="iComp_Cd" />
+          </Key>
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="ResturantID" Type="int" />
+          <Property Name="sComp_Nm" Type="varchar" MaxLength="250" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+          <Property Name="TagLine" Type="varchar" MaxLength="250" />
+          <Property Name="GSTIN" Type="varchar" MaxLength="250" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="250" />
+          <Property Name="ImgName" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="Website" Type="varchar" MaxLength="250" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+          <Property Name="DBaseNm" Type="varchar" MaxLength="50" />
+          <Property Name="RefCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Expenses_Tran">
+          <Key>
+            <PropertyRef Name="iRec_Cd" />
+            <PropertyRef Name="iExp_Cd" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iRec_Cd" Type="int" Nullable="false" />
+          <Property Name="dRec_Dt" Type="smalldatetime" />
+          <Property Name="iPay_Cd" Type="int" />
+          <Property Name="iExp_Cd" Type="int" Nullable="false" />
+          <Property Name="iAmount" Type="float" />
+          <Property Name="Remark" Type="varchar" MaxLength="50" />
+          <Property Name="iFin_Cd" Type="int" Nullable="false" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Item_Master">
+          <Key>
+            <PropertyRef Name="AutoCode" />
+          </Key>
+          <Property Name="AutoCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iCat_Cd" Type="int" />
+          <Property Name="iSale_Cd" Type="int" />
+          <Property Name="iItem_Cd" Type="int" Nullable="false" />
+          <Property Name="sItem_Nm" Type="nvarchar" MaxLength="250" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="HSN" Type="nvarchar" MaxLength="50" />
+          <Property Name="MCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="iMeal_Cd" Type="int" />
+          <Property Name="Hindi_Nm" Type="nvarchar" MaxLength="250" />
+          <Property Name="bVeg" Type="int" />
+          <Property Name="Rate1" Type="float" />
+          <Property Name="Rate2" Type="float" />
+          <Property Name="Rate3" Type="float" />
+          <Property Name="Rate4" Type="float" />
+          <Property Name="Rate5" Type="float" />
+          <Property Name="bActive" Type="int" />
+          <Property Name="BarCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+          <Property Name="bTop" Type="int" />
+          <Property Name="bDisApply" Type="int" />
+          <Property Name="bQRCode" Type="tinyint" />
+          <Property Name="sDesc" Type="nvarchar" MaxLength="250" />
+          <Property Name="sLabel_Nm" Type="nvarchar" MaxLength="250" />
+          <Property Name="sQR_Nm" Type="nvarchar" MaxLength="250" />
+          <Property Name="iItemOrder" Type="int" />
+          <Property Name="bFoodOrder" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="KOT_Delete">
+          <Key>
+            <PropertyRef Name="iCode" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iCode" Type="int" Nullable="false" />
+          <Property Name="iItem_Cd" Type="int" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="iBill_No" Type="int" />
+          <Property Name="UserName" Type="varchar" MaxLength="250" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="iFin_Cd" Type="int" Nullable="false" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Map_Sale_Tax">
+          <Key>
+            <PropertyRef Name="iSale_Cd" />
+            <PropertyRef Name="iTax_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iSale_Cd" Type="int" Nullable="false" />
+          <Property Name="iTax_Cd" Type="int" Nullable="false" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+          <Property Name="iPercentage" Type="float" />
+        </EntityType>
+        <EntityType Name="Meal_Master">
+          <Key>
+            <PropertyRef Name="iMeal_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iMeal_Cd" Type="int" Nullable="false" />
+          <Property Name="sMeal_Nm" Type="varchar" MaxLength="50" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+          <Property Name="bTop" Type="int" />
+          <Property Name="iOrder" Type="int" />
+          <Property Name="bActive" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="PayMode_Master">
+          <Key>
+            <PropertyRef Name="iPay_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iPay_Cd" Type="int" Nullable="false" />
+          <Property Name="sPay_Nm" Type="varchar" MaxLength="50" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Table_Master">
+          <Key>
+            <PropertyRef Name="iTab_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iTab_Cat_Cd" Type="int" Nullable="false" />
+          <Property Name="iTab_Cd" Type="int" Nullable="false" />
+          <Property Name="sTab_Nm" Type="nvarchar" MaxLength="250" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User_Master">
+          <Key>
+            <PropertyRef Name="iUser_Cd" />
+          </Key>
+          <Property Name="iUser_Cd" Type="int" Nullable="false" />
+          <Property Name="sUser_Nm" Type="varchar" MaxLength="50" />
+          <Property Name="sFull_nm" Type="varchar" MaxLength="250" />
+          <Property Name="bAdmin" Type="int" />
+          <Property Name="sPIN" Type="varchar" MaxLength="50" />
+          <Property Name="sPassword" Type="varchar" MaxLength="250" />
+          <Property Name="bAttd" Type="tinyint" />
+          <Property Name="iAttd_Cd" Type="int" />
+        </EntityType>
+        <EntityType Name="Void_Bill">
+          <Key>
+            <PropertyRef Name="iBill_No" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iBill_No" Type="int" Nullable="false" />
+          <Property Name="sVoidReason" Type="varchar" MaxLength="250" />
+          <Property Name="UserName" Type="varchar" MaxLength="250" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="iFin_Cd" Type="int" Nullable="false" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KhaoPiyoSoft_Matki.dbo.View_RunningTable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_RunningTable">
+          <Key>
+            <PropertyRef Name="iBill_No" />
+            <PropertyRef Name="iTab_Cat_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iBill_No" Type="int" Nullable="false" />
+          <Property Name="dBill_Dt" Type="smalldatetime" />
+          <Property Name="iTab_Cd" Type="int" />
+          <Property Name="sGuest_Nm" Type="varchar" MaxLength="250" />
+          <Property Name="bPrint" Type="tinyint" />
+          <Property Name="iGrand_Amt" Type="float" />
+          <Property Name="iPax" Type="int" />
+          <Property Name="INTime" Type="datetime" />
+          <Property Name="sTab_Cat_Nm" Type="nvarchar" MaxLength="250" />
+          <Property Name="iTab_Cat_Cd" Type="int" Nullable="false" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="sTab_Nm" Type="nvarchar" MaxLength="250" />
+          <Property Name="bOpen" Type="tinyint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KhaoPiyoSoft_Matki.dbo.View_Tran' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Tran">
+          <Key>
+            <PropertyRef Name="iBill_No" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+            <PropertyRef Name="iItemSr_No" />
+            <PropertyRef Name="iCat_Cd" />
+            <PropertyRef Name="iMeal_Cd" />
+            <PropertyRef Name="AutoCode" />
+          </Key>
+          <Property Name="iBill_No" Type="int" Nullable="false" />
+          <Property Name="dBill_Dt" Type="smalldatetime" />
+          <Property Name="iTab_Cd" Type="int" />
+          <Property Name="sGuest_Nm" Type="varchar" MaxLength="250" />
+          <Property Name="sMobile" Type="varchar" MaxLength="50" />
+          <Property Name="iPax" Type="int" />
+          <Property Name="GSTIN" Type="varchar" MaxLength="50" />
+          <Property Name="iAttd_Cd" Type="int" />
+          <Property Name="TQty" Type="float" />
+          <Property Name="bNC" Type="tinyint" />
+          <Property Name="sNCReason" Type="varchar" MaxLength="250" />
+          <Property Name="TAmt" Type="float" />
+          <Property Name="TGST" Type="float" />
+          <Property Name="TCESS" Type="float" />
+          <Property Name="TDiscount" Type="float" />
+          <Property Name="TRoundOff" Type="float" />
+          <Property Name="iGrand_Amt" Type="float" />
+          <Property Name="bDiscount" Type="tinyint" />
+          <Property Name="sDis" Type="varchar" MaxLength="50" />
+          <Property Name="iDis_Cd" Type="int" />
+          <Property Name="bPrint" Type="tinyint" />
+          <Property Name="bOpen" Type="tinyint" />
+          <Property Name="bLessStock" Type="tinyint" />
+          <Property Name="INTime" Type="datetime" />
+          <Property Name="bVoid" Type="tinyint" />
+          <Property Name="iFin_Cd" Type="int" Nullable="false" />
+          <Property Name="iComp_Cd" Type="int" Nullable="false" />
+          <Property Name="iBus_Cd" Type="int" Nullable="false" />
+          <Property Name="iUser_Cd" Type="int" />
+          <Property Name="dUpdate_Dt" Type="datetime" />
+          <Property Name="sAttd_Nm" Type="varchar" MaxLength="50" />
+          <Property Name="sDis_Nm" Type="varchar" MaxLength="50" />
+          <Property Name="sItem_Nm" Type="nvarchar" MaxLength="250" />
+          <Property Name="iItem_Cd" Type="int" />
+          <Property Name="HSN" Type="varchar" MaxLength="50" />
+          <Property Name="Rate" Type="float" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="DisPer" Type="float" />
+          <Property Name="DisAmt" Type="float" />
+          <Property Name="GSTPer" Type="float" />
+          <Property Name="GSTAmt" Type="float" />
+          <Property Name="CessPer" Type="float" />
+          <Property Name="CessAmt" Type="float" />
+          <Property Name="Total" Type="float" />
+          <Property Name="ItemDesc" Type="varchar" MaxLength="250" />
+          <Property Name="bKOTPrint" Type="int" />
+          <Property Name="iItemSr_No" Type="int" Nullable="false" />
+          <Property Name="iSale_Cd" Type="int" />
+          <Property Name="iKOT_No" Type="int" />
+          <Property Name="TaxAmt" Type="float" />
+          <Property Name="sType" Type="varchar" MaxLength="50" />
+          <Property Name="iAcc_Cd" Type="int" />
+          <Property Name="sDis_Type" Type="varchar" MaxLength="50" />
+          <Property Name="iCat_Cd" Type="int" Nullable="false" />
+          <Property Name="sCat_Nm" Type="varchar" MaxLength="50" />
+          <Property Name="iMeal_Cd" Type="int" Nullable="false" />
+          <Property Name="sMeal_Nm" Type="varchar" MaxLength="50" />
+          <Property Name="TDiscountValue" Type="float" />
+          <Property Name="sTab_Nm" Type="nvarchar" MaxLength="250" />
+          <Property Name="ExtraAmt" Type="float" />
+          <Property Name="TExtra" Type="float" />
+          <Property Name="NCAmt" Type="float" />
+          <Property Name="iRef_Cd" Type="int" />
+          <Property Name="iWayOffAmt" Type="float" />
+          <Property Name="iWayOffRemark" Type="varchar" MaxLength="250" />
+          <Property Name="iTipAmt" Type="float" />
+          <Property Name="iDonationAmt" Type="float" />
+          <Property Name="iTipRemark" Type="varchar" MaxLength="250" />
+          <Property Name="iDonationRemark" Type="varchar" MaxLength="250" />
+          <Property Name="MCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="sTab_Cat_Nm" Type="nvarchar" MaxLength="250" />
+          <Property Name="sVoidReason" Type="varchar" MaxLength="250" />
+          <Property Name="sBillType" Type="varchar" MaxLength="250" />
+          <Property Name="sRef_Nm" Type="varchar" MaxLength="250" />
+          <Property Name="dPunch_Time" Type="datetime" />
+          <Property Name="bReady" Type="tinyint" />
+          <Property Name="iTab_Cat_Cd" Type="int" />
+          <Property Name="AutoCode" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="CashBookAdvanceBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CashBookBilling" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CashBookIncome" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CashBookingExpenses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CashBookingVendorPayment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CashBookPayment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CashInHeand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dDate" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CategorySummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+          <Parameter Name="RdoQty" Type="int" Mode="In" />
+          <Parameter Name="RdoName" Type="int" Mode="In" />
+          <Parameter Name="rdoSale" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteKOT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ExpensesRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GrandTotal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ItemSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+          <Parameter Name="RdoQty" Type="int" Mode="In" />
+          <Parameter Name="RdoName" Type="int" Mode="In" />
+          <Parameter Name="rdoSale" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MealSummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+          <Parameter Name="RdoQty" Type="int" Mode="In" />
+          <Parameter Name="RdoName" Type="int" Mode="In" />
+          <Parameter Name="rdoSale" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SaleRegister" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+          <Parameter Name="RdoNC" Type="int" Mode="In" />
+          <Parameter Name="rdoVoid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalBank" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalBill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="TotalCard" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalCash" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalCredit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalDiscount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalDonate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalExpenses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalGuest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="TotalNC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalPaytm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalRoundoff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalSale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="TotalTax" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalTIP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TotalWayOff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="VoidBill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dtpFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="dtpTo" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompCd" Type="int" Mode="In" />
+          <Parameter Name="BusCd" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="KhaoPiyoSoft_MatkiModelStoreContainer">
+          <EntitySet Name="Account_Master" EntityType="Self.Account_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attendent_Master" EntityType="Self.Attendent_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Billing_Detail" EntityType="Self.Billing_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Billing_Master" EntityType="Self.Billing_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Billing_Tax" EntityType="Self.Billing_Tax" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_Master" EntityType="Self.Category_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company_Master" EntityType="Self.Company_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Expenses_Tran" EntityType="Self.Expenses_Tran" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Item_Master" EntityType="Self.Item_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KOT_Delete" EntityType="Self.KOT_Delete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Map_Sale_Tax" EntityType="Self.Map_Sale_Tax" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meal_Master" EntityType="Self.Meal_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayMode_Master" EntityType="Self.PayMode_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table_Master" EntityType="Self.Table_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Master" EntityType="Self.User_Master" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Void_Bill" EntityType="Self.Void_Bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_RunningTable" EntityType="Self.View_RunningTable" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_RunningTable].[iBill_No] AS [iBill_No], 
+    [View_RunningTable].[dBill_Dt] AS [dBill_Dt], 
+    [View_RunningTable].[iTab_Cd] AS [iTab_Cd], 
+    [View_RunningTable].[sGuest_Nm] AS [sGuest_Nm], 
+    [View_RunningTable].[bPrint] AS [bPrint], 
+    [View_RunningTable].[iGrand_Amt] AS [iGrand_Amt], 
+    [View_RunningTable].[iPax] AS [iPax], 
+    [View_RunningTable].[INTime] AS [INTime], 
+    [View_RunningTable].[sTab_Cat_Nm] AS [sTab_Cat_Nm], 
+    [View_RunningTable].[iTab_Cat_Cd] AS [iTab_Cat_Cd], 
+    [View_RunningTable].[iComp_Cd] AS [iComp_Cd], 
+    [View_RunningTable].[iBus_Cd] AS [iBus_Cd], 
+    [View_RunningTable].[sTab_Nm] AS [sTab_Nm], 
+    [View_RunningTable].[bOpen] AS [bOpen]
+    FROM [dbo].[View_RunningTable] AS [View_RunningTable]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_Tran" EntityType="Self.View_Tran" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_Tran].[iBill_No] AS [iBill_No], 
+    [View_Tran].[dBill_Dt] AS [dBill_Dt], 
+    [View_Tran].[iTab_Cd] AS [iTab_Cd], 
+    [View_Tran].[sGuest_Nm] AS [sGuest_Nm], 
+    [View_Tran].[sMobile] AS [sMobile], 
+    [View_Tran].[iPax] AS [iPax], 
+    [View_Tran].[GSTIN] AS [GSTIN], 
+    [View_Tran].[iAttd_Cd] AS [iAttd_Cd], 
+    [View_Tran].[TQty] AS [TQty], 
+    [View_Tran].[bNC] AS [bNC], 
+    [View_Tran].[sNCReason] AS [sNCReason], 
+    [View_Tran].[TAmt] AS [TAmt], 
+    [View_Tran].[TGST] AS [TGST], 
+    [View_Tran].[TCESS] AS [TCESS], 
+    [View_Tran].[TDiscount] AS [TDiscount], 
+    [View_Tran].[TRoundOff] AS [TRoundOff], 
+    [View_Tran].[iGrand_Amt] AS [iGrand_Amt], 
+    [View_Tran].[bDiscount] AS [bDiscount], 
+    [View_Tran].[sDis] AS [sDis], 
+    [View_Tran].[iDis_Cd] AS [iDis_Cd], 
+    [View_Tran].[bPrint] AS [bPrint], 
+    [View_Tran].[bOpen] AS [bOpen], 
+    [View_Tran].[bLessStock] AS [bLessStock], 
+    [View_Tran].[INTime] AS [INTime], 
+    [View_Tran].[bVoid] AS [bVoid], 
+    [View_Tran].[iFin_Cd] AS [iFin_Cd], 
+    [View_Tran].[iComp_Cd] AS [iComp_Cd], 
+    [View_Tran].[iBus_Cd] AS [iBus_Cd], 
+    [View_Tran].[iUser_Cd] AS [iUser_Cd], 
+    [View_Tran].[dUpdate_Dt] AS [dUpdate_Dt], 
+    [View_Tran].[sAttd_Nm] AS [sAttd_Nm], 
+    [View_Tran].[sDis_Nm] AS [sDis_Nm], 
+    [View_Tran].[sItem_Nm] AS [sItem_Nm], 
+    [View_Tran].[iItem_Cd] AS [iItem_Cd], 
+    [View_Tran].[HSN] AS [HSN], 
+    [View_Tran].[Rate] AS [Rate], 
+    [View_Tran].[Qty] AS [Qty], 
+    [View_Tran].[Amount] AS [Amount], 
+    [View_Tran].[DisPer] AS [DisPer], 
+    [View_Tran].[DisAmt] AS [DisAmt], 
+    [View_Tran].[GSTPer] AS [GSTPer], 
+    [View_Tran].[GSTAmt] AS [GSTAmt], 
+    [View_Tran].[CessPer] AS [CessPer], 
+    [View_Tran].[CessAmt] AS [CessAmt], 
+    [View_Tran].[Total] AS [Total], 
+    [View_Tran].[ItemDesc] AS [ItemDesc], 
+    [View_Tran].[bKOTPrint] AS [bKOTPrint], 
+    [View_Tran].[iItemSr_No] AS [iItemSr_No], 
+    [View_Tran].[iSale_Cd] AS [iSale_Cd], 
+    [View_Tran].[iKOT_No] AS [iKOT_No], 
+    [View_Tran].[TaxAmt] AS [TaxAmt], 
+    [View_Tran].[sType] AS [sType], 
+    [View_Tran].[iAcc_Cd] AS [iAcc_Cd], 
+    [View_Tran].[sDis_Type] AS [sDis_Type], 
+    [View_Tran].[iCat_Cd] AS [iCat_Cd], 
+    [View_Tran].[sCat_Nm] AS [sCat_Nm], 
+    [View_Tran].[iMeal_Cd] AS [iMeal_Cd], 
+    [View_Tran].[sMeal_Nm] AS [sMeal_Nm], 
+    [View_Tran].[TDiscountValue] AS [TDiscountValue], 
+    [View_Tran].[sTab_Nm] AS [sTab_Nm], 
+    [View_Tran].[ExtraAmt] AS [ExtraAmt], 
+    [View_Tran].[TExtra] AS [TExtra], 
+    [View_Tran].[NCAmt] AS [NCAmt], 
+    [View_Tran].[iRef_Cd] AS [iRef_Cd], 
+    [View_Tran].[iWayOffAmt] AS [iWayOffAmt], 
+    [View_Tran].[iWayOffRemark] AS [iWayOffRemark], 
+    [View_Tran].[iTipAmt] AS [iTipAmt], 
+    [View_Tran].[iDonationAmt] AS [iDonationAmt], 
+    [View_Tran].[iTipRemark] AS [iTipRemark], 
+    [View_Tran].[iDonationRemark] AS [iDonationRemark], 
+    [View_Tran].[MCode] AS [MCode], 
+    [View_Tran].[sTab_Cat_Nm] AS [sTab_Cat_Nm], 
+    [View_Tran].[sVoidReason] AS [sVoidReason], 
+    [View_Tran].[sBillType] AS [sBillType], 
+    [View_Tran].[sRef_Nm] AS [sRef_Nm], 
+    [View_Tran].[dPunch_Time] AS [dPunch_Time], 
+    [View_Tran].[bReady] AS [bReady], 
+    [View_Tran].[iTab_Cat_Cd] AS [iTab_Cat_Cd], 
+    [View_Tran].[AutoCode] AS [AutoCode]
+    FROM [dbo].[View_Tran] AS [View_Tran]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KhaoPiyoSoft_MatkiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="CashBookAdvanceBooking" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CashBookBilling" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CashBookIncome" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CashBookingExpenses" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CashBookingVendorPayment" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CashBookPayment" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CashInHeand" ReturnType="Collection(KhaoPiyoSoft_MatkiModel.CashInHeand_Result)">
+            <Parameter Name="dDate" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CategorySummary">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+            <Parameter Name="RdoQty" Mode="In" Type="Int32" />
+            <Parameter Name="RdoName" Mode="In" Type="Int32" />
+            <Parameter Name="rdoSale" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteKOT" ReturnType="Collection(KhaoPiyoSoft_MatkiModel.DeleteKOT_Result)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ExpensesRegister">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GrandTotal" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ItemSummary">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+            <Parameter Name="RdoQty" Mode="In" Type="Int32" />
+            <Parameter Name="RdoName" Mode="In" Type="Int32" />
+            <Parameter Name="rdoSale" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MealSummary">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+            <Parameter Name="RdoQty" Mode="In" Type="Int32" />
+            <Parameter Name="RdoName" Mode="In" Type="Int32" />
+            <Parameter Name="rdoSale" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SaleRegister" ReturnType="Collection(KhaoPiyoSoft_MatkiModel.SaleRegister_Result)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+            <Parameter Name="RdoNC" Mode="In" Type="Int32" />
+            <Parameter Name="rdoVoid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalAmount" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalBank" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalBill" ReturnType="Collection(Int32)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TotalCard" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalCash" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalCredit" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalDiscount" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalDonate" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalExpenses" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalGuest" ReturnType="Collection(Int32)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TotalNC" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalPaytm" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalRoundoff" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalSale" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TotalTax" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalTIP" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TotalWayOff" ReturnType="Collection(Double)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="VoidBill" ReturnType="Collection(KhaoPiyoSoft_MatkiModel.VoidBill_Result)">
+            <Parameter Name="dtpFrom" Mode="In" Type="String" />
+            <Parameter Name="dtpTo" Mode="In" Type="String" />
+            <Parameter Name="CompCd" Mode="In" Type="Int32" />
+            <Parameter Name="BusCd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Account_Master" EntityType="KhaoPiyoSoft_MatkiModel.Account_Master" />
+          <EntitySet Name="Attendent_Master" EntityType="KhaoPiyoSoft_MatkiModel.Attendent_Master" />
+          <EntitySet Name="Billing_Detail" EntityType="KhaoPiyoSoft_MatkiModel.Billing_Detail" />
+          <EntitySet Name="Billing_Master" EntityType="KhaoPiyoSoft_MatkiModel.Billing_Master" />
+          <EntitySet Name="Billing_Tax" EntityType="KhaoPiyoSoft_MatkiModel.Billing_Tax" />
+          <EntitySet Name="Category_Master" EntityType="KhaoPiyoSoft_MatkiModel.Category_Master" />
+          <EntitySet Name="Company_Master" EntityType="KhaoPiyoSoft_MatkiModel.Company_Master" />
+          <EntitySet Name="Item_Master" EntityType="KhaoPiyoSoft_MatkiModel.Item_Master" />
+          <EntitySet Name="KOT_Delete" EntityType="KhaoPiyoSoft_MatkiModel.KOT_Delete" />
+          <EntitySet Name="Map_Sale_Tax" EntityType="KhaoPiyoSoft_MatkiModel.Map_Sale_Tax" />
+          <EntitySet Name="Meal_Master" EntityType="KhaoPiyoSoft_MatkiModel.Meal_Master" />
+          <EntitySet Name="PayMode_Master" EntityType="KhaoPiyoSoft_MatkiModel.PayMode_Master" />
+          <EntitySet Name="Table_Master" EntityType="KhaoPiyoSoft_MatkiModel.Table_Master" />
+          <EntitySet Name="User_Master" EntityType="KhaoPiyoSoft_MatkiModel.User_Master" />
+          <EntitySet Name="Void_Bill" EntityType="KhaoPiyoSoft_MatkiModel.Void_Bill" />
+          <EntitySet Name="View_RunningTable" EntityType="KhaoPiyoSoft_MatkiModel.View_RunningTable" />
+          <EntitySet Name="View_Tran" EntityType="KhaoPiyoSoft_MatkiModel.View_Tran" />
+          <EntitySet Name="Expenses_Tran" EntityType="KhaoPiyoSoft_MatkiModel.Expenses_Tran" />
+          </EntityContainer>
+        <ComplexType Name="CashInHeand_Result">
+          <Property Type="DateTime" Name="dDate" Nullable="false" Precision="16" />
+          <Property Type="Double" Name="Amount" Nullable="true" />
+          <Property Type="Int32" Name="iComp_Cd" Nullable="false" />
+          <Property Type="Int32" Name="iBus_Cd" Nullable="false" />
+          <Property Type="Int32" Name="iUser_Cd" Nullable="true" />
+          <Property Type="DateTime" Name="dUpdate_Dt" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="DeleteKOT_Result">
+          <Property Type="Double" Name="Qty" Nullable="true" />
+          <Property Type="Double" Name="Rate" Nullable="true" />
+          <Property Type="Int32" Name="iBill_No" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="UpdateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="C______" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="SaleRegister_Result">
+          <Property Type="Int32" Name="iBill_No" Nullable="false" />
+          <Property Type="String" Name="sTab_Nm" Nullable="true" MaxLength="250" />
+          <Property Type="Double" Name="TaxAmt" Nullable="true" />
+          <Property Type="DateTime" Name="dBill_Dt" Nullable="true" Precision="16" />
+          <Property Type="String" Name="sGuest_Nm" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sMobile" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="iPax" Nullable="true" />
+          <Property Type="String" Name="GSTIN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sAttd_Nm" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="TQty" Nullable="true" />
+          <Property Type="String" Name="sNCReason" Nullable="true" MaxLength="250" />
+          <Property Type="Double" Name="TAmt" Nullable="true" />
+          <Property Type="Double" Name="TDiscount" Nullable="true" />
+          <Property Type="Double" Name="TRoundOff" Nullable="true" />
+          <Property Type="Double" Name="TDiscountValue" Nullable="true" />
+          <Property Type="Double" Name="iGrand_Amt" Nullable="true" />
+          <Property Type="String" Name="sVoidReason" Nullable="true" MaxLength="250" />
+          <Property Type="Double" Name="TGST" Nullable="true" />
+          <Property Type="String" Name="sAcc_Nm" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="sType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sDis_Type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sDis" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="sDis_Nm" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="TExtra" Nullable="true" />
+          <Property Type="Double" Name="NCAmt" Nullable="true" />
+          <Property Type="Int32" Name="iTab_Cd" Nullable="true" />
+          <Property Type="Double" Name="iWayOffAmt" Nullable="true" />
+          <Property Type="String" Name="iWayOffRemark" Nullable="true" MaxLength="250" />
+          <Property Type="Double" Name="iTipAmt" Nullable="true" />
+          <Property Type="String" Name="iTipRemark" Nullable="true" MaxLength="250" />
+          <Property Type="Double" Name="iDonationAmt" Nullable="true" />
+          <Property Type="String" Name="iDonationRemark" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="VoidBill_Result">
+          <Property Type="Int32" Name="iBill_No" Nullable="false" />
+          <Property Type="String" Name="sVoidReason" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="250" />
+          <Property Type="DateTime" Name="UpdateDate" Nullable="true" Precision="23" />
+          <Property Type="Double" Name="iGrand_Amt" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Account_Master">
+          <Key>
+            <PropertyRef Name="iAcc_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iGrp_Cd" Type="Int32" />
+          <Property Name="iAcc_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sAcc_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+          <Property Name="sMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sGSTIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="sEmail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="bActive" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Attendent_Master">
+          <Key>
+            <PropertyRef Name="iAttd_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iAttd_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sAttd_Nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+          <Property Name="bActive" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Billing_Detail">
+          <Key>
+            <PropertyRef Name="AutoCode" />
+          </Key>
+          <Property Name="AutoCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iBill_No" Type="Int32" Nullable="false" />
+          <Property Name="iItem_Cd" Type="Int32" />
+          <Property Name="HSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="DisPer" Type="Double" />
+          <Property Name="DisAmt" Type="Double" />
+          <Property Name="ExtraAmt" Type="Double" />
+          <Property Name="GSTPer" Type="Double" />
+          <Property Name="GSTAmt" Type="Double" />
+          <Property Name="CessPer" Type="Double" />
+          <Property Name="CessAmt" Type="Double" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="ItemDesc" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="iFin_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="bKOTPrint" Type="Int32" />
+          <Property Name="iSale_Cd" Type="Int32" />
+          <Property Name="iItemSr_No" Type="Int32" Nullable="false" />
+          <Property Name="iKOT_No" Type="Int32" />
+          <Property Name="TaxAmt" Type="Double" />
+          <Property Name="dPunch_Time" Type="DateTime" Precision="3" />
+          <Property Name="bReady" Type="Byte" />
+        </EntityType>
+        <EntityType Name="Billing_Master">
+          <Key>
+            <PropertyRef Name="iBill_No" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iBill_No" Type="Int32" Nullable="false" />
+          <Property Name="dBill_Dt" Type="DateTime" Precision="0" />
+          <Property Name="iTab_Cd" Type="Int32" />
+          <Property Name="sBillType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="sGuest_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="sMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iPax" Type="Int32" />
+          <Property Name="GSTIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iAttd_Cd" Type="Int32" />
+          <Property Name="TQty" Type="Double" />
+          <Property Name="bNC" Type="Byte" />
+          <Property Name="sNCReason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NCAmt" Type="Double" />
+          <Property Name="TAmt" Type="Double" />
+          <Property Name="TGST" Type="Double" />
+          <Property Name="TCESS" Type="Double" />
+          <Property Name="TDiscount" Type="Double" />
+          <Property Name="TDiscountValue" Type="Double" />
+          <Property Name="TExtra" Type="Double" />
+          <Property Name="TRoundOff" Type="Double" />
+          <Property Name="iGrand_Amt" Type="Double" />
+          <Property Name="bDiscount" Type="Byte" />
+          <Property Name="sDis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iDis_Cd" Type="Int32" />
+          <Property Name="bPrint" Type="Byte" />
+          <Property Name="bOpen" Type="Byte" />
+          <Property Name="bLessStock" Type="Byte" />
+          <Property Name="INTime" Type="DateTime" Precision="3" />
+          <Property Name="bVoid" Type="Byte" />
+          <Property Name="sVoidReason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="iFin_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+          <Property Name="sType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iAcc_Cd" Type="Int32" />
+          <Property Name="sDis_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iRef_Cd" Type="Int32" />
+          <Property Name="iWayOffAmt" Type="Double" />
+          <Property Name="iWayOffRemark" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="iTipAmt" Type="Double" />
+          <Property Name="iTipRemark" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="iDonationAmt" Type="Double" />
+          <Property Name="iDonationRemark" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="iMore_Cd" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Billing_Tax">
+          <Key>
+            <PropertyRef Name="AutoCode" />
+            <PropertyRef Name="iBill_No" />
+            <PropertyRef Name="iItem_Cd" />
+            <PropertyRef Name="iSale_Cd" />
+            <PropertyRef Name="iTax_Cd" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+            <PropertyRef Name="SRNo" />
+          </Key>
+          <Property Name="AutoCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iBill_No" Type="Int32" Nullable="false" />
+          <Property Name="iItem_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iSale_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iTax_Cd" Type="Int32" Nullable="false" />
+          <Property Name="TAmount" Type="Double" />
+          <Property Name="TTaxPer" Type="Double" />
+          <Property Name="TTaxAmt" Type="Double" />
+          <Property Name="iFin_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="SRNo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category_Master">
+          <Key>
+            <PropertyRef Name="iCat_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iCat_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sCat_Nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Company_Master">
+          <Key>
+            <PropertyRef Name="iComp_Cd" />
+          </Key>
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="ResturantID" Type="Int32" />
+          <Property Name="sComp_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TagLine" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="GSTIN" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ImgName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+          <Property Name="DBaseNm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RefCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Item_Master">
+          <Key>
+            <PropertyRef Name="AutoCode" />
+          </Key>
+          <Property Name="AutoCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iCat_Cd" Type="Int32" />
+          <Property Name="iSale_Cd" Type="Int32" />
+          <Property Name="iItem_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sItem_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="HSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="iMeal_Cd" Type="Int32" />
+          <Property Name="Hindi_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="bVeg" Type="Int32" />
+          <Property Name="Rate1" Type="Double" />
+          <Property Name="Rate2" Type="Double" />
+          <Property Name="Rate3" Type="Double" />
+          <Property Name="Rate4" Type="Double" />
+          <Property Name="Rate5" Type="Double" />
+          <Property Name="bActive" Type="Int32" />
+          <Property Name="BarCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+          <Property Name="bTop" Type="Int32" />
+          <Property Name="bDisApply" Type="Int32" />
+          <Property Name="bQRCode" Type="Byte" />
+          <Property Name="sDesc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="sLabel_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="sQR_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="iItemOrder" Type="Int32" />
+          <Property Name="bFoodOrder" Type="Byte" />
+        </EntityType>
+        <EntityType Name="KOT_Delete">
+          <Key>
+            <PropertyRef Name="iCode" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iCode" Type="Int32" Nullable="false" />
+          <Property Name="iItem_Cd" Type="Int32" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="iBill_No" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="iFin_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Map_Sale_Tax">
+          <Key>
+            <PropertyRef Name="iSale_Cd" />
+            <PropertyRef Name="iTax_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iSale_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iTax_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+          <Property Name="iPercentage" Type="Double" />
+        </EntityType>
+        <EntityType Name="Meal_Master">
+          <Key>
+            <PropertyRef Name="iMeal_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iMeal_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sMeal_Nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+          <Property Name="bTop" Type="Int32" />
+          <Property Name="iOrder" Type="Int32" />
+          <Property Name="bActive" Type="Byte" />
+        </EntityType>
+        <EntityType Name="PayMode_Master">
+          <Key>
+            <PropertyRef Name="iPay_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iPay_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sPay_Nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Table_Master">
+          <Key>
+            <PropertyRef Name="iTab_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iTab_Cat_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iTab_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sTab_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User_Master">
+          <Key>
+            <PropertyRef Name="iUser_Cd" />
+          </Key>
+          <Property Name="iUser_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sUser_Nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sFull_nm" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="bAdmin" Type="Int32" />
+          <Property Name="sPIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="bAttd" Type="Byte" />
+          <Property Name="iAttd_Cd" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Void_Bill">
+          <Key>
+            <PropertyRef Name="iBill_No" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iBill_No" Type="Int32" Nullable="false" />
+          <Property Name="sVoidReason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="iFin_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="View_RunningTable">
+          <Key>
+            <PropertyRef Name="iBill_No" />
+            <PropertyRef Name="iTab_Cat_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iBill_No" Type="Int32" Nullable="false" />
+          <Property Name="dBill_Dt" Type="DateTime" Precision="0" />
+          <Property Name="iTab_Cd" Type="Int32" />
+          <Property Name="sGuest_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="bPrint" Type="Byte" />
+          <Property Name="iGrand_Amt" Type="Double" />
+          <Property Name="iPax" Type="Int32" />
+          <Property Name="INTime" Type="DateTime" Precision="3" />
+          <Property Name="sTab_Cat_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="iTab_Cat_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sTab_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="bOpen" Type="Byte" />
+        </EntityType>
+        <EntityType Name="View_Tran">
+          <Key>
+            <PropertyRef Name="iBill_No" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+            <PropertyRef Name="iItemSr_No" />
+            <PropertyRef Name="iCat_Cd" />
+            <PropertyRef Name="iMeal_Cd" />
+            <PropertyRef Name="AutoCode" />
+          </Key>
+          <Property Name="iBill_No" Type="Int32" Nullable="false" />
+          <Property Name="dBill_Dt" Type="DateTime" Precision="0" />
+          <Property Name="iTab_Cd" Type="Int32" />
+          <Property Name="sGuest_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="sMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iPax" Type="Int32" />
+          <Property Name="GSTIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iAttd_Cd" Type="Int32" />
+          <Property Name="TQty" Type="Double" />
+          <Property Name="bNC" Type="Byte" />
+          <Property Name="sNCReason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TAmt" Type="Double" />
+          <Property Name="TGST" Type="Double" />
+          <Property Name="TCESS" Type="Double" />
+          <Property Name="TDiscount" Type="Double" />
+          <Property Name="TRoundOff" Type="Double" />
+          <Property Name="iGrand_Amt" Type="Double" />
+          <Property Name="bDiscount" Type="Byte" />
+          <Property Name="sDis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iDis_Cd" Type="Int32" />
+          <Property Name="bPrint" Type="Byte" />
+          <Property Name="bOpen" Type="Byte" />
+          <Property Name="bLessStock" Type="Byte" />
+          <Property Name="INTime" Type="DateTime" Precision="3" />
+          <Property Name="bVoid" Type="Byte" />
+          <Property Name="iFin_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+          <Property Name="sAttd_Nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sDis_Nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sItem_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="iItem_Cd" Type="Int32" />
+          <Property Name="HSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Double" />
+          <Property Name="Qty" Type="Double" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="DisPer" Type="Double" />
+          <Property Name="DisAmt" Type="Double" />
+          <Property Name="GSTPer" Type="Double" />
+          <Property Name="GSTAmt" Type="Double" />
+          <Property Name="CessPer" Type="Double" />
+          <Property Name="CessAmt" Type="Double" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="ItemDesc" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="bKOTPrint" Type="Int32" />
+          <Property Name="iItemSr_No" Type="Int32" Nullable="false" />
+          <Property Name="iSale_Cd" Type="Int32" />
+          <Property Name="iKOT_No" Type="Int32" />
+          <Property Name="TaxAmt" Type="Double" />
+          <Property Name="sType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iAcc_Cd" Type="Int32" />
+          <Property Name="sDis_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iCat_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sCat_Nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iMeal_Cd" Type="Int32" Nullable="false" />
+          <Property Name="sMeal_Nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TDiscountValue" Type="Double" />
+          <Property Name="sTab_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ExtraAmt" Type="Double" />
+          <Property Name="TExtra" Type="Double" />
+          <Property Name="NCAmt" Type="Double" />
+          <Property Name="iRef_Cd" Type="Int32" />
+          <Property Name="iWayOffAmt" Type="Double" />
+          <Property Name="iWayOffRemark" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="iTipAmt" Type="Double" />
+          <Property Name="iDonationAmt" Type="Double" />
+          <Property Name="iTipRemark" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="iDonationRemark" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="sTab_Cat_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="sVoidReason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="sBillType" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="sRef_Nm" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="dPunch_Time" Type="DateTime" Precision="3" />
+          <Property Name="bReady" Type="Byte" />
+          <Property Name="iTab_Cat_Cd" Type="Int32" />
+          <Property Name="AutoCode" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Expenses_Tran">
+          <Key>
+            <PropertyRef Name="iRec_Cd" />
+            <PropertyRef Name="iExp_Cd" />
+            <PropertyRef Name="iFin_Cd" />
+            <PropertyRef Name="iComp_Cd" />
+            <PropertyRef Name="iBus_Cd" />
+          </Key>
+          <Property Name="iRec_Cd" Type="Int32" Nullable="false" />
+          <Property Name="dRec_Dt" Type="DateTime" Precision="0" />
+          <Property Name="iPay_Cd" Type="Int32" />
+          <Property Name="iExp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iAmount" Type="Double" />
+          <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iFin_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iComp_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iBus_Cd" Type="Int32" Nullable="false" />
+          <Property Name="iUser_Cd" Type="Int32" />
+          <Property Name="dUpdate_Dt" Type="DateTime" Precision="3" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KhaoPiyoSoft_MatkiModelStoreContainer" CdmEntityContainer="Entities">
+          <FunctionImportMapping FunctionImportName="CashBookAdvanceBooking" FunctionName="KhaoPiyoSoft_MatkiModel.Store.CashBookAdvanceBooking" />
+          <FunctionImportMapping FunctionImportName="CashBookBilling" FunctionName="KhaoPiyoSoft_MatkiModel.Store.CashBookBilling" />
+          <FunctionImportMapping FunctionImportName="CashBookIncome" FunctionName="KhaoPiyoSoft_MatkiModel.Store.CashBookIncome" />
+          <FunctionImportMapping FunctionImportName="CashBookingExpenses" FunctionName="KhaoPiyoSoft_MatkiModel.Store.CashBookingExpenses" />
+          <FunctionImportMapping FunctionImportName="CashBookingVendorPayment" FunctionName="KhaoPiyoSoft_MatkiModel.Store.CashBookingVendorPayment" />
+          <FunctionImportMapping FunctionImportName="CashBookPayment" FunctionName="KhaoPiyoSoft_MatkiModel.Store.CashBookPayment" />
+          <FunctionImportMapping FunctionImportName="CashInHeand" FunctionName="KhaoPiyoSoft_MatkiModel.Store.CashInHeand">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.CashInHeand_Result">
+                <ScalarProperty Name="dDate" ColumnName="dDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CategorySummary" FunctionName="KhaoPiyoSoft_MatkiModel.Store.CategorySummary" />
+          <FunctionImportMapping FunctionImportName="DeleteKOT" FunctionName="KhaoPiyoSoft_MatkiModel.Store.DeleteKOT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.DeleteKOT_Result">
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="iBill_No" ColumnName="iBill_No" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="C______" ColumnName=" &amp; _&#xD;&#xA;" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ExpensesRegister" FunctionName="KhaoPiyoSoft_MatkiModel.Store.ExpensesRegister" />
+          <FunctionImportMapping FunctionImportName="GrandTotal" FunctionName="KhaoPiyoSoft_MatkiModel.Store.GrandTotal" />
+          <FunctionImportMapping FunctionImportName="ItemSummary" FunctionName="KhaoPiyoSoft_MatkiModel.Store.ItemSummary" />
+          <FunctionImportMapping FunctionImportName="MealSummary" FunctionName="KhaoPiyoSoft_MatkiModel.Store.MealSummary" />
+          <FunctionImportMapping FunctionImportName="SaleRegister" FunctionName="KhaoPiyoSoft_MatkiModel.Store.SaleRegister">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.SaleRegister_Result">
+                <ScalarProperty Name="iBill_No" ColumnName="iBill_No" />
+                <ScalarProperty Name="sTab_Nm" ColumnName="sTab_Nm" />
+                <ScalarProperty Name="TaxAmt" ColumnName="TaxAmt" />
+                <ScalarProperty Name="dBill_Dt" ColumnName="dBill_Dt" />
+                <ScalarProperty Name="sGuest_Nm" ColumnName="sGuest_Nm" />
+                <ScalarProperty Name="sMobile" ColumnName="sMobile" />
+                <ScalarProperty Name="iPax" ColumnName="iPax" />
+                <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+                <ScalarProperty Name="sAttd_Nm" ColumnName="sAttd_Nm" />
+                <ScalarProperty Name="TQty" ColumnName="TQty" />
+                <ScalarProperty Name="sNCReason" ColumnName="sNCReason" />
+                <ScalarProperty Name="TAmt" ColumnName="TAmt" />
+                <ScalarProperty Name="TDiscount" ColumnName="TDiscount" />
+                <ScalarProperty Name="TRoundOff" ColumnName="TRoundOff" />
+                <ScalarProperty Name="TDiscountValue" ColumnName="TDiscountValue" />
+                <ScalarProperty Name="iGrand_Amt" ColumnName="iGrand_Amt" />
+                <ScalarProperty Name="sVoidReason" ColumnName="sVoidReason" />
+                <ScalarProperty Name="TGST" ColumnName="TGST" />
+                <ScalarProperty Name="sAcc_Nm" ColumnName="sAcc_Nm" />
+                <ScalarProperty Name="sType" ColumnName="sType" />
+                <ScalarProperty Name="sDis_Type" ColumnName="sDis_Type" />
+                <ScalarProperty Name="sDis" ColumnName="sDis" />
+                <ScalarProperty Name="sDis_Nm" ColumnName="sDis_Nm" />
+                <ScalarProperty Name="TExtra" ColumnName="TExtra" />
+                <ScalarProperty Name="NCAmt" ColumnName="NCAmt" />
+                <ScalarProperty Name="iTab_Cd" ColumnName="iTab_Cd" />
+                <ScalarProperty Name="iWayOffAmt" ColumnName="iWayOffAmt" />
+                <ScalarProperty Name="iWayOffRemark" ColumnName="iWayOffRemark" />
+                <ScalarProperty Name="iTipAmt" ColumnName="iTipAmt" />
+                <ScalarProperty Name="iTipRemark" ColumnName="iTipRemark" />
+                <ScalarProperty Name="iDonationAmt" ColumnName="iDonationAmt" />
+                <ScalarProperty Name="iDonationRemark" ColumnName="iDonationRemark" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TotalAmount" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalAmount" />
+          <FunctionImportMapping FunctionImportName="TotalBank" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalBank" />
+          <FunctionImportMapping FunctionImportName="TotalBill" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalBill" />
+          <FunctionImportMapping FunctionImportName="TotalCard" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalCard" />
+          <FunctionImportMapping FunctionImportName="TotalCash" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalCash" />
+          <FunctionImportMapping FunctionImportName="TotalCredit" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalCredit" />
+          <FunctionImportMapping FunctionImportName="TotalDiscount" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalDiscount" />
+          <FunctionImportMapping FunctionImportName="TotalDonate" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalDonate" />
+          <FunctionImportMapping FunctionImportName="TotalExpenses" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalExpenses" />
+          <FunctionImportMapping FunctionImportName="TotalGuest" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalGuest" />
+          <FunctionImportMapping FunctionImportName="TotalNC" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalNC" />
+          <FunctionImportMapping FunctionImportName="TotalPaytm" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalPaytm" />
+          <FunctionImportMapping FunctionImportName="TotalRoundoff" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalRoundoff" />
+          <FunctionImportMapping FunctionImportName="TotalSale" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalSale" />
+          <FunctionImportMapping FunctionImportName="TotalTax" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalTax" />
+          <FunctionImportMapping FunctionImportName="TotalTIP" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalTIP" />
+          <FunctionImportMapping FunctionImportName="TotalWayOff" FunctionName="KhaoPiyoSoft_MatkiModel.Store.TotalWayOff" />
+          <FunctionImportMapping FunctionImportName="VoidBill" FunctionName="KhaoPiyoSoft_MatkiModel.Store.VoidBill">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.VoidBill_Result">
+                <ScalarProperty Name="iBill_No" ColumnName="iBill_No" />
+                <ScalarProperty Name="sVoidReason" ColumnName="sVoidReason" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="iGrand_Amt" ColumnName="iGrand_Amt" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Account_Master">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Account_Master">
+              <MappingFragment StoreEntitySet="Account_Master">
+                <ScalarProperty Name="bActive" ColumnName="bActive" />
+                <ScalarProperty Name="sEmail" ColumnName="sEmail" />
+                <ScalarProperty Name="sAddress" ColumnName="sAddress" />
+                <ScalarProperty Name="sGSTIN" ColumnName="sGSTIN" />
+                <ScalarProperty Name="sMobile" ColumnName="sMobile" />
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="sAcc_Nm" ColumnName="sAcc_Nm" />
+                <ScalarProperty Name="iAcc_Cd" ColumnName="iAcc_Cd" />
+                <ScalarProperty Name="iGrp_Cd" ColumnName="iGrp_Cd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attendent_Master">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Attendent_Master">
+              <MappingFragment StoreEntitySet="Attendent_Master">
+                <ScalarProperty Name="bActive" ColumnName="bActive" />
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="sAttd_Nm" ColumnName="sAttd_Nm" />
+                <ScalarProperty Name="iAttd_Cd" ColumnName="iAttd_Cd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Billing_Detail">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Billing_Detail">
+              <MappingFragment StoreEntitySet="Billing_Detail">
+                <ScalarProperty Name="bReady" ColumnName="bReady" />
+                <ScalarProperty Name="dPunch_Time" ColumnName="dPunch_Time" />
+                <ScalarProperty Name="TaxAmt" ColumnName="TaxAmt" />
+                <ScalarProperty Name="iKOT_No" ColumnName="iKOT_No" />
+                <ScalarProperty Name="iItemSr_No" ColumnName="iItemSr_No" />
+                <ScalarProperty Name="iSale_Cd" ColumnName="iSale_Cd" />
+                <ScalarProperty Name="bKOTPrint" ColumnName="bKOTPrint" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="iFin_Cd" ColumnName="iFin_Cd" />
+                <ScalarProperty Name="ItemDesc" ColumnName="ItemDesc" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="CessAmt" ColumnName="CessAmt" />
+                <ScalarProperty Name="CessPer" ColumnName="CessPer" />
+                <ScalarProperty Name="GSTAmt" ColumnName="GSTAmt" />
+                <ScalarProperty Name="GSTPer" ColumnName="GSTPer" />
+                <ScalarProperty Name="ExtraAmt" ColumnName="ExtraAmt" />
+                <ScalarProperty Name="DisAmt" ColumnName="DisAmt" />
+                <ScalarProperty Name="DisPer" ColumnName="DisPer" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="HSN" ColumnName="HSN" />
+                <ScalarProperty Name="iItem_Cd" ColumnName="iItem_Cd" />
+                <ScalarProperty Name="iBill_No" ColumnName="iBill_No" />
+                <ScalarProperty Name="AutoCode" ColumnName="AutoCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Billing_Master">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Billing_Master">
+              <MappingFragment StoreEntitySet="Billing_Master">
+                <ScalarProperty Name="iMore_Cd" ColumnName="iMore_Cd" />
+                <ScalarProperty Name="iDonationRemark" ColumnName="iDonationRemark" />
+                <ScalarProperty Name="iDonationAmt" ColumnName="iDonationAmt" />
+                <ScalarProperty Name="iTipRemark" ColumnName="iTipRemark" />
+                <ScalarProperty Name="iTipAmt" ColumnName="iTipAmt" />
+                <ScalarProperty Name="iWayOffRemark" ColumnName="iWayOffRemark" />
+                <ScalarProperty Name="iWayOffAmt" ColumnName="iWayOffAmt" />
+                <ScalarProperty Name="iRef_Cd" ColumnName="iRef_Cd" />
+                <ScalarProperty Name="sDis_Type" ColumnName="sDis_Type" />
+                <ScalarProperty Name="iAcc_Cd" ColumnName="iAcc_Cd" />
+                <ScalarProperty Name="sType" ColumnName="sType" />
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="iFin_Cd" ColumnName="iFin_Cd" />
+                <ScalarProperty Name="sVoidReason" ColumnName="sVoidReason" />
+                <ScalarProperty Name="bVoid" ColumnName="bVoid" />
+                <ScalarProperty Name="INTime" ColumnName="INTime" />
+                <ScalarProperty Name="bLessStock" ColumnName="bLessStock" />
+                <ScalarProperty Name="bOpen" ColumnName="bOpen" />
+                <ScalarProperty Name="bPrint" ColumnName="bPrint" />
+                <ScalarProperty Name="iDis_Cd" ColumnName="iDis_Cd" />
+                <ScalarProperty Name="sDis" ColumnName="sDis" />
+                <ScalarProperty Name="bDiscount" ColumnName="bDiscount" />
+                <ScalarProperty Name="iGrand_Amt" ColumnName="iGrand_Amt" />
+                <ScalarProperty Name="TRoundOff" ColumnName="TRoundOff" />
+                <ScalarProperty Name="TExtra" ColumnName="TExtra" />
+                <ScalarProperty Name="TDiscountValue" ColumnName="TDiscountValue" />
+                <ScalarProperty Name="TDiscount" ColumnName="TDiscount" />
+                <ScalarProperty Name="TCESS" ColumnName="TCESS" />
+                <ScalarProperty Name="TGST" ColumnName="TGST" />
+                <ScalarProperty Name="TAmt" ColumnName="TAmt" />
+                <ScalarProperty Name="NCAmt" ColumnName="NCAmt" />
+                <ScalarProperty Name="sNCReason" ColumnName="sNCReason" />
+                <ScalarProperty Name="bNC" ColumnName="bNC" />
+                <ScalarProperty Name="TQty" ColumnName="TQty" />
+                <ScalarProperty Name="iAttd_Cd" ColumnName="iAttd_Cd" />
+                <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+                <ScalarProperty Name="iPax" ColumnName="iPax" />
+                <ScalarProperty Name="sMobile" ColumnName="sMobile" />
+                <ScalarProperty Name="sGuest_Nm" ColumnName="sGuest_Nm" />
+                <ScalarProperty Name="sBillType" ColumnName="sBillType" />
+                <ScalarProperty Name="iTab_Cd" ColumnName="iTab_Cd" />
+                <ScalarProperty Name="dBill_Dt" ColumnName="dBill_Dt" />
+                <ScalarProperty Name="iBill_No" ColumnName="iBill_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Billing_Tax">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Billing_Tax">
+              <MappingFragment StoreEntitySet="Billing_Tax">
+                <ScalarProperty Name="SRNo" ColumnName="SRNo" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="iFin_Cd" ColumnName="iFin_Cd" />
+                <ScalarProperty Name="TTaxAmt" ColumnName="TTaxAmt" />
+                <ScalarProperty Name="TTaxPer" ColumnName="TTaxPer" />
+                <ScalarProperty Name="TAmount" ColumnName="TAmount" />
+                <ScalarProperty Name="iTax_Cd" ColumnName="iTax_Cd" />
+                <ScalarProperty Name="iSale_Cd" ColumnName="iSale_Cd" />
+                <ScalarProperty Name="iItem_Cd" ColumnName="iItem_Cd" />
+                <ScalarProperty Name="iBill_No" ColumnName="iBill_No" />
+                <ScalarProperty Name="AutoCode" ColumnName="AutoCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_Master">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Category_Master">
+              <MappingFragment StoreEntitySet="Category_Master">
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="sCat_Nm" ColumnName="sCat_Nm" />
+                <ScalarProperty Name="iCat_Cd" ColumnName="iCat_Cd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company_Master">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Company_Master">
+              <MappingFragment StoreEntitySet="Company_Master">
+                <ScalarProperty Name="RefCode" ColumnName="RefCode" />
+                <ScalarProperty Name="DBaseNm" ColumnName="DBaseNm" />
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+                <ScalarProperty Name="TagLine" ColumnName="TagLine" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="sComp_Nm" ColumnName="sComp_Nm" />
+                <ScalarProperty Name="ResturantID" ColumnName="ResturantID" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Item_Master">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Item_Master">
+              <MappingFragment StoreEntitySet="Item_Master">
+                <ScalarProperty Name="bFoodOrder" ColumnName="bFoodOrder" />
+                <ScalarProperty Name="iItemOrder" ColumnName="iItemOrder" />
+                <ScalarProperty Name="sQR_Nm" ColumnName="sQR_Nm" />
+                <ScalarProperty Name="sLabel_Nm" ColumnName="sLabel_Nm" />
+                <ScalarProperty Name="sDesc" ColumnName="sDesc" />
+                <ScalarProperty Name="bQRCode" ColumnName="bQRCode" />
+                <ScalarProperty Name="bDisApply" ColumnName="bDisApply" />
+                <ScalarProperty Name="bTop" ColumnName="bTop" />
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="bActive" ColumnName="bActive" />
+                <ScalarProperty Name="Rate5" ColumnName="Rate5" />
+                <ScalarProperty Name="Rate4" ColumnName="Rate4" />
+                <ScalarProperty Name="Rate3" ColumnName="Rate3" />
+                <ScalarProperty Name="Rate2" ColumnName="Rate2" />
+                <ScalarProperty Name="Rate1" ColumnName="Rate1" />
+                <ScalarProperty Name="bVeg" ColumnName="bVeg" />
+                <ScalarProperty Name="Hindi_Nm" ColumnName="Hindi_Nm" />
+                <ScalarProperty Name="iMeal_Cd" ColumnName="iMeal_Cd" />
+                <ScalarProperty Name="MCode" ColumnName="MCode" />
+                <ScalarProperty Name="HSN" ColumnName="HSN" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="sItem_Nm" ColumnName="sItem_Nm" />
+                <ScalarProperty Name="iItem_Cd" ColumnName="iItem_Cd" />
+                <ScalarProperty Name="iSale_Cd" ColumnName="iSale_Cd" />
+                <ScalarProperty Name="iCat_Cd" ColumnName="iCat_Cd" />
+                <ScalarProperty Name="AutoCode" ColumnName="AutoCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KOT_Delete">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.KOT_Delete">
+              <MappingFragment StoreEntitySet="KOT_Delete">
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="iFin_Cd" ColumnName="iFin_Cd" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="iBill_No" ColumnName="iBill_No" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="iItem_Cd" ColumnName="iItem_Cd" />
+                <ScalarProperty Name="iCode" ColumnName="iCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Map_Sale_Tax">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Map_Sale_Tax">
+              <MappingFragment StoreEntitySet="Map_Sale_Tax">
+                <ScalarProperty Name="iPercentage" ColumnName="iPercentage" />
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="iTax_Cd" ColumnName="iTax_Cd" />
+                <ScalarProperty Name="iSale_Cd" ColumnName="iSale_Cd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meal_Master">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Meal_Master">
+              <MappingFragment StoreEntitySet="Meal_Master">
+                <ScalarProperty Name="bActive" ColumnName="bActive" />
+                <ScalarProperty Name="iOrder" ColumnName="iOrder" />
+                <ScalarProperty Name="bTop" ColumnName="bTop" />
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="sMeal_Nm" ColumnName="sMeal_Nm" />
+                <ScalarProperty Name="iMeal_Cd" ColumnName="iMeal_Cd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayMode_Master">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.PayMode_Master">
+              <MappingFragment StoreEntitySet="PayMode_Master">
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="sPay_Nm" ColumnName="sPay_Nm" />
+                <ScalarProperty Name="iPay_Cd" ColumnName="iPay_Cd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table_Master">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Table_Master">
+              <MappingFragment StoreEntitySet="Table_Master">
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="sTab_Nm" ColumnName="sTab_Nm" />
+                <ScalarProperty Name="iTab_Cd" ColumnName="iTab_Cd" />
+                <ScalarProperty Name="iTab_Cat_Cd" ColumnName="iTab_Cat_Cd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Master">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.User_Master">
+              <MappingFragment StoreEntitySet="User_Master">
+                <ScalarProperty Name="iAttd_Cd" ColumnName="iAttd_Cd" />
+                <ScalarProperty Name="bAttd" ColumnName="bAttd" />
+                <ScalarProperty Name="sPassword" ColumnName="sPassword" />
+                <ScalarProperty Name="sPIN" ColumnName="sPIN" />
+                <ScalarProperty Name="bAdmin" ColumnName="bAdmin" />
+                <ScalarProperty Name="sFull_nm" ColumnName="sFull_nm" />
+                <ScalarProperty Name="sUser_Nm" ColumnName="sUser_Nm" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Void_Bill">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Void_Bill">
+              <MappingFragment StoreEntitySet="Void_Bill">
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="iFin_Cd" ColumnName="iFin_Cd" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="sVoidReason" ColumnName="sVoidReason" />
+                <ScalarProperty Name="iBill_No" ColumnName="iBill_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_RunningTable">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.View_RunningTable">
+              <MappingFragment StoreEntitySet="View_RunningTable">
+                <ScalarProperty Name="bOpen" ColumnName="bOpen" />
+                <ScalarProperty Name="sTab_Nm" ColumnName="sTab_Nm" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="iTab_Cat_Cd" ColumnName="iTab_Cat_Cd" />
+                <ScalarProperty Name="sTab_Cat_Nm" ColumnName="sTab_Cat_Nm" />
+                <ScalarProperty Name="INTime" ColumnName="INTime" />
+                <ScalarProperty Name="iPax" ColumnName="iPax" />
+                <ScalarProperty Name="iGrand_Amt" ColumnName="iGrand_Amt" />
+                <ScalarProperty Name="bPrint" ColumnName="bPrint" />
+                <ScalarProperty Name="sGuest_Nm" ColumnName="sGuest_Nm" />
+                <ScalarProperty Name="iTab_Cd" ColumnName="iTab_Cd" />
+                <ScalarProperty Name="dBill_Dt" ColumnName="dBill_Dt" />
+                <ScalarProperty Name="iBill_No" ColumnName="iBill_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_Tran">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.View_Tran">
+              <MappingFragment StoreEntitySet="View_Tran">
+                <ScalarProperty Name="AutoCode" ColumnName="AutoCode" />
+                <ScalarProperty Name="iTab_Cat_Cd" ColumnName="iTab_Cat_Cd" />
+                <ScalarProperty Name="bReady" ColumnName="bReady" />
+                <ScalarProperty Name="dPunch_Time" ColumnName="dPunch_Time" />
+                <ScalarProperty Name="sRef_Nm" ColumnName="sRef_Nm" />
+                <ScalarProperty Name="sBillType" ColumnName="sBillType" />
+                <ScalarProperty Name="sVoidReason" ColumnName="sVoidReason" />
+                <ScalarProperty Name="sTab_Cat_Nm" ColumnName="sTab_Cat_Nm" />
+                <ScalarProperty Name="MCode" ColumnName="MCode" />
+                <ScalarProperty Name="iDonationRemark" ColumnName="iDonationRemark" />
+                <ScalarProperty Name="iTipRemark" ColumnName="iTipRemark" />
+                <ScalarProperty Name="iDonationAmt" ColumnName="iDonationAmt" />
+                <ScalarProperty Name="iTipAmt" ColumnName="iTipAmt" />
+                <ScalarProperty Name="iWayOffRemark" ColumnName="iWayOffRemark" />
+                <ScalarProperty Name="iWayOffAmt" ColumnName="iWayOffAmt" />
+                <ScalarProperty Name="iRef_Cd" ColumnName="iRef_Cd" />
+                <ScalarProperty Name="NCAmt" ColumnName="NCAmt" />
+                <ScalarProperty Name="TExtra" ColumnName="TExtra" />
+                <ScalarProperty Name="ExtraAmt" ColumnName="ExtraAmt" />
+                <ScalarProperty Name="sTab_Nm" ColumnName="sTab_Nm" />
+                <ScalarProperty Name="TDiscountValue" ColumnName="TDiscountValue" />
+                <ScalarProperty Name="sMeal_Nm" ColumnName="sMeal_Nm" />
+                <ScalarProperty Name="iMeal_Cd" ColumnName="iMeal_Cd" />
+                <ScalarProperty Name="sCat_Nm" ColumnName="sCat_Nm" />
+                <ScalarProperty Name="iCat_Cd" ColumnName="iCat_Cd" />
+                <ScalarProperty Name="sDis_Type" ColumnName="sDis_Type" />
+                <ScalarProperty Name="iAcc_Cd" ColumnName="iAcc_Cd" />
+                <ScalarProperty Name="sType" ColumnName="sType" />
+                <ScalarProperty Name="TaxAmt" ColumnName="TaxAmt" />
+                <ScalarProperty Name="iKOT_No" ColumnName="iKOT_No" />
+                <ScalarProperty Name="iSale_Cd" ColumnName="iSale_Cd" />
+                <ScalarProperty Name="iItemSr_No" ColumnName="iItemSr_No" />
+                <ScalarProperty Name="bKOTPrint" ColumnName="bKOTPrint" />
+                <ScalarProperty Name="ItemDesc" ColumnName="ItemDesc" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="CessAmt" ColumnName="CessAmt" />
+                <ScalarProperty Name="CessPer" ColumnName="CessPer" />
+                <ScalarProperty Name="GSTAmt" ColumnName="GSTAmt" />
+                <ScalarProperty Name="GSTPer" ColumnName="GSTPer" />
+                <ScalarProperty Name="DisAmt" ColumnName="DisAmt" />
+                <ScalarProperty Name="DisPer" ColumnName="DisPer" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="HSN" ColumnName="HSN" />
+                <ScalarProperty Name="iItem_Cd" ColumnName="iItem_Cd" />
+                <ScalarProperty Name="sItem_Nm" ColumnName="sItem_Nm" />
+                <ScalarProperty Name="sDis_Nm" ColumnName="sDis_Nm" />
+                <ScalarProperty Name="sAttd_Nm" ColumnName="sAttd_Nm" />
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="iFin_Cd" ColumnName="iFin_Cd" />
+                <ScalarProperty Name="bVoid" ColumnName="bVoid" />
+                <ScalarProperty Name="INTime" ColumnName="INTime" />
+                <ScalarProperty Name="bLessStock" ColumnName="bLessStock" />
+                <ScalarProperty Name="bOpen" ColumnName="bOpen" />
+                <ScalarProperty Name="bPrint" ColumnName="bPrint" />
+                <ScalarProperty Name="iDis_Cd" ColumnName="iDis_Cd" />
+                <ScalarProperty Name="sDis" ColumnName="sDis" />
+                <ScalarProperty Name="bDiscount" ColumnName="bDiscount" />
+                <ScalarProperty Name="iGrand_Amt" ColumnName="iGrand_Amt" />
+                <ScalarProperty Name="TRoundOff" ColumnName="TRoundOff" />
+                <ScalarProperty Name="TDiscount" ColumnName="TDiscount" />
+                <ScalarProperty Name="TCESS" ColumnName="TCESS" />
+                <ScalarProperty Name="TGST" ColumnName="TGST" />
+                <ScalarProperty Name="TAmt" ColumnName="TAmt" />
+                <ScalarProperty Name="sNCReason" ColumnName="sNCReason" />
+                <ScalarProperty Name="bNC" ColumnName="bNC" />
+                <ScalarProperty Name="TQty" ColumnName="TQty" />
+                <ScalarProperty Name="iAttd_Cd" ColumnName="iAttd_Cd" />
+                <ScalarProperty Name="GSTIN" ColumnName="GSTIN" />
+                <ScalarProperty Name="iPax" ColumnName="iPax" />
+                <ScalarProperty Name="sMobile" ColumnName="sMobile" />
+                <ScalarProperty Name="sGuest_Nm" ColumnName="sGuest_Nm" />
+                <ScalarProperty Name="iTab_Cd" ColumnName="iTab_Cd" />
+                <ScalarProperty Name="dBill_Dt" ColumnName="dBill_Dt" />
+                <ScalarProperty Name="iBill_No" ColumnName="iBill_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expenses_Tran">
+            <EntityTypeMapping TypeName="KhaoPiyoSoft_MatkiModel.Expenses_Tran">
+              <MappingFragment StoreEntitySet="Expenses_Tran">
+                <ScalarProperty Name="dUpdate_Dt" ColumnName="dUpdate_Dt" />
+                <ScalarProperty Name="iUser_Cd" ColumnName="iUser_Cd" />
+                <ScalarProperty Name="iBus_Cd" ColumnName="iBus_Cd" />
+                <ScalarProperty Name="iComp_Cd" ColumnName="iComp_Cd" />
+                <ScalarProperty Name="iFin_Cd" ColumnName="iFin_Cd" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="iAmount" ColumnName="iAmount" />
+                <ScalarProperty Name="iExp_Cd" ColumnName="iExp_Cd" />
+                <ScalarProperty Name="iPay_Cd" ColumnName="iPay_Cd" />
+                <ScalarProperty Name="dRec_Dt" ColumnName="dRec_Dt" />
+                <ScalarProperty Name="iRec_Cd" ColumnName="iRec_Cd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

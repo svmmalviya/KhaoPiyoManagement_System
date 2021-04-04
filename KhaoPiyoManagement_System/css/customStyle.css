@@ -1,9 +1,23 @@
-﻿body {
+﻿
+:root {
+    --primarycolor: #fe5012;
+}
+
+*, *::before, *::after {
+box-sizing:border-box;
+}
+
+body {
     font-family: 'Poppins' !important;
 }
 
 .list-group > .list-group-item {
     border: none;
+}
+
+.khaopiyo-brand {
+   text-transform:uppercase;
+
 }
 
 img.loginpage-logo {
@@ -13,8 +27,12 @@ img.loginpage-logo {
 
 
 .navbar-brand img {
-    width: 50px;
-    height: 50px;
+    width: auto;
+    height: 60px;
+}
+a.navbar-brand.shadow-soft.py-2.px-3.rounded.border img {
+    width: auto;
+    height: 60px;
 }
 
 div.dataTables_wrapper div.dataTables_paginate {
@@ -30,6 +48,13 @@ div.dataTables_wrapper div.dataTables_paginate {
     margin: 0px;
 }
 
+nav .navbar-brand a {
+    padding: 5px !important;
+    /* margin: 0px !important; */
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
 
 .sorting, .sorting_asc, .sorting_desc {
     background: none;
@@ -58,6 +83,9 @@ div.dataTables_wrapper div.dataTables_paginate {
 
 .login-form > .input-group input[type='text'] {
     background: white;
+}
+table .dataTable thead .sorting:after {
+content:none;
 }
 
 button.btn-primary.btn {
@@ -96,6 +124,43 @@ overflow-x:auto;
 }
 
 
+.errorBox {
+    background: #e6e7ee;
+    color: var(--primarycolor);
+    font-size: 18px;
+    text-transform: lowercase;
+    text-align: center;
+    align-items: center;
+    padding: 0;
+    -moz-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Firefox */
+    -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Safari and Chrome */
+    -o-animation: cssAnimation 0s ease-in 5s forwards;
+    /* Opera */
+    animation: cssAnimation 0s ease-in 5s forwards;
+    transition: opacity 1s ease-out;
+    /*transition: opacity 1000ms ease-out;*/
+}
+
+
+@keyframes cssAnimation {
+
+    from {
+      opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+}
+
+@-webkit-keyframes cssAnimation {
+    to {
+        width: 0;
+        height: 0;
+        visibility: hidden;
+    }
+}
 
 button.btn.btn-primary.btn-block:hover {
     background: #fff;
@@ -177,7 +242,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         width: 20%;
     }
 
-        .table td:first-child {
-            width: 40%;
-        }
+
+     
 

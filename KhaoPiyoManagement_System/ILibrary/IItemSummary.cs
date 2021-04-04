@@ -15,6 +15,5 @@ namespace KhaoPiyoManagement_System.ILibrary
         MyResponse GetTransactionCatWise(string from, string to);
         MyResponse GetTransactionAuditReport(string from, string to);
 
-
     }
 }

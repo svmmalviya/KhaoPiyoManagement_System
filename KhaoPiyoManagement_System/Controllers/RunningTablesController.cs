@@ -1,7 +1,9 @@
-﻿using KhaoPiyoManagement_System.ILibrary;
+﻿using Classes;
+using KhaoPiyoManagement_System.ILibrary;
 using KhaoPiyoManagement_System.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,10 +12,15 @@ namespace KhaoPiyoManagement_System.Controllers
 {
     public class RunningTablesController : Controller
     {
-        private KhaoPiyoEntities entities = new KhaoPiyoEntities();
+        private Entities entities = new Entities();
         private List<breadcumb> breadcumbs = new List<breadcumb>();
         // GET: RuinningTables
         IRunningTables runningTables;
+        private string query;
+        private DBConnect dbConnect;
+        private DataSet ds;
+        private string error;
+        private List<View_RunningTable> listofrunningtables;
 
         public RunningTablesController(IRunningTables _running)
         {
@@ -46,6 +53,7 @@ namespace KhaoPiyoManagement_System.Controllers
         [HttpPost]
         public JsonResult GetRunningTableDetail(FormCollection form)
         {
+            
             if (Request.IsAjaxRequest())
             {
                 var tablecode = Convert.ToInt32(form["tableno"].ToString());
@@ -69,27 +77,38 @@ namespace KhaoPiyoManagement_System.Controllers
         {
 
             Models.RunningTables rtabs = new Models.RunningTables();
+            query = "select * from View_RunningTable";
 
+            if (dbConnect.Select(query, out ds, out error))
+            {
+
+                listofrunningtables = CommonMethod.ConvertToList<View_RunningTable>(ds.Tables[0]);
+            }
             try
             {
 
-                var listofrunningtables = entities.View_RunningTable.Where(x => x.iComp_Cd == 1 && x.iBus_Cd == 1);
+                //var listofrunningtables = entities.View_RunningTable.Where(x => x.iComp_Cd == 1 && x.iBus_Cd == 1);
 
                 List<string> catart = new List<string>();
                 List<tableCode> tabary = new List<tableCode>();
-
-                foreach (var item in listofrunningtables)
+                if (listofrunningtables.Count > 0)
                 {
-                    catart.Add(item.sTab_Cat_Nm.ToString());
-                }
+                    foreach (var item in listofrunningtables)
+                    {
+                        catart.Add(item.sTab_Nm.ToString());
+                    }
 
-                foreach (var item in listofrunningtables)
-                {
-                    tabary.Add(new tableCode { itab_cd = item.iTab_Cd.ToString(), stab_Nm = item.sTab_Nm.ToString(), stab_Cat_Nm = item.sTab_Cat_Nm });
-                }
+                    foreach (var item in listofrunningtables)
+                    {
+                        tabary.Add(new tableCode { itab_cd = item.iTab_Cd.ToString(), stab_Nm = item.sTab_Nm.ToString(), stab_Cat_Nm = item.sTab_Nm });
+                    }
 
-                rtabs.tablecatname = catart;
-                rtabs.tableDetails = tabary;
+                    rtabs.tablecatname = catart;
+                    rtabs.tableDetails = tabary;
+                }
+                else {
+                    rtabs.tablecatname = new List<string>();
+                }       rtabs.tableDetails = new List<tableCode>();
             }
             catch (Exception ex)
             {
